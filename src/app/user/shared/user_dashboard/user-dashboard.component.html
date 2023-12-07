@@ -1,0 +1,187 @@
+<main>
+    <section class="barra-busqueda">
+        <form class="form">
+            <button>
+                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                        stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+        
+            <input class="input" placeholder="¿Qué deseas aprender hoy?" type="text">
+    
+            <button class="reset" type="reset">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </form>
+    </section>
+
+    <section class="cursos-inicio">
+        <h2 (click)="curso_Nuevo()"> 
+            <span class="material-symbols-outlined">
+                {{menuN}}
+            </span> 
+            Nuevos cursos
+        </h2>
+        <div class="lista-cursos" *ngIf="nuevos">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button" (click)="prueba()">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cursos-actuales">
+        <h2 (click)="curso_Inscritos()"> 
+            <span class="material-symbols-outlined">
+                {{menuI}}
+            </span> 
+            Tus cursos
+        </h2>
+        <div class="lista-cursos" *ngIf="actuales">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">Buenas prácticas de manufactura</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="description">Descripción</span>
+                        <p class="description-text">
+                            La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                            encuentran establecidos en la Resolución ...
+                        </p>
+                        <button class="course-button">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <main>
+        <div class="login-box" *ngIf="!loading && !reset">
+            <p class="titulo">INICIO DE SESIÓN</p>
+            <form>
+              <div class="user-box">
+                <input required="" name="" type="text">
+                <label>Username</label>
+              </div>
+              <div class="user-box">
+                <input required="" name="" type="password">
+                <label>Contraseña</label>
+              </div>
+              <button (click)="login()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                INICIAR SESIÓN
+              </button>
+            </form>
+            <p>¿Olvidaste la contraseña? <a class="a2" (click)="reset_Password()">¡Haz click aquí!</a></p>
+            <p>¿No tienes cuenta? <a class="a2" (click)="register()">¡Registrate aquí!</a></p>
+          </div>
+
+          <app-loading *ngIf="loading"></app-loading>
+
+          <app-reset-password *ngIf="reset" (eventoBooleano)="handleEventoBooleano($event)"></app-reset-password>
+
+    </main>
+</body>
+</html>

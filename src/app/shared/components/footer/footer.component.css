@@ -1,0 +1,18 @@
+
+footer{
+    color: #f1f1f1;
+    background-color: #464441;
+    padding: 10px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .container-logo{
+    display: flex;
+}
+

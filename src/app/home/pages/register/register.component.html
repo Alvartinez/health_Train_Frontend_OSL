@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <main>
+        <div class="login-box" *ngIf="!loading">
+            <p class="titulo">REGISTRO</p>
+            <form>
+              <div class="user-box">
+                <input required="" name="" type="text">
+                <label>Nombre completo</label>
+              </div>
+              <div class="user-box">
+                <input required="" name="" type="text">
+                <label>Email</label>
+              </div>
+              <div class="user-box">
+                <input required="" name="" type="password">
+                <label>Contraseña</label>
+              </div>
+              <div class="user-box">
+                <input required="" name="" type="password">
+                <label>Conrfima contraseña</label>
+              </div>
+              <a>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                REGISTRARSE
+              </a>
+            </form>
+            <p>¿Ya tienes cuenta? <a class="a2" (click)="login()">¡Inicia aquí!</a></p>
+          </div>
+
+          <app-loading *ngIf="loading"></app-loading>
+
+    </main>
+</body>
+</html>

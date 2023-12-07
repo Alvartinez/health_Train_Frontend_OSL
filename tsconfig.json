@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@images/*": ["./src/assets/image/*"],
+      "@rutas/*": ["./src/app/*"],
+      "@users/*": ["./src/app/user/*"],
+      "@visitor/*": ["./src/app/user/1-Visitor/*"]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

@@ -1,0 +1,102 @@
+
+.news{
+    height: 100vh;
+    background-image: url("/assets/image/fondo-azul.png");
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #333;
+    border: 3px 0px solid #26077c;
+}
+
+.news .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.news .texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.news .texto h1{
+    font-size: 30px;
+}
+
+.news .texto p{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: justify;
+}
+
+.container-cards{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.container-card{
+    display: flex;
+}
+
+.card{
+    border: 1px solid #e8eaeb;
+    border-radius: 10px;
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+        0deg,
+        #23256d7a,
+        #2e2b2b4d
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fbfeff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 5px;
+}
+
+.card .ver-mobile{
+    text-decoration: none;
+    padding: 12px 18px;
+    background-color: #fbfeff;
+    border: 1px solid rgb(7, 38, 53);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d635f;
+    cursor: pointer;
+}
+
+.card .ver-mobile:hover{
+    border: 2px solid #47c2bc;
+    background-color: #47c2bc;
+    font-weight: 700;
+    color: #fbfeff;
+}
+
+.card .title-web{
+    display: none;
+}
+
+.card .parrafo{
+    display: none;
+}
+
+.card .ver-web{
+    display: none;
+}

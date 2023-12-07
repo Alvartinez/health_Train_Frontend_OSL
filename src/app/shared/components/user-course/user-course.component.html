@@ -1,0 +1,82 @@
+<user-navbar></user-navbar>
+<main>
+    <nav class="titulo">
+        <div class="titulo-curso">
+            <div class="flecha">&#9668;</div>
+            <h1>Buenas prácticas de manufactura</h1>
+        </div>
+
+        <div class="user-progreso">
+            <div class="progreso">
+                <div class="barra">
+                    <div class="barra-progreso">
+                        <span>0%</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exam-foro">
+            <button class="examen"> Haz el Examen aquí</button>
+            <button class="foro">
+                <span class="material-symbols-outlined">
+                    forum
+                </span>
+                <span class="info">Foro</span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="descripcion">
+        <div class="video-descripcion">
+            <iframe src="https://www.youtube.com/embed/TcnePkr-8wg?si=9f5HAQ_Yvc3oSRoc" frameborder="0"></iframe>
+        </div>
+        <div class="texto-descripcion">
+            <h2> Descripción </h2>
+            <p>
+                Hola, ¿cómo se encuentra en este día?
+            </p>
+        </div>
+    </section>
+
+    <section class="modulos">
+        <h2>Módulos</h2>
+        <div class="lista-modulos">
+            <div class="card">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="container-img">
+                                <img [src]="imagen" alt="">
+                            </div>
+                            <div class="container-title">
+                                <h2>Modulo {{numero}}</h2>
+                                <h3>{{titulo}}</h3>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="description">Descripción</span>
+                            <p class="description-text">
+                                {{descripcion}}
+                            </p>
+                            <button class="course-button">
+                                Ver más
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-progress">
+                    <div class="progreso-carta">
+                        <div class="barra-carta">
+                            <div class="barra-progreso-carta" [style.width.%]="porcentaje_Modulo">
+                            </div>
+                        </div>
+                    </div>
+                    <span>{{porcentaje_Modulo}}%</span> 
+                </div>
+            </div>
+                
+        </div>
+    </section>
+
+</main>

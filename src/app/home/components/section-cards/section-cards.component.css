@@ -1,0 +1,179 @@
+
+.cursos{
+    height: 100vh;
+    border: 2px 0px solid #26077c;
+}
+
+.cursos .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.cursos .texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.cursos .texto h1{
+    font-size: 30px;
+}
+
+.cursos .texto p{
+    font-size: 16px;
+    text-align: justify;
+}
+
+.container-cards{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.container-card{
+    display: flex;
+}
+
+.card{
+    border: 1px solid #e8eaeb;
+    border-radius: 10px;
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+        0deg,
+        #23256d7a,
+        #2e2b2b4d
+    ), url("/assets/image/buenas_practicas_manufactura.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fbfeff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 8px;
+    gap: 5px;
+}
+
+.card .ver-mobile{
+    text-decoration: none;
+    padding: 12px 18px;
+    background-color: #fbfeff;
+    border: 1px solid rgb(7, 38, 53);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d635f;
+    cursor: pointer;
+}
+
+.card .ver-mobile:hover{
+    border: 2px solid #47c2bc;
+    background-color: #47c2bc;
+    font-weight: 700;
+    color: #fbfeff;
+}
+
+.card .title-mobile{
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.card .title-web{
+    display: none;
+}
+
+.card .parrafo{
+    display: none;
+}
+
+.card .ver-web{
+    display: none;
+}
+
+@media (min-width: 800px) {
+
+    .container-cards{
+        flex-direction: row;
+        margin-top: 0px;
+        padding: 20px;
+    }
+
+    .container-card{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card{
+        border: 1px solid #585858;
+        overflow: hidden;
+        box-shadow: 3px 3px 12px #5f5e5e;
+        padding: 12px;
+    }
+
+    .card:hover{
+        box-shadow: 3px 3px 12px rgb(63, 197, 238);
+        border: 1px solid #b4b4b4;
+    }
+
+    .image{
+        width: 100%;
+        height: 180px;
+        border-radius: 8px;
+    }
+
+    .card .ver-mobile{
+        display: none;
+    }
+
+    .card .title-mobile{
+        display: none;
+    }
+
+    .card .title-web{
+        display: block;
+        font-size: 22px;
+        text-align: center;
+    }
+    
+    .card .parrafo{
+        display: block;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        padding: 0px 10px;
+    }
+    
+    .card .ver-web{
+        display: block;
+        padding: 12px 18px;
+        border: 1px solid rgb(67, 144, 180);
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .card .ver-web:hover{
+        border: 2px solid rgb(71, 194, 188);
+        background-color: rgb(71, 194, 188);
+        font-weight: 700;
+        color: rgb(248, 240, 240);
+        object-fit: contain;
+    }
+
+}

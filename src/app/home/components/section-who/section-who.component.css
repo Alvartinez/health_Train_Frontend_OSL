@@ -1,0 +1,72 @@
+
+.quienes-somos{
+    display: flex;
+    background-image: linear-gradient(
+        0deg,
+        #0e4b5eab,
+        #ab38f8ab
+    ),url("/assets/image/medusa.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 120% 100%;
+    height: 100vh;
+    border: 2px 0px solid rgb(38, 7, 124);
+}
+
+.quienes-somos .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.quienes-somos .texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: #ffffff;
+}
+
+.quienes-somos .texto h2{
+    font-size: 35px;
+    -webkit-text-stroke: 2px #3405b6;
+}
+
+.quienes-somos .texto p{
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: justify;
+    -webkit-text-stroke: 1px #3405b6;
+}
+
+@media (min-width: 800px) {
+
+    .quienes-somos{
+        padding: 20px;
+    }
+
+    .quienes-somos .container{
+        display: flex;
+        justify-content: space-between;
+        padding: 0px;
+    }
+
+    .img{
+        background-image: url("/assets/image/quienes-somos.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 12px;
+        padding: 200px;
+        width: 45%;
+    }
+
+    .quienes-somos .texto{
+        width: 55%;
+        padding: 20px;
+    }
+
+}

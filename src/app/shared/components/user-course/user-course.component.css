@@ -1,0 +1,389 @@
+main{
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    min-height: 110vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+}
+
+.titulo{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.titulo-curso{
+    display: flex;
+    font-size: 3vw;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.user-progreso{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progreso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.barra{
+    display: flex;
+    align-items: center;
+    width: 380px;
+    height: 25px;
+    background-color: #fff1eb;
+    border-radius: 10px;
+    overflow: hidden;
+    font-weight: 700;
+    cursor: default;
+    border: 1px solid #33333370;
+}
+
+.barra-progreso{
+    width: 0%;
+    height: 25px;
+    background-color: #25ec89;
+    color: rgb(11, 124, 67);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.barra-progreso span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin: 3px;
+}
+
+.exam-foro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.examen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #fff1eb;
+    border-radius: 10px;
+    border: 2px solid rgb(13, 126, 128);
+    background-color: rgb(10, 140, 145);
+    box-shadow: 3px 3px 12px #3bcf92;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.foro{
+    position: fixed;
+    left: 80%;
+    display: flex;
+    align-items: center;
+    background-color: #9C83E4;
+    border-radius: 50%;
+    padding: 5px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.material-symbols-outlined{
+    color: #211644;
+    z-index: 1;
+}
+
+.info{
+    display: none;
+}
+
+.foro:hover .info{
+    display: block;
+    position: absolute;
+    right: 70%;
+    border-radius: 5px;
+    padding: 4px 8px;
+    font-weight: 700;
+    background-color: #9C83E4;
+    color: #211644;
+}
+
+.descripcion{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 10px 0px;
+}
+
+.video-descripcion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(23rem, 70vw, 180rem);
+    height: clamp(12rem, 36vw, 34rem);
+    padding: 10px;
+    z-index: 2;
+}
+
+.video-descripcion iframe{
+    width: 100%;
+    height: 100%;
+}
+
+.texto-descripcion{
+    text-align: justify;
+    padding-bottom: 10px;
+}
+
+.modulos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.lista-modulos{
+    display: flex;
+    flex-wrap: wrap;
+    
+    align-items:center ;
+    width: 100%;
+    gap: 20px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.flip-card {
+    width: clamp(7rem, 44vw, 15rem);
+    height: clamp(6rem, 42vw, 12rem);
+    perspective: 1000px;
+    font-family: sans-serif;
+}
+
+.description {
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid rgb(247, 238, 235);
+    border-radius: 1rem;
+}
+
+.flip-card-front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    box-shadow: 5px 5px 10px 0px #333;
+}
+.flip-card-front .container-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 70%;
+}
+
+.flip-card-front .container-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: fill;
+    border: 1px #33333363 solid;
+}
+
+.container-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.container-title h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2E95B6;
+}
+
+.container-title h3{
+    display: none;
+}
+
+.flip-card-back {
+    background: linear-gradient(120deg, rgb(145, 242, 255) 30%, rgb(80, 205, 255) 88%,
+            rgb(196, 255, 226) 40%, rgb(160, 255, 226) 78%);
+    color: rgb(16, 20, 59);
+    transform: rotateY(180deg);
+    align-items: center;
+    overflow: hidden;
+}
+
+.description-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px;
+    width: clamp(9rem, 12vw, 14rem);
+    text-align: justify;
+}
+
+.course-button {
+    position: relative;
+    top: 5px;
+    background-color: #00BFA6;
+    padding: 6px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px dashed #00BFA6;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .4s;
+}
+
+.course-button span:last-child {
+    display: none;
+}
+
+.course-button:hover {
+    transition: .4s;
+    border: 2px dashed #00BFA6;
+    background-color: #fff;
+    color: #00BFA6;
+}
+
+.course-button:active {
+    background-color: #87dbd0;
+}
+
+.card-progress{
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+}
+
+.progreso-carta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(10.625rem, 17.5vw, 200rem);
+}
+
+.barra-carta{
+    display: flex;
+    align-items: center;
+    width: 380px;
+    height: 10px;
+    background-color: #fff1eb;
+    border-radius: 10px;
+    overflow: hidden;
+    font-weight: 700;
+    cursor: default;
+    border: 1px solid #33333370;
+}
+
+.barra-progreso-carta{
+    width: 0%;
+    height: 100%;
+    background-color: #25ec89;
+    color: rgb(11, 124, 67);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-progress span{
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+@media (min-width: 630px) {
+    main{
+        padding: 30px;
+    }
+
+    .titulo-curso{
+        font-size: 1.4vw;
+        max-width: 42%;
+    }
+
+    .titulo-curso h1{
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .user-progreso{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .exam-foro{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 25%;
+
+    }
+
+    .foro{
+        left: 85%;
+    }
+
+    .descripcion{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .texto-descripcion{
+        align-self: flex-start;
+    }
+    
+}
