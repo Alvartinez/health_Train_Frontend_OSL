@@ -13,13 +13,10 @@ const routes: Routes = [
         // canActivate: [AuthGuard, VisitanteGuard],
         // data: { rol: 'Visitante' }
     },
-    // {
-    //   path:"courses",
-    //   loadChildren: () => import('@visitor/routers').then((m) => m.CourseRoutingModule) 
-    // },
+    //Modificar después
     {
-      path:"user-course",
-      component: UserCourseComponent
+      path:"courses",
+      loadChildren: () => import('@course/course-routing.module').then((m) => m.CourseRoutingModule) 
     }
 ];
 

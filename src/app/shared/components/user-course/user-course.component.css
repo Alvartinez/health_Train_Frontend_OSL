@@ -126,6 +126,7 @@ main{
     flex-wrap: wrap;
     flex-direction: column;
     padding: 10px 0px;
+    align-items: center;
 }
 
 .video-descripcion{
@@ -148,6 +149,13 @@ main{
     padding-bottom: 10px;
 }
 
+.texto-descripcion p{
+    text-align: justify;
+    font-size: clamp(.7rem, 1rem, 1.5rem);
+    padding-right: 10px;
+    line-height: 25px;
+}
+
 .modulos{
     display: flex;
     flex-wrap: wrap;
@@ -157,15 +165,18 @@ main{
 .lista-modulos{
     display: flex;
     flex-wrap: wrap;
-    
-    align-items:center ;
     width: 100%;
-    gap: 20px;
+    min-width: none;
+    gap: 8px;
+    padding: 2px;
 }
 
 .card{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
+    padding: 2px;
+    gap: 8px;
 }
 
 
@@ -304,6 +315,7 @@ main{
     display: flex;
     flex-direction: column;
     padding-top: 8px;
+    width: 100%;
 }
 
 .progreso-carta{
@@ -316,7 +328,7 @@ main{
 .barra-carta{
     display: flex;
     align-items: center;
-    width: 380px;
+    width: clamp(20.625rem, 100%, 40.5vw);
     height: 10px;
     background-color: #fff1eb;
     border-radius: 10px;
@@ -384,6 +396,15 @@ main{
 
     .texto-descripcion{
         align-self: flex-start;
+    }
+
+    .texto-descripcion p{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .card{
+        gap: 12px;
     }
     
 }

@@ -9,7 +9,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 120% 100%;
-    height: 100vh;
+    min-height: 100vh;
     border: 2px 0px solid rgb(38, 7, 124);
 }
 

@@ -123,7 +123,6 @@ input:not(:placeholder-shown)~.reset {
 }
 
 .material-symbols-outlined{
-
     text-align: right;
     font-size: clamp(0.007rem, 7vw, 2rem);
     font-weight: 700;
@@ -136,6 +135,27 @@ input:not(:placeholder-shown)~.reset {
     min-width: none;
     gap: 8px;
     padding: 2px;
+}
+
+.flip-newCard {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    width: clamp(7rem, 43vw, 15rem);
+    height: clamp(7rem, 43vw, 12rem);
+    perspective: 1000px;
+    font-family: sans-serif;
+    border-radius: 1rem;
+    border: 2px dotted  #00BFA6;
+    cursor: pointer;
+}
+
+.flip-newCard:hover{
+    border: 3px dotted  #f7f7f7;
+}
+
+.flip-newCard:hover p{
+    color: #f7f7f7;
 }
 
 .flip-card {
@@ -172,6 +192,15 @@ input:not(:placeholder-shown)~.reset {
 
 .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
+}
+
+.flip-card-front .nuevoCurso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 700;
+    color: #1e9993;
 }
 
 .flip-card-front,

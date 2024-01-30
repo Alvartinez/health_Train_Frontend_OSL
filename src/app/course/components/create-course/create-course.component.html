@@ -1,0 +1,460 @@
+<main>
+    <div class="Retorno">
+        <div class="flecha">&#9668;</div>
+        <h3>Regresar</h3>
+    </div>
+
+    <section class="contenido-curso" *ngIf="true">
+
+        <form>
+            <div class="container">
+                <div class="container-perfil">
+                    <div class="portada">
+                        <img [src]="imagen" alt="avatar" id="img">
+                    </div>
+                    <input type="file" name="foto" id="foto" accept="image/*" (change)="onFileChange($event)">
+                    <label for="foto" id="upgrate" *ngIf="portada">
+                        <span class="material-symbols-outlined">
+                            upgrade
+                        </span>
+                        Selecciona portada
+                    </label>
+                    
+                    <label for="foto" id="edit" *ngIf="!portada">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                        Editar portada
+                    </label>
+    
+                    <label (click)="quitarFoto()" id="delete" *ngIf="!portada">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                        Eliminar portada
+                    </label>
+    
+                    <label class="presenta" for="video" style="color: black; font-size: 1rem; font-weight: normal; margin-bottom: 0;">Presentación</label>
+                    <span class="indicacion">*Inserta el enlace del video de presentación del curso</span>
+    
+                    <input [(ngModel)]="video" type="text" name="video" id="">
+                </div>
+    
+                <div class="competencia">
+                    <div class="nueva-competencia">
+                        <label for="competencia">Competencia(s)</label>
+                        <input type="text" name="comp1" [(ngModel)]="comp1">
+        
+                        <div class="nueva-competencia">
+                            <button (click)="nuevaCompetencia1()" id="upgrate" *ngIf="add1">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                Nueva competencia
+                            </button>
+        
+                        </div>
+    
+                        <div class="newCompetencia" *ngIf="nucomp1">
+                            <input type="text"  name="comp2" [(ngModel)]="comp2">
+        
+                            <div class="nueva-competencia" id="opcion">
+                                <button (click)="nuevaCompetencia2()" id="upgrate" *ngIf="add2">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Nueva competencia
+                                </button>
+        
+                                <button id="delete" (click)="eliminaCompetencia1()" *ngIf="!nucomp2">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                    Borrar competencia
+                                </button>
+        
+                            </div>
+                        </div>
+    
+                        <div class="newCompetencia" *ngIf="nucomp2">
+                            <input type="text"  name="comp3" [(ngModel)]="comp3">
+            
+                            <div class="nueva-competencia" id="opcion">
+                                <button (click)="nuevaCompetencia3()" id="upgrate" *ngIf="add3">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Nueva competencia
+                                </button>
+        
+                                <button id="delete" *ngIf="!nucomp3" (click)="eliminaCompetencia2()">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                    Borrar competencia
+                                </button>
+        
+                            </div>
+                        </div>
+    
+                        <div class="newCompetencia" *ngIf="nucomp3">
+                            <input type="text" name="comp4" [(ngModel)]="comp4">
+            
+                            <div class="nueva-competencia" id="opcion">
+                                <button id="upgrate" *ngIf="add4" (click)="nuevaCompetencia4()">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Nueva competencia
+                                </button>
+        
+                                <button id="delete" *ngIf="!nucomp4" (click)="eliminaCompetencia3()">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                    Borrar competencia
+                                </button>
+                            </div>
+                        </div>
+    
+                        <div class="newCompetencia" *ngIf="nucomp4">
+                            <input type="text" name="comp5" [(ngModel)]="comp5">
+            
+                            <div class="nueva-competencia" id="opcion">
+        
+                                <button id="delete" (click)="eliminaCompetencia4()">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                    Borrar competencia
+                                </button>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="container-text">
+                <label for="titulo">Título</label>
+                <input type="text" [(ngModel)]="nombre" name="titulo" autocomplete="off">
+                <label for="descripcion">Descripción</label>
+                <textarea name="descripcion" [(ngModel)]= "descripcion" id="" cols="30" rows="2"></textarea>
+                <label for="objetivo">Objetivo(s)</label>
+                <div class="objetivos">
+                    <input type="text" [(ngModel)]="objetivo1" name="objetivo">
+
+                    <div class="nueva-competencia">
+                        <button (click)="nuevObjetivo1()" id="upgrate" *ngIf="add5">
+                            <span class="material-symbols-outlined">
+                                add
+                            </span>
+                            <span class="nuevo">Nuevo objetivo</span>
+                        </button>
+    
+                    </div>
+
+                    <div class="newCompetencia" *ngIf="nuobje1">
+                        <input type="text" [(ngModel)]="objetivo2"  name="ojetivo" id="">
+    
+                        <div class="nueva-competencia" id="opcion">
+                            <button (click)="nuevObjetivo2()" id="upgrate" *ngIf="add6">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                <span class="nuevo">Nuevo objetivo</span>
+                            </button>
+    
+                            <button id="delete" (click)="eliminaObjetivo1()" *ngIf="!nuobje2">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                                <span class="nuevo">Borra objetivo</span>
+                            </button>
+    
+                        </div>
+                    </div>
+
+                    <div class="newCompetencia" *ngIf="nuobje2">
+                        <input type="text" [(ngModel)]="objetivo3" name="competencia" id="">
+    
+                        <div class="nueva-competencia" id="opcion">
+                            <button (click)="nuevObjetivo3()" id="upgrate" *ngIf="add7">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                <span class="nuevo">Nuevo objetivo</span>
+                            </button>
+    
+                            <button id="delete" (click)="eliminaObjetivo2()" *ngIf="!nuobje3">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                                <span class="nuevo">Borra objetivo</span>
+                            </button>
+    
+                        </div>
+                    </div>
+                    
+                    <div class="newCompetencia" *ngIf="nuobje3">
+                        <input type="text" [(ngModel)]="objetivo4" name="competencia" id="">
+    
+                        <div class="nueva-competencia" id="opcion">
+                            <button (click)="nuevObjetivo4()" id="upgrate" *ngIf="add8">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                <span class="nuevo">Nuevo objetivo</span>
+                            </button>
+    
+                            <button id="delete" (click)="eliminaObjetivo3()" *ngIf="!nuobje4">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                                <span class="nuevo">Borra objetivo</span>
+                            </button>
+    
+                        </div>
+                    </div>
+
+                    <div class="newCompetencia" *ngIf="nuobje4">
+                        <input type="text" [(ngModel)]="objetivo5" name="competencia" id="">
+    
+                        <div class="nueva-competencia" id="opcion">
+    
+                            <button id="delete" (click)="eliminaObjetivo4()">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                                <span class="nuevo">Borra objetivo</span>
+                            </button>
+    
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="buttton-course">
+                <button (click)="generarCurso()">Finalizar</button>
+            </div>
+
+        </form>
+
+    </section>
+
+    <section class="contenido-curso" *ngIf="false">
+
+        <div>
+            <h2>Recurso</h2>
+
+            <span>Selecciona el tipo de recurso</span>
+
+            <div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        slideshow
+                    </span>
+                    <h3>Video</h3>
+                </div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        book_5
+                    </span>
+                    <h3>Texto Plano</h3>
+                </div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        audio_file
+                    </span>
+                    <h3>Podcast</h3>
+                </div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        timeline
+                    </span>
+                    <h3>Línea del Tiempo</h3>
+                </div>
+
+            </div>
+
+            <div>
+                <button>Siguiente</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contenido-curso" *ngIf="false">
+
+        <div>
+            <span class="material-symbols-outlined">
+                timeline
+            </span>
+            <h3>Línea del Tiempo</h3>
+        </div>
+
+        <span>Selecciona tipo(s) Componente(s)</span>
+
+        <div>
+            
+            <div>
+
+                <button>
+                    <span class="material-symbols-outlined">
+                        text_fields
+                    </span>
+                    <h4>Subtitulo</h4>
+                </button>
+
+                <button>
+                    <span class="material-symbols-outlined">
+                        menu_book
+                    </span>
+                    <h4>Parrafo</h4>
+                </button>
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+                        image
+                    </span>
+                    <h4>Imagen</h4>
+                </button>
+
+                <button>
+                    <span class="material-symbols-outlined">
+                        description
+                    </span>
+                    <h4>Archivo</h4>
+                </button>
+
+            </div>
+
+            <div>
+                <button>Generar</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contenido-curso" *ngIf="false">
+         
+        <div>
+
+            <div>
+                <h2>Titulo Curso</h2>
+            </div>
+            
+            <div>
+                <h3>Recurso(s)</h3>
+            </div>
+
+            <div class="lista-cursos" >
+
+                <div class="flip-newCard">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="nuevoCurso">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                Nuevo Curso
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Buenas prácticas de manufactura</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="description">Descripción</span>
+                            <p class="description-text">
+                                La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                                encuentran establecidos en la Resolución ...
+                            </p>
+                            <button class="course-button">
+                                Ver más
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button>Siguiente</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contenido-curso" *ngIf="false">
+
+        <div>
+
+            <div>
+                <h2>Componente(s)</h2>
+            </div>
+
+            <form>
+
+                <label for="parrafo">Parrafo</label>
+                <textarea name="parrafo" id="" cols="50" rows="2"></textarea>
+                <label for="subtitulo">Subtitulo</label>
+                <input type="text" name="subtitulo" id="">
+                <label>Imagen</label>
+                <div class="portada">
+                    <img [src]="imagen" alt="avatar" id="img">
+                </div>
+                <input type="file" name="imagen" id="imagen" accept="image/*" (change)="onFileChange($event)">
+
+                <label for="imagen" id="upgrate" *ngIf="portada">
+                    <span class="material-symbols-outlined">
+                        upgrade
+                    </span>
+                    Selecciona portada
+                </label>
+                
+                <label for="imagen" id="edit" *ngIf="!portada">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                    Editar portada
+                </label>
+
+                <label (click)="quitarFoto()" id="delete" *ngIf="!portada">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    Eliminar portada
+                </label>
+
+                <label for="archivo">Archivo</label>
+                <input type="file" name="archivo" id="archivo" accept="application/pdf" (change)="onFilePDFChange($event)">
+
+                <iframe [src]="pdfSrc" width="100%" height="100px" frameborder="0"></iframe>
+
+            </form>
+
+            <div>
+                <button>Generar</button>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>

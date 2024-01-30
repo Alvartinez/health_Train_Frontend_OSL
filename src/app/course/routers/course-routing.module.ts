@@ -10,6 +10,10 @@ import { UserCourseComponent } from '@rutas/shared/components/user-course/user-c
 // import { FeedbackExamComponent } from '../pages/feedback-exam/feedback-exam.component';
 // import { ErrorComponent } from '@rutas/home/pages/error/error.component';
 import { UserDashboardComponent } from '@rutas/user/shared/user_dashboard/user-dashboard.component';
+import { NewCourseComponent } from '../pages/Curso/new-course/new-course.component';
+import { InfoCourseComponent } from '../components/info-course/info-course.component';
+import { QuestionBankComponent } from '../pages/Curso/question-bank/question-bank.component';
+import { LineaTiempoComponent } from '../pages/Recurso/linea-tiempo/linea-tiempo.component';
 
 const routes: Routes = [
     // {
@@ -19,10 +23,10 @@ const routes: Routes = [
     //     resolve: { courseData: CourseResolver },
     //     data: { rol: 'Aprendiz' }
     // },
-    // {
-    //   path: "course/:id/modules",
-    //   loadChildren: () => import('@rutas/course/module/routers/module-routing.module').then((m) => m.ModuleRoutingModule)
-    // },
+    {
+      path: ":id/modules",
+      loadChildren: () => import('@rutas/course/routers/module-routing.module').then((m) => m.ModuleRoutingModule)
+    },
     // {
     //   path: "course/:id/terminos-y-condiciones",
     //   component: TerminosComponent,
@@ -48,10 +52,33 @@ const routes: Routes = [
     //   data: { rol: ['Aprendiz'] }
     // },
     {
-        path:"user-course",
-        component: UserCourseComponent
+      path:":id/user-course",
+      component: UserCourseComponent
+    },
+    {
+      path:"new-course",
+      component: NewCourseComponent
+    },
+    {
+      path: ":id/info-course",
+      component: InfoCourseComponent
+    },
+    {
+      path: ":id/exam",
+      loadChildren: () => import('@rutas/course/routers/exam-routing.module').then((m) => m.ExamRoutingModule)
+    },
+    {
+      path:"question-bank",
+      component:QuestionBankComponent
+    },
+    {
+      path:":id/question-bank",
+      component:QuestionBankComponent
+    },
+    {
+      path: "linea-time",
+      component:LineaTiempoComponent
     }
-    
 ];
 
 @NgModule({

@@ -1,0 +1,516 @@
+main{
+    background: linear-gradient(0deg, rgba(203,177,236,1) 11%, rgba(204,255,254,1) 63%);
+    min-height: 90.4vh;
+    padding: 30px 20px 10px 20px;
+    text-align: justify;
+}
+
+.Retorno{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.contenido-curso form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+}
+
+.container-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.container-perfil input[type="file"]{
+    display: none;
+}
+
+.portada{
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #dbfced;
+}
+
+.portada img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#upgrate, #delete, #edit{
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    gap: 5px;
+    color: rgb(236, 235, 234);
+    cursor: pointer;
+    font-size: clamp(.8rem, 2vw, 1rem);
+    font-weight: 700;
+}
+
+.container-perfil .indicacion{
+    text-align: center;
+    color: #333333d0;
+    font-size: .8rem;
+}
+
+.container-perfil input{
+    width: 100%;
+    height: 2rem;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#upgrate{
+    background-color: #088546;
+}
+
+#delete{
+    background-color: rgb(207, 16, 16);
+}
+
+#edit{
+    background-color: rgb(9, 131, 153);
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 40.25%; /* Aspect ratio 16:9 */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+hr{
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.editButton{
+    display: flex;
+    padding-top: 5px;
+}
+
+.editButton #upgrate{
+    box-shadow: 2px 1px #333;
+}
+
+.editButton #upgrate:hover{
+    background-color: #00BFA6;
+    padding: 6px 11px;
+    box-shadow: 1px 1px #333;
+}
+
+.lista-cursos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+}
+
+.flip-newCard {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    width: clamp(7rem, 43vw, 15rem);
+    height: clamp(7rem, 43vw, 12rem);
+    perspective: 1000px;
+    font-family: sans-serif;
+    border-radius: 1rem;
+    border: 2px dotted  #00BFA6;
+    cursor: pointer;
+}
+
+.flip-newCard:hover{
+    border: 3px dotted  #f7f7f7;
+}
+
+.flip-newCard:hover p{
+    color: #f7f7f7;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: clamp(7rem, 43vw, 15rem);
+    height: clamp(7rem, 43vw, 12rem);
+    perspective: 1000px;
+    font-family: sans-serif;
+}
+
+.title {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: 900;
+    text-align: center;
+    background-color: #fce8e8;
+    opacity: .8;
+    margin: 0;
+}
+
+.description {
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front .nuevoCurso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 700;
+    color: #1e9993;
+}
+
+.flip-card-front,
+.flip-card-back {
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid rgb(247, 238, 235);
+    border-radius: 1rem;
+}
+
+.flip-card-front {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: rgb(43, 21, 21);
+    opacity: 2;
+}
+
+.flip-card-back {
+    background: linear-gradient(120deg, rgb(145, 242, 255) 30%, rgb(80, 205, 255) 88%,
+            rgb(196, 255, 226) 40%, rgb(160, 255, 226) 78%);
+    color: rgb(16, 20, 59);
+    transform: rotateY(180deg);
+    align-items: center;
+    overflow: hidden;
+}
+
+.description-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px;
+    width: clamp(9rem, 12vw, 14rem);
+    text-align: justify;
+}
+
+ .indicacion{
+    margin-top: 15px;
+    color: #333333d0;
+    font-size: .8rem;
+}
+
+.course-button {
+    position: relative;
+    top: 5px;
+    background-color: #00BFA6;
+    padding: 6px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px dashed #00BFA6;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: .4s;
+}
+
+.course-button span:last-child {
+    display: none;
+}
+
+.course-button:hover {
+    transition: .4s;
+    border: 2px dashed #00BFA6;
+    background-color: #fff;
+    color: #00BFA6;
+}
+
+.course-button:active {
+    background-color: #87dbd0;
+}
+
+.material-symbols-outlined{
+    font-size: 1.4rem;
+}
+
+.presenta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333; 
+    font-size: 1rem; 
+    font-weight: normal; 
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.presenta:hover, .titulo:hover, .tituloCurso:hover{
+    color: #15daa8;
+    font-weight: 700;
+}
+
+.titulo, .modulo, .tituloCurso{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.contenido-exam{
+    padding: 5px;
+}
+
+.contenido-exam #examen{
+    width: clamp(15rem, 45vw, 20rem);
+}
+
+.info-curso{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-curso ul{
+    list-style: none;
+    counter-reset: custom-counter;
+}
+
+.info-curso li::before {
+    content: counter(custom-counter);
+    counter-increment: custom-counter;
+    font-weight: bold;
+    margin-right: 8px; 
+}
+
+.info-curso input, .info-curso textarea{
+    width: 100%;
+    height: 2rem;
+}
+
+.buttton-course{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.buttton-course button{
+    background-color: rgb(3, 126, 126);
+    padding: 8px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    color: #dbfced;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.buttton-course button:hover{
+    background-color: rgb(14, 185, 185);
+    font-weight: 700;
+}
+
+.contenido-com-obj{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #02352ed5;
+    inset: 0;
+    z-index: 1;
+    padding: 0;
+    width: 100%;
+    min-height: 90.4vh;
+}
+
+.modal{
+    background-color: #dbfced;
+    border-radius: 10px;
+    width: clamp(350px, 600px, 80%);
+    padding: 12px;
+    overflow-y: auto;
+}
+
+.container-modal{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #076460ab;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.container-modal .material-symbols-outlined{
+    align-self: flex-end;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.container-competencia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.model-competencia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.model-competencia textarea{
+    min-height: 3rem;
+    width: 100%;
+    margin: 10px;
+    box-sizing: border-box;
+    font-size: clamp(.8rem, 1rem, 70%);
+}
+
+.buttton-competencia{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.buttton-competencia button{
+    background-color: rgb(3, 126, 126);
+    padding: 8px 20px;
+    border-radius: 5px;
+    color: #dbfced;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.buttton-competencia button:hover{
+    background-color: rgb(14, 185, 185);
+    font-weight: 700;
+}
+
+.container-modulo{
+    width: 100%;
+}
+
+.recursos-informativos{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.banco-pregunta, .glosario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banco-pregunta label{
+    font-size: .85rem;
+}
+
+@media (min-width: 700px) {
+
+    .portada{
+        width: 180px;
+        height: 180px;
+    }
+
+    .indicacion, .container-perfil .indicacion{
+        font-size: 1rem;
+    }
+
+    video{
+        width: clamp(20rem, 45rem, 100%);
+        height: clamp(18rem, 45rem, 100%);
+        margin-top: 12px;
+    }
+
+    .titulo, .presenta{
+        font-size: 1.2rem;
+    }
+
+    .tituloCurso{
+        font-size: 1.8rem;
+    }
+
+    .banco-pregunta label{
+        font-size:1rem;
+    }
+
+}
+
+@media (min-width: 800px) {
+
+    .contenido-curso form{
+        padding: 10px 16px;
+    }
+
+    hr{
+        display: none;
+    }
+
+    .info-curso{
+        justify-self: center;
+        align-self: center;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .info-curso input, .info-curso textarea{
+        width: 80%;
+    }
+
+    .banco-pregunta label{
+        font-size:1.2rem;
+    }
+
+    .video-container {
+        position: relative;
+        overflow: hidden;
+        width: 80%;
+        padding-top: 30.25%; 
+    }
+    
+
+}

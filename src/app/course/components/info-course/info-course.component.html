@@ -1,0 +1,306 @@
+<user-navbar></user-navbar>
+<main>
+
+    <div class="Retorno" *ngIf="compObject">
+        <div class="flecha">&#9668;</div>
+        <h3>Regresar</h3>
+    </div>
+
+    <section class="contenido-curso" *ngIf="compObject">
+        <div class="vista-course">
+
+            <div class="container-perfil">
+                <span class="indicacion">*Portada del curso</span>
+                <div class="portada">
+                    <img [src]="imagen" alt="avatar" id="img">
+                </div>
+                <input type="file" name="foto" id="foto" accept="image/*" (change)="onFileChange($event)">
+                <label for="foto" id="upgrate" *ngIf="portada">
+                    <span class="material-symbols-outlined">
+                        upgrade
+                    </span>
+                    Selecciona portada
+                </label>
+                
+                <label for="foto" id="edit" *ngIf="!portada">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                    Editar portada
+                </label>
+    
+                <label (click)="quitarFoto()" id="delete" *ngIf="!portada">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    Eliminar portada
+                </label>
+
+                <div class="editButton" *ngIf="!portada">
+                    <label id="upgrate">
+                        Guardar
+                    </label>
+                </div>
+    
+                <label class="presenta" for="video" (click)="presentar(esPresenta)">
+                    <b>
+                        Presentación
+                    </b>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </label>
+                
+                <div class="video-container">
+                    <span class="indicacion">Puedes ampliar este video antes de reproducirlo ajustando el tamaño de la ventana.</span>
+                    <iframe [src]="getYouTubeEmbedUrl(video)" frameborder="0" allowfullscreen></iframe>
+                </div>
+    
+                <span class="indicacion" *ngIf="!esPresenta">*Inserta el enlace del video de presentación del curso</span>
+                <input [(ngModel)]="nuevoVideo" *ngIf="!esPresenta" type="text" name="video" id="">
+
+                <div class="editButton" *ngIf="!esPresenta">
+                    <label id="upgrate">
+                        Guardar
+                    </label>
+                </div>
+                <br>
+                <label class="presenta">
+                    <b>
+                        Examen
+                    </b>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </label>
+
+                <div class="contenido-exam">
+
+                    <div class="flip-newCard" id="examen" (click)="newExam()">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="nuevoCurso">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Examen 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="info-curso">
+                <h2 class="tituloCurso" (click)="titular(EsTitulo)">
+                    {{titulo}}
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </h2>
+                <span class="indicacion" *ngIf="!EsTitulo">*Actualiza el nombre del curso</span> 
+                <input type="text" *ngIf="!EsTitulo" [(ngModel)]="nuevoTitulo">
+
+                <div class="editButton" *ngIf="!EsTitulo">
+                    <label id="upgrate" (click)="actualizar()">
+                        Guardar
+                    </label>
+                </div>
+
+                <label class="titulo" (click)="_Descripcion(esDescripcion)">
+                    <h4>Descripción</h4>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </label>
+                <p class="descripcion">{{descripcion}}</p>
+                <span class="indicacion" *ngIf="!esDescripcion">*Actualiza la descripción del curso</span> 
+                <textarea name="nuevaDescripcion" [(ngModel)]="nuevaDescripcion"  *ngIf="!esDescripcion"></textarea>
+
+                <div class="editButton" *ngIf="!esDescripcion">
+                    <label id="upgrate">
+                        Guardar
+                    </label>
+                </div>
+
+                <label class="titulo" (click)="modalC()">
+                    <h4>Competencia(s)</h4>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </label>
+                
+                <div class="competencias">
+                    <ul>
+                        <li *ngFor="let competenciasCurso of competencias">
+                            {{ competenciasCurso?.nombre }}
+                        </li>
+                    </ul>
+                </div>
+
+                <label class="titulo" (click)="modalO()">
+                    <h4>Objetivo(s)</h4>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </label>
+                <ul>
+                    <li *ngFor="let objetivo of objetivos">
+                        {{ objetivo?.descripcion }}
+                    </li>
+                </ul>
+
+                <div class="recursos-informativos">
+                    <div class="banco-pregunta">
+                        <label class="titulo">
+                            <h4>Banco de preguntas</h4>
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </label>
+
+                        <div class="flip-card" class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <p class="title">Banco de preguntas</p>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="description">Descripción</span>
+                                    <p class="description-text">
+                                        Banco de preguntas donde se puede registrar preguntas e implementar en otra ocasión
+                                    </p>
+                                    <button class="course-button" (click)="questionBank()">
+                                        Ver más
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="glosario">
+                        <label class="titulo">
+                            <h4>Glosario</h4>
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </label>
+
+                        <div class="flip-card" class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <p class="title">Glosario de términos</p>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="description">Descripción</span>
+                                    <p class="description-text">
+                                       Glosario que se puede usar para palabras desconocidas
+                                    </p>
+                                    <button class="course-button">
+                                        Ver más
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="container-modulo">
+            <h3 class="modulo">
+                Módulo(s)
+            </h3>
+    
+            <div class="lista-cursos" >
+    
+                <div class="flip-newCard" (click)="newModulo()">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="nuevoCurso">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                Nuevo módulo
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="flip-card" *ngFor="let modulo of modulos" class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">{{modulo.nombre}}</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="description">Descripción</span>
+                            <p class="description-text">
+                                {{modulo.descripcion}}
+                            </p>
+                            <button class="course-button" (click)="Infomodulo()">
+                                Ver más
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
+    <section class="contenido-com-obj" *ngIf="!compObject">
+
+        <div class="modal">
+            <div class="container-modal">
+                <span class="material-symbols-outlined" (click)="cerrar()">
+                    close
+                </span>
+                <div class="model-competencia" *ngIf="comp">
+                    <h2>COMPETENCIAS</h2>
+                    <span class="indicacion" >*Actualiza las competencias</span>
+                    <div class="container-competencia">
+                        <textarea id="textarea1" (input)="autoExpand($event)" [(ngModel)]="textareaContent1"></textarea>
+                        <textarea id="textarea2" (input)="autoExpand($event)" [(ngModel)]="textareaContent2"></textarea>
+                        <textarea id="textarea3" (input)="autoExpand($event)" [(ngModel)]="textareaContent3"></textarea>
+                        <textarea id="textarea4" (input)="autoExpand($event)" [(ngModel)]="textareaContent4"></textarea>
+                        <textarea id="textarea5" (input)="autoExpand($event)" [(ngModel)]="textareaContent5"></textarea>
+                    </div>
+                    <div class="buttton-competencia">
+                        <button (click)="actualiza()">Actualizar</button>
+                    </div>
+                </div>
+
+                <div class="model-competencia" *ngIf="obj">
+                    <h2>OBJETIVOS</h2>
+                    <span class="indicacion" >*Actualiza los objetivos</span>
+                    <div class="container-competencia">
+                        <textarea id="textarea1" (input)="autoExpand($event)" [(ngModel)]="objetivoContent1"></textarea>
+                        <textarea id="textarea2" (input)="autoExpand($event)" [(ngModel)]="objetivoContent2"></textarea>
+                        <textarea id="textarea3" (input)="autoExpand($event)" [(ngModel)]="objetivoContent3"></textarea>
+                        <textarea id="textarea4" (input)="autoExpand($event)" [(ngModel)]="objetivoContent4"></textarea>
+                        <textarea id="textarea5" (input)="autoExpand($event)" [(ngModel)]="objetivoContent5"></textarea>
+                    </div>
+                    <div class="buttton-competencia">
+                        <button (click)="actualiza()">Actualizar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</main>

@@ -3,21 +3,21 @@
     <nav class="titulo">
         <div class="titulo-curso">
             <div class="flecha">&#9668;</div>
-            <h1>Buenas prácticas de manufactura</h1>
+            <h1>{{curso.nombre}}</h1>
         </div>
 
         <div class="user-progreso">
             <div class="progreso">
                 <div class="barra">
-                    <div class="barra-progreso">
-                        <span>0%</span> 
+                    <div class="barra-progreso" [style.width.%]="porcentaje">
+                        <span>{{porcentaje}}%</span> 
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="exam-foro">
-            <button class="examen"> Haz el Examen aquí</button>
+            <button class="examen" *ngIf="examen"> Haz el Examen aquí</button>
             <button class="foro">
                 <span class="material-symbols-outlined">
                     forum
@@ -29,12 +29,12 @@
 
     <section class="descripcion">
         <div class="video-descripcion">
-            <iframe src="https://www.youtube.com/embed/TcnePkr-8wg?si=9f5HAQ_Yvc3oSRoc" frameborder="0"></iframe>
+            <iframe [src]="curso.presentacion" frameborder="0"></iframe>
         </div>
         <div class="texto-descripcion">
             <h2> Descripción </h2>
             <p>
-                Hola, ¿cómo se encuentra en este día?
+                {{curso.descripcion}}
             </p>
         </div>
     </section>
@@ -42,7 +42,8 @@
     <section class="modulos">
         <h2>Módulos</h2>
         <div class="lista-modulos">
-            <div class="card">
+
+            <div class="card" *ngFor="let modulo of modulos; let i = index">
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
@@ -50,16 +51,16 @@
                                 <img [src]="imagen" alt="">
                             </div>
                             <div class="container-title">
-                                <h2>Modulo {{numero}}</h2>
-                                <h3>{{titulo}}</h3>
+                                <h2>Modulo {{i +1}}</h2>
+                                <h3>{{modulo.titulo}}</h3>
                             </div>
                         </div>
                         <div class="flip-card-back">
                             <span class="description">Descripción</span>
                             <p class="description-text">
-                                {{descripcion}}
+                                {{modulo.descripcion}}
                             </p>
-                            <button class="course-button">
+                            <button class="course-button" (click)="verModulo(modulo.id_modulo)">
                                 Ver más
                             </button>
                         </div>

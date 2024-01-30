@@ -1,1 +1,115 @@
-<p>info-modulo works!</p>
+<main>
+    <section class="modal-body">
+        <div class="close" (click)="close()">
+            <span class="material-symbols-outlined">
+                close
+            </span>
+        </div>
+
+        <div class="content-body">
+            <div class="titulo-modal">
+                <h2>Historia y evolución</h2>
+            </div>
+
+            <div class="container">
+
+                <div class="descripcion">
+                    <div class="titulo" (click)="tab('description')">
+                        <h3>Descripción</h3>
+                        <span class="material-symbols-outlined">
+                            {{tabDescription}}
+                        </span>
+                    </div>
+                    <div class="contenido" *ngIf="description">
+                        <p>
+                            Esto es un parrafo para guiar el diseño, dgdfhfgjghkghkfgjgnvlvhml, fdhjsgdsgdfjghfsvfhrgjkk,fdfgsdgfdhjkhgk hvfgjxjfgkfhkxbk
+                        </p>
+                    </div>
+                </div>
+
+                <div class="descripcion">
+                    <div class="titulo" (click)="tab('objetivo')">
+                        <h3>Objetivo de aprendizaje</h3>
+                        <span class="material-symbols-outlined">
+                            {{tabObjetivo}}
+                        </span>
+                    </div>
+                    <div class="contenido" *ngIf="objetivo">
+                        <p>
+                            Esto es un parrafo para guiar el diseño
+                        </p>
+                    </div>
+                </div>
+
+                <div class="descripcion">
+                    <div class="titulo" (click)="tab('competencia')">
+                        <h3>Competencias asociadas</h3>
+                        <span class="material-symbols-outlined">
+                            {{tabCompetencia}}
+                        </span>
+                    </div>
+                    <div class="contenido" *ngIf="competencia">
+                        <ol>
+                            <li>
+                              Gorda
+                              <ol>
+                                <li>
+                                  Hola
+                                </li>
+                                <li>
+                                  Adiós
+                                </li>
+                              </ol>
+                            </li>
+                            <li>
+                              Babosa
+                            </li>
+                          </ol>
+                    </div>
+                </div>
+
+                <div class="descripcion">
+                    <div class="titulo" (click)="tab('duracion')">
+                        <h3>Duración</h3>
+                        <span class="material-symbols-outlined">
+                            {{tabDuracion}}
+                        </span>
+                    </div>
+                    <div class="contenido" *ngIf="duracion">
+                        <p>
+                            24 Hora(s)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="descripcion">
+                    <div class="titulo" (click)="tab('tema')">
+                        <h3>Temas y subtemas</h3>
+                        <span class="material-symbols-outlined">
+                            {{tabTema}}
+                        </span>
+                    </div>
+                    <div class="contenido" *ngIf="tema">
+                        <ol>
+                            <li>
+                                Gorda   
+                                <ol>
+                                    <li>
+                                        Hola
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                Babosa
+                            </li>
+                        </ol>
+                    </div>
+                </div>  
+
+            </div> 
+
+            <button (click)="modulo()">Iniciar módulo</button>
+
+        </div>
+    </section>
+</main>

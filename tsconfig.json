@@ -6,7 +6,8 @@
       "@images/*": ["./src/assets/image/*"],
       "@rutas/*": ["./src/app/*"],
       "@users/*": ["./src/app/user/*"],
-      "@visitor/*": ["./src/app/user/1-Visitor/*"]
+      "@visitor/*": ["./src/app/user/1-Visitor/*"],
+      "@course/*": ["./src/app/course/routers/*"]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

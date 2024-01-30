@@ -1,0 +1,861 @@
+<user-navbar></user-navbar>
+<main>
+
+    <section class="Retorno">
+        <div class="flecha">&#9668;</div>
+        <h3>Regresar</h3>
+    </section>
+
+    <section class="contenido-curso" *ngIf="true">
+
+        <div>
+
+            <h2>Nuevo Módulo</h2>
+
+            <form>
+    
+                <div class="container-perfil">
+                    <div class="portada">
+                        <img [src]="imagen" alt="avatar" id="img">
+                    </div>
+                    <input type="file" name="foto" id="foto" accept="image/*" (change)="onFileChange($event)">
+                    <label for="foto" id="upgrate" *ngIf="portada">
+                        <span class="material-symbols-outlined">
+                            upgrade
+                        </span>
+                        Selecciona portada
+                    </label>
+                    
+                    <label for="foto" id="edit" *ngIf="!portada">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                        Editar portada
+                    </label>
+    
+                    <label (click)="quitarFoto()" id="delete" *ngIf="!portada">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                        Eliminar portada
+                    </label>
+    
+                </div>
+    
+                <div class="container-text">
+    
+                    <label for="titulo" class="titulo">Título</label>
+                    <input type="text"  [(ngModel)]="titulo" name="titulo" autocomplete="off">
+                    <label for="descripcion" class="titulo">Descripción</label>
+                    <textarea name="descripcion" [(ngModel)]="descripcion" id="" cols="30" rows="2"></textarea>
+                    <label for="duracion" class="titulo">Duración (Horas)</label>
+                    <input type="number" [(ngModel)]="tiempo" name="duracion" min="0">
+                    <label for="objetivoAprendizaje" class="titulo">Objetivo de aprendizaje</label>
+                    <textarea [(ngModel)]="objetivo" name="ojetivoAprendizaje" cols="30" rows="2"></textarea>
+                    <label for="competencia" class="titulo">COMPETENCIA(S)</label>
+
+                    <div class="listaCompetencia">
+                        <ng-container *ngFor="let competencia of competencias; let i = index">
+                            <select name="competencia" [(ngModel)]="seleccionesCompetencias[i]">
+                                <option *ngFor="let opcion of competencias" [value]="opcion.nombre">{{opcion.nombre}}</option>
+                            </select>
+                        </ng-container>
+                    </div>
+
+                    <label for="temas'" class="titulo">Temas</label>
+                    
+                    <div class="listaTemas">
+
+                        <!--Tema 1-->
+
+                        <div class="temas">
+
+                            <div class="tema-subtemas">
+
+                                <div class="icon-tema" (click)="temas1()">
+                                    <span class="material-symbols-outlined">
+                                        {{iconTema1}}
+                                    </span>
+                                    <span>Tema 1</span>
+                                </div>
+
+                                <input [(ngModel)]="moduloTema1" type="text" *ngIf="tema1" name="moduloTema1">
+
+                                <div class="nueva-competencia" id="opcion" *ngIf="tema1 && !tituloTema2">
+                                    <button (click)="nuevoTema1()" id="upgrate" *ngIf="add1">
+                                        <span class="material-symbols-outlined">
+                                            add
+                                        </span>
+                                        Nuevo tema
+                                    </button>            
+                                </div>
+
+                                <div class="tema-indicacion" *ngIf="tema1 && !subTema1">
+                                    <span class="indicacion" (click)="subtemas11()">¿Subtemas? Dar clic aquí</span>
+                                </div>
+
+                            </div>
+
+                            <div class="lista-subtemas" *ngIf="subTema1">
+
+                                <div class="icon-tema" (click)="subTema01(esSubTema1)">
+                                    <span class="material-symbols-outlined">
+                                        {{iconSubTema1}}
+                                    </span>
+                                    <span>Subtema(s)</span>
+                                </div>
+
+                                <div class="subtemas" *ngIf="esSubTema1">
+
+                                    <div class="nuevoSubtema">
+
+                                        <div class="newCompetencia" *ngIf="subTema11">
+                                            <input type="text" [(ngModel)]="moduloSubTema11" name="moduloSubTema11" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema12()" id="upgrate" *ngIf="add11">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema11()" *ngIf="nuSubTema1">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema12">
+                                            <input type="text"  [(ngModel)]="moduloSubTema12" name="moduloSubTema12" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema13()" id="upgrate" *ngIf="add12">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema12()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema13">
+                                            <input type="text"  [(ngModel)]="moduloSubTema13" name="moduloSubTema13" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema14()" id="upgrate" *ngIf="add13">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema13()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema14">
+                                            <input type="text"  [(ngModel)]="moduloSubTema14" name="moduloSubTema14" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema15()" id="upgrate" *ngIf="add14">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema14()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema15">
+                                            <input type="text"  [(ngModel)]="moduloSubTema15" name="moduloSubTema15" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button id="delete" (click)="eliminaSubtema15()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Tema 2-->
+
+                        <div class="temas" *ngIf="tituloTema2">
+
+                            <div class="tema-subtemas">
+
+                                <div class="icon-tema" (click)="temas2()">
+                                    <span class="material-symbols-outlined">
+                                        {{iconTema2}}
+                                    </span>
+                                    <span>Tema 2</span>
+                                </div>
+
+                                <input type="text" [(ngModel)]="moduloTema2" name="moduloTema2" id="" *ngIf="tema2">
+
+                                <div class="nueva-competencia" id="opcion" *ngIf="tema2">
+                                    <button (click)="nuevoTema2()" id="upgrate" *ngIf="add2 && !tituloTema3">
+                                        <span class="material-symbols-outlined">
+                                            add
+                                        </span>
+                                        Nuevo tema
+                                    </button>
+
+                                    <button id="delete" (click)="eliminaTema2()">
+                                        <span class="material-symbols-outlined">
+                                            delete
+                                        </span>
+                                        Borrar tema
+                                    </button>
+            
+                                </div>
+
+                                <div class="tema-indicacion" *ngIf="tema2 && !subTema2">
+                                    <span class="indicacion" (click)="subtemas21()">¿Subtemas? Dar clic aquí</span>
+                                </div>
+
+                            </div>
+
+                            <div class="lista-subtemas" *ngIf="subTema2">
+
+                                <div class="icon-tema"  (click)="subTema02(esSubTema2)">
+                                    <span class="material-symbols-outlined">
+                                        {{iconSubTema2}}
+                                    </span>
+                                    <span>Subtema(s)</span>
+                                </div>
+
+                                <div class="subtemas" *ngIf="esSubTema2">
+
+                                    <div class="nuevoSubtema">
+
+                                        <div class="newCompetencia" *ngIf="subTema21">
+                                            <input type="text"  [(ngModel)]="moduloSubTema21" name="moduloSubTema21" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema22()" id="upgrate" *ngIf="add21">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema21()" *ngIf="nuSubTema2">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema22">
+                                            <input type="text"  [(ngModel)]="moduloSubTema22" name="moduloSubTema22" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema23()" id="upgrate" *ngIf="add22">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema22()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema23">
+                                            <input type="text"  [(ngModel)]="moduloSubTema23" name="moduloSubTema23" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema24()" id="upgrate" *ngIf="add23">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema23()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema24">
+                                            <input type="text"  [(ngModel)]="moduloSubTema24" name="moduloSubTema24" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema25()" id="upgrate" *ngIf="add24">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema24()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema25">
+                                            <input type="text"  [(ngModel)]="moduloSubTema25" name="moduloSubTema25" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                        
+                                                <button id="delete" (click)="eliminaSubtema25()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Tema 3-->
+
+                        <div class="temas" *ngIf="tituloTema3">
+
+                            <div class="tema-subtemas">
+
+                                <div class="icon-tema" (click)="temas3()">
+                                    <span class="material-symbols-outlined">
+                                        {{iconTema3}}
+                                    </span>
+                                    <span>Tema 3</span>
+                                </div>
+
+                                <input type="text" [(ngModel)]="moduloTema3" name="moduloTema3" id="" *ngIf="tema3">
+
+                                <div class="nueva-competencia" id="opcion" *ngIf="tema3">
+                                    <button (click)="nuevoTema3()" id="upgrate" *ngIf="add3 &&!tituloTema4">
+                                        <span class="material-symbols-outlined">
+                                            add
+                                        </span>
+                                        Nuevo tema
+                                    </button>
+            
+                                    <button id="delete" (click)="eliminaTema3()">
+                                        <span class="material-symbols-outlined">
+                                            delete
+                                        </span>
+                                        Borrar tema
+                                    </button>
+            
+                                </div>
+
+                                <div class="tema-indicacion" *ngIf="tema3 && !subTema3">
+                                    <span class="indicacion" (click)="subtemas31()">¿Subtemas? Dar clic aquí</span>
+                                </div>
+
+                            </div>
+
+                            <div class="lista-subtemas" *ngIf="subTema3">
+
+                                <div class="icon-tema" (click)="subTema03(esSubTema3)">
+                                    <span class="material-symbols-outlined">
+                                        {{iconSubTema3}}
+                                    </span>
+                                    <span>Subtema(s)</span>
+                                </div>
+
+                                <div class="subtemas" *ngIf="esSubTema3">
+
+                                    <div class="nuevoSubtema">
+
+                                        <div class="newCompetencia" *ngIf="subTema31">
+                                            <input type="text"  [(ngModel)]="moduloSubTema31" name="moduloSubTema31" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema32()" id="upgrate" *ngIf="add31">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema31()" *ngIf="nuSubTema3">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema32">
+                                            <input type="text"  [(ngModel)]="moduloSubTema32" name="moduloSubTema32" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema33()" id="upgrate" *ngIf="add32">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema32()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema33"> 
+                                            <input type="text"  [(ngModel)]="moduloSubTema33" name="moduloSubTema33" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema34()" id="upgrate" *ngIf="add33">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema33()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema34">
+                                            <input type="text"  [(ngModel)]="moduloSubTema34" name="moduloSubTema34" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema35()" id="upgrate" *ngIf="add34">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema34()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema35">
+                                            <input type="text"  [(ngModel)]="moduloSubTema35" name="moduloSubTema35" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                        
+                                                <button id="delete" (click)="eliminaSubtema35()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Tema 4-->
+
+                        <div class="temas" *ngIf="tituloTema4">
+
+                            <div class="tema-subtemas">
+
+                                <div class="icon-tema" (click)="temas4()">
+                                    <span class="material-symbols-outlined">
+                                        {{iconTema4}}
+                                    </span>
+                                    <span>Tema 4</span>
+                                </div>
+
+                                <input type="text" [(ngModel)]="moduloTema4" name="moduloTema4" id="" *ngIf="tema4">
+
+                                <div class="nueva-competencia" id="opcion" *ngIf="tema4">
+                                    <button (click)="nuevoTema4()" id="upgrate" *ngIf="add4  &&!tituloTema5">
+                                        <span class="material-symbols-outlined">
+                                            add
+                                        </span>
+                                        Nuevo tema
+                                    </button>
+            
+                                    <button id="delete" (click)="eliminaTema4()">
+                                        <span class="material-symbols-outlined">
+                                            delete
+                                        </span>
+                                        Borrar tema
+                                    </button>
+            
+                                </div>
+
+                                <div class="tema-indicacion" *ngIf="tema4 && !subTema4">
+                                    <span class="indicacion" (click)="subtemas41()">¿Subtemas? Dar clic aquí</span>
+                                </div>
+
+                            </div>
+
+                            <div class="lista-subtemas" *ngIf="subTema4">
+
+                                <div class="icon-tema" (click)="subTema04(esSubTema4)">
+                                    <span class="material-symbols-outlined">
+                                        {{iconSubTema4}}
+                                    </span>
+                                    <span>Subtema(s)</span>
+                                </div>
+
+                                <div class="subtemas" *ngIf="esSubTema4">
+
+                                    <div class="nuevoSubtema">
+
+                                        <div class="newCompetencia" *ngIf="subTema41">
+                                            <input type="text"  [(ngModel)]="moduloSubTema41" name="moduloSubTema41" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema42()" id="upgrate" *ngIf="add41">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema41()" *ngIf="nuSubTema4">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema42">
+                                            <input type="text"  [(ngModel)]="moduloSubTema42" name="moduloSubTema42" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema43()" id="upgrate" *ngIf="add42">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema42()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema43">
+                                            <input type="text"  [(ngModel)]="moduloSubTema43" name="moduloSubTema43" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema44()" id="upgrate" *ngIf="add43">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema43()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema44">
+                                            <input type="text"  [(ngModel)]="moduloSubTema44" name="moduloSubTema44" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema45()" id="upgrate" *ngIf="add44">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema44()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema45">
+                                            <input type="text"  [(ngModel)]="moduloSubTema45" name="moduloSubTema45" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                        
+                                                <button id="delete" (click)="eliminaSubtema45()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Tema 5-->
+
+                        <div class="temas" *ngIf="tituloTema5">
+
+                            <div class="tema-subtemas">
+
+                                <div class="icon-tema" (click)="temas5()">
+                                    <span class="material-symbols-outlined">
+                                        {{iconTema5}}
+                                    </span>
+                                    <span>Tema 5</span>
+                                </div>
+
+                                <input type="text" [(ngModel)]="moduloTema5" name="moduloTema5" id="" *ngIf="tema5">
+
+                                <div class="nueva-competencia" id="opcion" *ngIf="tema5">
+            
+                                    <button id="delete" (click)="eliminaTema5()">
+                                        <span class="material-symbols-outlined">
+                                            delete
+                                        </span>
+                                        Borrar tema
+                                    </button>
+            
+                                </div>
+
+                                <div class="tema-indicacion" *ngIf="tema5 && !subTema5">
+                                    <span class="indicacion" (click)="subtemas51()">¿Subtemas? Dar clic aquí</span>
+                                </div>
+
+                            </div>
+
+                            <div class="lista-subtemas" *ngIf="subTema5">
+
+                                <div class="icon-tema" (click)="subTema05(esSubTema5)">
+                                    <span class="material-symbols-outlined">
+                                        {{iconSubTema5}}
+                                    </span>
+                                    <span>Subtema(s)</span>
+                                </div>
+
+                                <div class="subtemas" *ngIf="esSubTema5">
+
+                                    <div class="nuevoSubtema">
+
+                                        <div class="newCompetencia" *ngIf="subTema51">
+                                            <input type="text"  [(ngModel)]="moduloSubTema51" name="moduloSubTema51" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema52()" id="upgrate" *ngIf="add51">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema51()" *ngIf="nuSubTema5">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema52">
+                                            <input type="text"  [(ngModel)]="moduloSubTema52" name="moduloSubTema52" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema53()" id="upgrate" *ngIf="add52">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema52()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema53">
+                                            <input type="text"  [(ngModel)]="moduloSubTema53" name="moduloSubTema53" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema54()" id="upgrate" *ngIf="add53">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema53()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema54">
+                                            <input type="text"  [(ngModel)]="moduloSubTema54" name="moduloSubTema54" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                                                <button (click)="nuevoSubtema55()" id="upgrate" *ngIf="add54">
+                                                    <span class="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                    Nuevo subtema
+                                                </button>
+                        
+                                                <button id="delete" (click)="eliminaSubtema54()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                        <div class="newCompetencia" *ngIf="subTema55">
+                                            <input type="text"  [(ngModel)]="moduloSubTema55" name="moduloSubTema55" id="">
+                        
+                                            <div class="nueva-competencia" id="opcion">
+                        
+                                                <button id="delete" (click)="eliminaSubtema55()">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                    Borrar subtema
+                                                </button>
+                        
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <label for="conclusion" class="titulo">Conclusión</label>
+                    <textarea name="conclusion" [(ngModel)]="conlusion" id="" cols="30" rows="2"></textarea>
+    
+                </div>
+
+                <div class="buttton-course">
+                    <button (click)="genera()">Generar</button>
+                </div>
+    
+            </form>
+            
+        </div>
+
+    </section>
+
+</main>

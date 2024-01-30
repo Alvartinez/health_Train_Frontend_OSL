@@ -1,0 +1,50 @@
+<user-navbar></user-navbar>
+<main>
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+
+        <div>
+            <h2>BANCO DE PREGUNTAS</h2>
+        </div>
+
+        <div>
+          <label for="enunciado">Enunciado:</label>
+          <input type="text" id="enunciado" formControlName="enunciado">
+        </div>
+      
+        <div formArrayName="opciones">
+          <div *ngFor="let opcion of opciones().controls; let i=index">
+            <div [formGroupName]="i">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" formControlName="nombre">
+              
+              <label for="valor">Valor:</label>
+              <input type="checkbox" id="valor" formControlName="valor">
+      
+              <label for="ponderado">Ponderado:</label>
+              <input type="number" id="ponderado" formControlName="ponderado">
+      
+              <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
+            </div>
+          </div>
+          <button type="button" (click)="addOpcion()">Agregar Opción</button>
+        </div>
+      
+        <div>
+          <label for="tipo_pregunta">Tipo de Pregunta:</label>
+          <input type="text" id="tipo_pregunta" formControlName="tipo_pregunta">
+        </div>
+      
+        <div>
+          <label for="multiple">Multiple:</label>
+          <input type="checkbox" id="multiple" formControlName="multiple">
+        </div>
+      
+        <div>
+          <label for="puntaje">Puntaje:</label>
+          <input type="number" id="puntaje" formControlName="puntaje">
+        </div>
+      
+        <button type="submit">Guardar Pregunta</button>
+      </form>
+
+</main>

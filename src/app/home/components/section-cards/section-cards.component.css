@@ -1,6 +1,6 @@
 
 .cursos{
-    height: 100vh;
+    min-height: 100vh;
     border: 2px 0px solid #26077c;
 }
 

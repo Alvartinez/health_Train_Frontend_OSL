@@ -1,0 +1,15 @@
+main{
+    background: linear-gradient(0deg, rgba(203,177,236,1) 11%, rgba(204,255,254,1) 63%);
+    min-height: 90.4vh;
+    padding: 30px 20px 10px 20px;
+}
+
+div {
+    margin-bottom: 10px;
+}
+  label {
+    margin-right: 10px;
+}
+  input, button {
+    margin-right: 10px;
+}

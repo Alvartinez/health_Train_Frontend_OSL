@@ -1,0 +1,124 @@
+main{
+    background: linear-gradient(to top, #5F9EA0, #7FFFD4 100%);
+    display: flex;
+    justify-content: center;
+    min-height: 110vh;
+    padding: 20px 10px;
+    color: #333;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    opacity: .8;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: opacity .5s;
+    animation: show 1s .5s backwards;
+    padding: 10px;
+    width: clamp(90%, 2vw, 70%);
+    height: 80%;
+}
+
+@keyframes show {
+
+    0% {
+        transform: translateY(-100vh);
+    }
+
+}
+
+.close{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.material-symbols-outlined{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-modal{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.titulo-modal h2{
+    font-weight: 700;
+    font-size: clamp(.8rem, 5vw, 1.6rem);
+    text-transform: uppercase;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+}
+
+.descripcion{
+    border-radius: 5px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    font-size: clamp(.2rem, 3vw, 1.1rem);
+    color: #f7f8f8;
+    border-radius: 5px;
+    background-color: #2E95B6;
+}
+
+.titulo .material-symbols-outlined{
+    color: #f7f8f8;
+}
+
+.contenido{
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.39);
+    border: 1px solid #33333391;
+    padding: 15px;
+    font-size: clamp(.4rem, 3vw, 1rem);
+    overflow-y: scroll;
+}
+
+.contenido ol{
+    padding: 0px 15px;
+}
+
+.contenido ol li ol li{
+    list-style-type: upper-roman;
+}
+
+button{
+    align-self: flex-end;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 92px;
+    border-radius: 12px;
+    border: 1px #2E95B6 solid;
+    background-color: #2E95B6;
+    color: #fff8f8;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #00BFA6;
+    cursor: pointer;
+    border: 0;
+    font-size: 15px;
+    box-shadow: 1px 2px 4px 2px #168f67;
+}

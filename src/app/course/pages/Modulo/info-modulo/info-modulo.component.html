@@ -1,0 +1,342 @@
+<user-navbar></user-navbar>
+<main>
+
+    <section class="Retorno">
+        <div class="flecha">&#9668;</div>
+        <h3>Regresar</h3>
+    </section>
+
+    <section class="contenido-curso" *ngIf="compObject">
+        <div class="vista-course">
+
+            <div class="container-perfil">
+                <span class="indicacion">*Portada del módulo</span> 
+                <div class="portada">
+                    <img [src]="imagen" alt="avatar" id="img">
+                </div>
+                <input type="file" name="foto" id="foto" accept="image/*" (change)="onFileChange($event)">
+                <label for="foto" id="upgrate" *ngIf="portada">
+                    <span class="material-symbols-outlined">
+                        upgrade
+                    </span>
+                    Selecciona portada
+                </label>
+                
+                <label for="foto" id="edit" *ngIf="!portada">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                    Editar portada
+                </label>
+    
+                <label (click)="quitarFoto()" id="delete" *ngIf="!portada">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    Eliminar portada
+                </label>
+
+            </div>
+
+            <hr>
+
+            <div class="info-curso">
+                <div class="container">
+                    <h2 class="tituloCurso" (click)="titular(EsTitulo)">
+                        {{modulos.nombre}}
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </h2>
+                    <span class="indicacion" *ngIf="!EsTitulo">*Actualiza el nombre del módulo del curso</span> 
+                    <input type="text" *ngIf="!EsTitulo">
+
+                    <label class="titulo" (click)="duracion(tiempo)">
+                        <h4>Duración</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </label>
+
+                    <p>{{modulos.duracion}} horas</p>
+
+                    <span class="indicacion" *ngIf="tiempo">*Actualiza la duración del módulo </span> 
+                    <input type="number" *ngIf="tiempo">
+    
+                    <label class="titulo" (click)="_Descripcion(esDescripcion)">
+                        <h4>Descripción</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </label>
+                    <p class="descripcion">{{modulos.descripcion}}</p>
+                    <span class="indicacion" *ngIf="!esDescripcion">*Actualiza la descripción del modulo</span> 
+                    <textarea name="" id=""  *ngIf="!esDescripcion"></textarea>
+    
+                    <label class="titulo" (click)="aprendizaje(objetivo_aprendizaje)">
+                        <h4>Objetivo de aprendizaje</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </label>
+
+                    <p class="descripcion">{{modulos.objetivo}}</p>
+
+                    <span class="indicacion" *ngIf="objetivo_aprendizaje">*Actualiza el objetivo de aprendizaje</span> 
+                    <textarea type="text" *ngIf="objetivo_aprendizaje"></textarea>
+
+                    <label class="titulo" (click)="modalC()">
+                        <h4>Competencia(s)</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </label>
+                    <div class="competencias">
+                        <ul>
+                            <li *ngFor="let competencia of modulos.competencias">
+                                {{ competencia.competencia }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h4 class="titulo">Temario</h4>
+                    <div *ngFor="let tema of modulos.temas">
+                        <label class="titulo">
+    
+                            <h4>{{ tema.tema }}</h4>
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </label>
+                        <div class="competencias">
+                            <ul>
+                                <li *ngFor="let subtema of tema.subtemas">
+                                    {{ subtema.subtema }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <label class="titulo" (click)="editar(fin)">
+                        <h4>Conclusión</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </label>
+
+                    <p class="descripcion">{{modulos.conclusion}}</p>
+
+                    <span class="indicacion" *ngIf="fin">*Actualiza la conclusión del módulo </span> 
+                    <input type="text" *ngIf="fin">
+
+                </div>
+            </div>
+            
+
+        </div>
+        <div class="container-modulo">
+
+            <div class="container-resource" *ngIf="recurso">
+
+                <div class="resource">
+                    <label class="titulo">
+                        <h4>RECURSO(S) </h4>
+                        <span class="material-symbols-outlined">
+                            visibility
+                        </span>
+                    </label>
+                </div>
+
+                <div class="lista-cursos" >
+        
+                    <div class="flip-newCard">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="nuevoCurso">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Nuevo Recurso
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="flip-card" *ngFor="let resource of resources" class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="title">{{resource.nombre}}</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="description">Descripción</span>
+                                <p class="description-text">
+                                    {{resource.descripcion}}
+                                </p>
+                                <button class="course-button" (click)="Infomodulo()">
+                                    Ver más
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="container-quiz" *ngIf="quiz">
+
+                <div class="resource">
+                    <label class="titulo">
+                        <h4>QUIZ(ZES) FORMATIVO(S)</h4>
+                        <span class="material-symbols-outlined">
+                            visibility
+                        </span>
+                    </label>
+                </div>
+
+                <div class="lista-cursos" >
+        
+                    <div class="flip-newCard" (click)="newModulo()">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="nuevoCurso">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Nuevo quiz formativo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="flip-card" *ngFor="let quizz of quizzes" class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="title">{{quizz.titulo}}</p>
+                            </div>
+                            <div class="flip-card-back">
+
+                                <button class="course-button" (click)="Infomodulo()">
+                                    Ver más
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="buttton-course" *ngIf="!esPresenta || !EsTitulo || !esDescripcion || !portada">
+            <button>Actualizar</button>
+        </div>
+
+    </section>
+
+
+    <section class="contenido-curso" *ngIf="false">
+
+        <div>
+            <h2>Recurso</h2>
+
+            <span>Selecciona el tipo de recurso</span>
+
+            <div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        slideshow
+                    </span>
+                    <h3>Video</h3>
+                </div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        book_5
+                    </span>
+                    <h3>Texto Plano</h3>
+                </div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        audio_file
+                    </span>
+                    <h3>Podcast</h3>
+                </div>
+
+                <div>
+                    <span class="material-symbols-outlined">
+                        timeline
+                    </span>
+                    <h3>Línea del Tiempo</h3>
+                </div>
+
+            </div>
+
+            <div>
+                <button>Siguiente</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contenido-curso" *ngIf="false">
+         
+        <div>
+
+            <div>
+                <h2>Titulo Curso</h2>
+            </div>
+            
+            <div>
+                <h3>Recurso(s)</h3>
+            </div>
+
+            <div class="lista-cursos" >
+
+                <div class="flip-newCard">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="nuevoCurso">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                Nuevo Curso
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Buenas prácticas de manufactura</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="description">Descripción</span>
+                            <p class="description-text">
+                                La finalidad del curso es dar a conocer a los estudiantes diferentes principios y requisitos sanitarios que se
+                                encuentran establecidos en la Resolución ...
+                            </p>
+                            <button class="course-button">
+                                Ver más
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttton-course">
+                <button>Generar</button>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>

@@ -1,0 +1,55 @@
+<user-navbar></user-navbar>
+<main>
+    <div class="container">
+        <form (ngSubmit)="addQuestion()">
+            <h1>Creación de Evaluación</h1>
+            
+            <label for="evaluation-name">Nombre de la Evaluación:</label>
+            <input type="text" id="evaluation-name" [(ngModel)]="evaluationName" required>
+
+            <label for="total-score">Nota Total de la Evaluación:</label>
+            <input type="number" id="total-score" [(ngModel)]="totalScore" required>
+    
+            <h2>Agregar Pregunta</h2>
+            <label>Tipo de Pregunta:</label>
+            <select [(ngModel)]="newQuestion.type">
+                <option value="single">Opción Única</option>
+                <option value="multiple">Opción Múltiple</option>
+                <option value="matching">Emparejamiento</option>
+            </select>
+
+            <label for="question-content">Pregunta:</label>
+            <input type="text" id="question-content" [(ngModel)]="newQuestion.content" required>
+
+            <div *ngIf="newQuestion.type === 'single'">
+                <label>Opciones:</label>
+                <div *ngFor="let option of newQuestion.options; let i = index">
+                    <input type="text" [(ngModel)]="newQuestion.options[i]">
+                    <button type="button" *ngIf="i > 0" (click)="removeOption(i)">Eliminar Opción</button>
+                </div>
+                <button type="button" (click)="addOption()">Añadir Opción</button>
+                <button type="button" (click)="updateOptions()">Actualizar Opciones</button>
+            
+                <div *ngIf="optionsReady">
+                    <label for="single-answer">Respuesta Correcta:</label>
+                    <select id="single-answer" [(ngModel)]="newQuestion.correctAnswer">
+                        <option *ngFor="let option of newQuestion.options" [value]="option">{{ option }}</option>
+                    </select>
+            
+                    <label for="feedback">Retroalimentación de la Respuesta Correcta:</label>
+                    <textarea id="feedback" [(ngModel)]="newQuestion.feedback"></textarea>
+                </div>
+            </div>
+
+            <!-- Código para preguntas de opción múltiple y emparejamiento aquí -->
+
+            <button type="submit">Añadir Pregunta</button>
+        </form>
+    
+        <div *ngFor="let question of questions; let i = index">
+            <p>{{ question.type }}: {{ question.content }} - Valor: {{ question.value }}</p>
+            <button type="button" (click)="editQuestion(i)">Editar</button>
+            <button type="button" (click)="removeQuestion(i)">Eliminar</button>
+        </div>
+    </div>
+</main>
