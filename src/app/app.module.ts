@@ -40,6 +40,7 @@ import { NewExamComponent } from './course/pages/Examen/new-exam/new-exam.compon
 import { QuestionBankComponent } from './course/pages/Curso/question-bank/question-bank.component';
 import { QuestionService } from './course/services/question.service';
 import { LineaTiempoComponent } from './course/pages/Recurso/linea-tiempo/linea-tiempo.component';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { LineaTiempoComponent } from './course/pages/Recurso/linea-tiempo/linea-
     NuevoModuloComponent,
     NewExamComponent,
     QuestionBankComponent,
-    LineaTiempoComponent
+    LineaTiempoComponent,
+    DomseguroPipe
   ],
   imports: [
     BrowserModule,
