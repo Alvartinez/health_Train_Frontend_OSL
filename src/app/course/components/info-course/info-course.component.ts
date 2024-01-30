@@ -8,6 +8,7 @@ import { ModuleService } from '@rutas/course/services/modulo.service';
 import { Location } from '@angular/common';
 import { CompetenceService } from '@rutas/course/services/competencia.service';
 
+
 @Component({
   selector: 'info-course',
   templateUrl: './info-course.component.html',
@@ -16,7 +17,7 @@ import { CompetenceService } from '@rutas/course/services/competencia.service';
 export class InfoCourseComponent {
 
   datos:any;
-  modulos:any;
+  modulos:any[] = [];
   esPresenta:boolean = true;
   EsTitulo:boolean = true;
   esDescripcion:boolean = true;
@@ -142,7 +143,9 @@ export class InfoCourseComponent {
         this._moduleService.getAllModules(this.numero).subscribe({
           next: (dataModule) =>{
 
-            this.modulos = dataModule;
+            console.log(dataModule.length);
+
+            this.modulos = (dataModule.length > 0) ? dataModule:this.modulos;
           },
           error: (e: HttpErrorResponse) => {
             console.error(e);

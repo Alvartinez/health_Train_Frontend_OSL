@@ -1,7 +1,8 @@
+import { Module } from './../../../interfaces/modulo';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '@rutas/course/services/curso.service';
 import { ModuleService } from '@rutas/course/services/modulo.service';
 
@@ -313,7 +314,7 @@ export class InfoModuloDocComponent {
   }
 
   datos:any;
-  modulos:any;
+  modulos: Module;
   esPresenta:boolean = true;
   EsTitulo:boolean = true;
   esDescripcion:boolean = true;
@@ -348,16 +349,27 @@ export class InfoModuloDocComponent {
   auxiliar4: string = "";
   auxiliar5: string = "";
 
-  constructor(private router: Router, private _courseService: CourseService, private cdr: ChangeDetectorRef, private sanitizer: DomSanitizer, private _moduleService: ModuleService) {}
+  constructor(private router: Router, 
+              private _courseService: CourseService, 
+              private cdr: ChangeDetectorRef, 
+              private sanitizer: DomSanitizer, 
+              private _moduleService: ModuleService,
+              private activatedRoute:ActivatedRoute
+    ) {}
   
   ngOnInit(){
     this.competencias = "Hola"
     this.textareaContent1 = this.competencias;
 
-    this._moduleService.getModule(2).subscribe({
+    const {id}= this.activatedRoute.snapshot.params;
+
+    this._moduleService.getModule(id).subscribe({
       next: (dataModule) =>{
 
-        this.modulos = dataModule.cursoModuloInfo.modulo;
+        this.modulos = dataModule.cursoModuloInfo?.modulo;
+
+        console.log(this.modulos);
+
 
         this.quizzes = Array.isArray(dataModule.quizFormativo) ? dataModule.quizFormativo : [dataModule.quizFormativo];
 

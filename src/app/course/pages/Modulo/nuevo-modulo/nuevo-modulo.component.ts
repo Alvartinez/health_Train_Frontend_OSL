@@ -914,7 +914,8 @@ export class NuevoModuloComponent {
     this._moduleService.newModule(moduloNuevo).subscribe({
       next: (datoModulo) => {
        console.log("Módulo creado");
-        this.router.navigate([this.newBaseUrl, datoModulo?.id_modulo,'infoDoc-modulo'], { relativeTo: this.route });
+       console.log(datoModulo);
+        this.router.navigate([this.newBaseUrl, datoModulo?.moduloNuevo.id_modulo,'infoDoc-modulo']);
       }
     });      
 

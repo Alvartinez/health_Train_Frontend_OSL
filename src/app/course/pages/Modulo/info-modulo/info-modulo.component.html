@@ -40,7 +40,7 @@
 
             <hr>
 
-            <div class="info-curso">
+            <div class="info-curso" *ngIf="modulos">
                 <div class="container">
                     <h2 class="tituloCurso" (click)="titular(EsTitulo)">
                         {{modulos.nombre}}
@@ -94,7 +94,7 @@
                     <div class="competencias">
                         <ul>
                             <li *ngFor="let competencia of modulos.competencias">
-                                {{ competencia.competencia }}
+                                {{ competencia.nombre }}
                             </li>
                         </ul>
                     </div>
@@ -103,7 +103,7 @@
                     <div *ngFor="let tema of modulos.temas">
                         <label class="titulo">
     
-                            <h4>{{ tema.tema }}</h4>
+                            <h4>{{ tema.nombre }}</h4>
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
@@ -111,7 +111,7 @@
                         <div class="competencias">
                             <ul>
                                 <li *ngFor="let subtema of tema.subtemas">
-                                    {{ subtema.subtema }}
+                                    {{ subtema.nombre }}
                                 </li>
                             </ul>
                         </div>
@@ -213,7 +213,7 @@
                     <div class="flip-card" *ngFor="let quizz of quizzes" class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <p class="title">{{quizz.titulo}}</p>
+                                <p class="title">{{quizz?.titulo}}</p>
                             </div>
                             <div class="flip-card-back">
 

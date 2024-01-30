@@ -239,15 +239,15 @@
                     </div>
                 </div>
     
-                <div class="flip-card" *ngFor="let modulo of modulos" class="flip-card">
+                <div class="flip-card" ngIf="modulos.length > 0" *ngFor="let modulo of modulos">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <p class="title">{{modulo.nombre}}</p>
+                            <p class="title">{{modulo?.nombre}}</p>
                         </div>
                         <div class="flip-card-back">
                             <span class="description">Descripción</span>
                             <p class="description-text">
-                                {{modulo.descripcion}}
+                                {{modulo?.descripcion}}
                             </p>
                             <button class="course-button" (click)="Infomodulo()">
                                 Ver más
