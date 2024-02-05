@@ -98,15 +98,14 @@ hr{
     width: 100%;
     min-width: none;
     gap: 8px;
-    padding: 2px;
 }
 
 .flip-newCard {
     display: flex;
     align-items: center;
     background-color: transparent;
-    width: clamp(7rem, 43vw, 15rem);
-    height: clamp(7rem, 43vw, 12rem);
+    width: clamp(7rem, 42vw, 15rem);
+    height: clamp(7rem, 42vw, 12rem);
     perspective: 1000px;
     font-family: sans-serif;
     border-radius: 1rem;
@@ -297,6 +296,34 @@ p{
     height: 2rem;
 }
 
+.info{
+    border: 1px solid #c4c4c4;
+    background-color: #2E95B6;
+    color: #081938;
+    padding: 10px;
+    margin: 0;
+}
+
+.infor{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #333333b6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.inforContent{
+    padding: 15px;
+}
+.inforContent textarea{
+    width: 100%;
+}
+
+.info-tema{
+    padding: 10px;
+}
+
 .buttton-course{
     display: flex;
     justify-content: center;
@@ -398,9 +425,7 @@ p{
     font-weight: 700;
 }
 
-.container-modulo{
-    padding: 20px;
-}
+
 
 @media (min-width: 700px) {
 
@@ -455,5 +480,10 @@ p{
     .container{
         width: 95%;
     }
+
+    
+.container-modulo{
+    padding: 30px;
+}
 
 }

@@ -13,7 +13,6 @@ import { UserDashboardComponent } from '@rutas/user/shared/user_dashboard/user-d
 import { NewCourseComponent } from '../pages/Curso/new-course/new-course.component';
 import { InfoCourseComponent } from '../components/info-course/info-course.component';
 import { QuestionBankComponent } from '../pages/Curso/question-bank/question-bank.component';
-import { LineaTiempoComponent } from '../pages/Recurso/linea-tiempo/linea-tiempo.component';
 
 const routes: Routes = [
     // {
@@ -74,10 +73,6 @@ const routes: Routes = [
     {
       path:":id/question-bank",
       component:QuestionBankComponent
-    },
-    {
-      path: "linea-time",
-      component:LineaTiempoComponent
     }
 ];
 

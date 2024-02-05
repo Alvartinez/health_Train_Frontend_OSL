@@ -28,7 +28,7 @@ export class CreateCourseComponent {
   objetivo4:any;
   objetivo5:any;
 
-  portadaa = '../../../../assets/image/logo-perfil.png';
+  portadaa = '';
 
 
   imagen: string | ArrayBuffer | null = '../../../../assets/image/logo-perfil.png';
@@ -66,6 +66,18 @@ export class CreateCourseComponent {
   add7:boolean = true;
   add8:boolean = true;
 
+  idPersona:number = 0;
+
+  curso: Course = {
+    nombre: '',
+    descripcion: '',
+    id_persona: 1, // Ejemplo, ajusta según necesidad
+    objetivos: [],
+    video_presentacion: '',
+    portada: '',
+    publicado: false
+  };
+
   constructor(private sanitizer: DomSanitizer, private cdr: ChangeDetectorRef, private router: Router, private _courseService: CourseService, private _competenceService:CompetenceService) {}
 
 
@@ -74,27 +86,18 @@ export class CreateCourseComponent {
 
     if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
+      
+      reader.readAsDataURL(file);
 
       reader.onload = () => {
-        this.imagen = reader.result;
+        this.imagen = reader.result as string;
+        this.curso.portada = reader.result as string;
       };
 
-      reader.readAsDataURL(file);
       this.portada =false;
+
     }
   }
-
-  onFilePDFChange(event: any) {
-      const fileList: FileList = event.target.files;
-      if (fileList.length > 0) {
-        this.archivo = fileList[0];
-        
-        // Sanitizar la URL del PDF
-        this.pdfSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.archivo));
-        console.log(this.pdfSrc);
-        this.cdr.detectChanges();
-      }
-    }
 
     ngOnInit(){
       this.currentUrl = this.router.url;
@@ -217,22 +220,18 @@ export class CreateCourseComponent {
     this.agregarCompetencia(this.comp3);
     this.agregarCompetencia(this.comp4);
     this.agregarCompetencia(this.comp5);
+
+    this.curso.nombre = this.nombre;
+    this.curso.descripcion = this.descripcion;
+    this.curso.id_persona = 1;
+    this.curso.objetivos = this.objetivosCurso;
+    this.curso.video_presentacion = this.video;
     
-    const curso: Course = {
-      nombre: this.nombre,
-      descripcion: this.descripcion,
-      id_persona: 1,
-      objetivos: this.objetivosCurso,
-      video_presentacion: this.video,
-      portada: this.portadaa,
-      publicado: false
-    }
-    
-    this._courseService.postCourse(curso).subscribe({
+    this._courseService.postCourse(this.curso).subscribe({
       next: (data) =>{
         console.log(data);
         console.log("Registro exitoso");
-        console.log(data.cursoNuevo.id_curso);
+        console.log(data);
 
         this._competenceService.postCompetence(data.cursoNuevo.id_curso, this.competencias).subscribe({
           next:() => {

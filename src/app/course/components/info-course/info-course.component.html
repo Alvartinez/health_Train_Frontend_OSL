@@ -10,6 +10,30 @@
         <div class="vista-course">
 
             <div class="container-perfil">
+
+                <h2 class="tituloCurso" (click)="titular(EsTitulo)">
+                    {{titulo}}
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </h2>
+
+                <span class="indicacion" *ngIf="!EsTitulo">*Actualiza el nombre del curso</span> 
+                <input type="text" *ngIf="!EsTitulo" [(ngModel)]="nuevoTitulo">
+
+                <div class="editButton" *ngIf="!EsTitulo">
+                    <label id="upgrate" (click)="actualizar()">
+                        Guardar
+                    </label>
+                </div>
+
+                <label id="delete" (click)="eliminarCurso()">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    Eliminar Curso
+                </label>
+
                 <span class="indicacion">*Portada del curso</span>
                 <div class="portada">
                     <img [src]="imagen" alt="avatar" id="img">
@@ -36,7 +60,7 @@
                     Eliminar portada
                 </label>
 
-                <div class="editButton" *ngIf="!portada">
+                <div class="editButton" *ngIf="guardaImagen" (click)="actualizar()">
                     <label id="upgrate">
                         Guardar
                     </label>
@@ -53,7 +77,6 @@
                 
                 <div class="video-container">
                     <span class="indicacion">Puedes ampliar este video antes de reproducirlo ajustando el tamaño de la ventana.</span>
-                    <!-- <iframe [src]="getYouTubeEmbedUrl(video)" frameborder="0" allowfullscreen></iframe> -->
                     <iframe width="560" 
                             height="315" 
                             [src]="video | domseguro" 
@@ -72,97 +95,69 @@
                         Guardar
                     </label>
                 </div>
-                <br>
-                <label class="presenta">
-                    <b>
-                        Examen
-                    </b>
-                    <span class="material-symbols-outlined">
-                        edit
-                    </span>
-                </label>
-
-                <div class="contenido-exam">
-
-                    <div class="flip-newCard" id="examen" (click)="newExam()">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="nuevoCurso">
-                                    <span class="material-symbols-outlined">
-                                        add
-                                    </span>
-                                    Examen 
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
 
             </div>
 
             <hr>
 
             <div class="info-curso">
-                <h2 class="tituloCurso" (click)="titular(EsTitulo)">
-                    {{titulo}}
-                    <span class="material-symbols-outlined">
-                        edit
-                    </span>
-                </h2>
-                <span class="indicacion" *ngIf="!EsTitulo">*Actualiza el nombre del curso</span> 
-                <input type="text" *ngIf="!EsTitulo" [(ngModel)]="nuevoTitulo">
 
-                <div class="editButton" *ngIf="!EsTitulo">
-                    <label id="upgrate" (click)="actualizar()">
-                        Guardar
+                <div class="infor">
+                    <label class="titulo info" (click)="_Descripcion(esDescripcion)">
+                        <h4>Descripción</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
                     </label>
+
+                    <div class="inforContent">
+                        <p class="descripcion">{{descripcion}}</p>
+                        <span class="indicacion" *ngIf="!esDescripcion">*Actualiza la descripción del curso existente</span> 
+                        <textarea name="nuevaDescripcion" [(ngModel)]="nuevaDescripcion"  *ngIf="!esDescripcion"></textarea>
+        
+                        <div class="editButton" *ngIf="!esDescripcion">
+                            <label id="upgrate">
+                                Guardar
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
-                <label class="titulo" (click)="_Descripcion(esDescripcion)">
-                    <h4>Descripción</h4>
-                    <span class="material-symbols-outlined">
-                        edit
-                    </span>
-                </label>
-                <p class="descripcion">{{descripcion}}</p>
-                <span class="indicacion" *ngIf="!esDescripcion">*Actualiza la descripción del curso</span> 
-                <textarea name="nuevaDescripcion" [(ngModel)]="nuevaDescripcion"  *ngIf="!esDescripcion"></textarea>
-
-                <div class="editButton" *ngIf="!esDescripcion">
-                    <label id="upgrate">
-                        Guardar
+                <div class="infor">
+                    <label class="titulo info" (click)="modalC()">
+                        <h4>Competencia(s)</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
                     </label>
+                    
+                    <div class="inforContent">
+                        <div class="competencias">
+                            <ul>
+                                <li *ngFor="let competenciasCurso of competencias">
+                                    {{ competenciasCurso?.nombre }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <label class="titulo" (click)="modalC()">
-                    <h4>Competencia(s)</h4>
-                    <span class="material-symbols-outlined">
-                        edit
-                    </span>
-                </label>
-                
-                <div class="competencias">
-                    <ul>
-                        <li *ngFor="let competenciasCurso of competencias">
-                            {{ competenciasCurso?.nombre }}
-                        </li>
-                    </ul>
+                <div class="infor">
+                    <label class="titulo info" (click)="modalO()">
+                        <h4>Objetivo(s)</h4>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </label>
+    
+                    <div class="inforContent">
+                        <ul>
+                            <li *ngFor="let objetivo of objetivos">
+                                {{ objetivo?.descripcion }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-                <label class="titulo" (click)="modalO()">
-                    <h4>Objetivo(s)</h4>
-                    <span class="material-symbols-outlined">
-                        edit
-                    </span>
-                </label>
-                <ul>
-                    <li *ngFor="let objetivo of objetivos">
-                        {{ objetivo?.descripcion }}
-                    </li>
-                </ul>
 
                 <div class="recursos-informativos">
                     <div class="banco-pregunta">
@@ -183,7 +178,7 @@
                                     <p class="description-text">
                                         Banco de preguntas donde se puede registrar preguntas e implementar en otra ocasión
                                     </p>
-                                    <button class="course-button" (click)="questionBank()">
+                                    <button class="course-button">
                                         Ver más
                                     </button>
                                 </div>
@@ -226,6 +221,7 @@
 
         </div>
 
+        <hr>
 
         <div class="container-modulo">
             <h3 class="modulo">
@@ -246,23 +242,26 @@
                         </div>
                     </div>
                 </div>
-    
-                <div class="flip-card" ngIf="modulos.length > 0" *ngFor="let modulo of modulos">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <p class="title">{{modulo?.nombre}}</p>
+                
+                <ng-container *ngIf="modulos.length > 0">
+                    <div class="flip-card" *ngFor="let modulo of modulos">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="title">{{modulo?.nombre}}</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="description">Descripción</span>
+                                <p class="description-text">
+                                    {{modulo?.descripcion}}
+                                </p>
+                                <button class="course-button" (click)="Infomodulo(modulo?.id_modulo)">
+                                    Ver más
+                                </button>
+                            </div>
                         </div>
-                        <div class="flip-card-back">
-                            <span class="description">Descripción</span>
-                            <p class="description-text">
-                                {{modulo?.descripcion}}
-                            </p>
-                            <button class="course-button" (click)="Infomodulo()">
-                                Ver más
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    </div>           
+                
+                </ng-container>
                 
             </div>
         </div>

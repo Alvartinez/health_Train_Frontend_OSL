@@ -62,6 +62,10 @@ const routes: Routes = [
     {
       path: "modulo",
       component: ModuloInicioComponent
+    },
+    {
+      path: ":id/resources",
+      loadChildren: () => import('@rutas/course/routers/resource-routing.module').then((m) => m.ResourceRoutingModule)
     }
     
 ];

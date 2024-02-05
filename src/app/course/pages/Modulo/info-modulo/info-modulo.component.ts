@@ -136,10 +136,6 @@ export class InfoModuloDocComponent {
     this.portada = true;
   }
 
-  tema02(){
-
-  }
-
   temas1(){
     if(this.iconTema1 === "add"){
       this.iconTema1 = "remove";
@@ -349,6 +345,8 @@ export class InfoModuloDocComponent {
   auxiliar4: string = "";
   auxiliar5: string = "";
 
+  currentUrl:string = "";
+
   constructor(private router: Router, 
               private _courseService: CourseService, 
               private cdr: ChangeDetectorRef, 
@@ -358,8 +356,8 @@ export class InfoModuloDocComponent {
     ) {}
   
   ngOnInit(){
-    this.competencias = "Hola"
-    this.textareaContent1 = this.competencias;
+
+    this.currentUrl = this.router.url;
 
     const {id}= this.activatedRoute.snapshot.params;
 
@@ -473,23 +471,10 @@ export class InfoModuloDocComponent {
   }
 
   newModulo(){
-    const currentUrl = this.router.url;
 
-    const baseUrl = currentUrl.split('/info-course')[0];
+    const baseUrl = this.currentUrl.split('/infoDoc-modulo')[0];
 
-    console.log(baseUrl);
-
-    const newUrl = baseUrl+"/course/modules/new-module"
-
-    this.router.navigateByUrl(newUrl);
-  }
-
-  Infomodulo(){
-    const currentUrl = this.router.url;
-
-    const baseUrl = currentUrl.split('/info-course')[0];
-
-    const newUrl = baseUrl+"/course/modules/infoDoc-modulo"
+    const newUrl = baseUrl+"/resources/podcast";
 
     this.router.navigateByUrl(newUrl);
   }

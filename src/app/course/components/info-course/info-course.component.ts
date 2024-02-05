@@ -59,6 +59,8 @@ export class InfoCourseComponent {
   objetivoContent5:any;
 
   imagen: string | ArrayBuffer | null = '../../../../assets/image/logo-perfil.png';
+  imagenActual:string | ArrayBuffer | null;
+  guardaImagen:boolean = false;
 
   video:string = "";
   nuevoVideo:string = "";
@@ -68,18 +70,17 @@ export class InfoCourseComponent {
   baseUrl:string = "";
   idCompetencia: number = 0;
 
+  curso: Course = {
+    id_curso: 0,
+    nombre: "",
+    descripcion: "",
+    objetivos: [],
+    video_presentacion: ""
+  }
+
+  newUrl:any;
+
   constructor(private router: Router, private _courseService: CourseService, private cdr: ChangeDetectorRef, private sanitizer: DomSanitizer, private _moduleService: ModuleService, private location: Location, private _competenceService: CompetenceService) {}
-
-  getYouTubeEmbedUrl(url: string): SafeResourceUrl {
-    const videoId = this.getYouTubeVideoId(url);
-    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
-  }
-
-  private getYouTubeVideoId(url: string): string | null {
-    const match = url.match(/[?&]v=([^?&]+)/);
-    return match ? match[1] : null;
-  }
   
   ngOnInit(){
 
@@ -104,6 +105,12 @@ export class InfoCourseComponent {
         this.titulo = data?.nombre;
         this.descripcion = data?.descripcion;
         this.objetivos = data?.objetivos;
+        
+        if (data.portada) {
+          this.imagen = data.portada;
+          this.imagenActual = this.imagen;
+          this.portada = false;
+        }
 
         if (this.objetivos.length > 0) {
           this.objetivos.forEach((objetivo, index) => {
@@ -114,7 +121,7 @@ export class InfoCourseComponent {
               if(index === 4) this.objetivoContent5 = objetivo.descripcion;
           });
         }
-        this.cdr.detectChanges();
+        // this.cdr.detectChanges();
 
         this._competenceService.getCompetence(this.numero).subscribe({
           next: (competencia) =>{
@@ -143,9 +150,12 @@ export class InfoCourseComponent {
         this._moduleService.getAllModules(this.numero).subscribe({
           next: (dataModule) =>{
 
-            console.log(dataModule.length);
+            if (dataModule.length > 0) {
+              this.modulos = dataModule.sort((a, b) => a.id_modulo - b.id_modulo);
+            } else{
+              this.modulos = [];
+            }
 
-            this.modulos = (dataModule.length > 0) ? dataModule:this.modulos;
           },
           error: (e: HttpErrorResponse) => {
             console.error(e);
@@ -170,13 +180,26 @@ export class InfoCourseComponent {
       };
 
       reader.readAsDataURL(file);
-      this.portada =false;
+
+      if(this.imagen != this.imagenActual){
+        this.guardaImagen = false;
+      }else{
+        this.guardaImagen = true;
+      }
+
     }
   }
 
   quitarFoto() {
-    this.imagen = '../../../../assets/image/logo-perfil.png';
-    this.portada = true;
+    if(this.imagen === this.imagenActual){
+      this.imagen = '../../../../assets/image/logo-perfil.png';
+      this.portada = true;
+      this.guardaImagen = true;
+    }else{
+      this.imagen = this.imagenActual;
+      this.portada = true;
+      this.guardaImagen = true;
+    }
   }
 
   editar(estado:boolean): boolean {
@@ -266,7 +289,7 @@ export class InfoCourseComponent {
         this.nuevosObjetivos = objetivosTemporales;
         console.log(this.nuevosObjetivos);
 
-        const curso: Course = {
+        this.curso = {
           id_curso:this.numero,
           nombre: this.titulo,
           descripcion: this.descripcion,
@@ -274,13 +297,7 @@ export class InfoCourseComponent {
           video_presentacion: this.video
         }
 
-        this._courseService.updateCourse(curso).subscribe({
-          next: () =>{
-            console.log("Has recibido cambios");
-            window.location.reload();
-            this.cerrar();
-          }
-        });
+        this.guardar(this.curso);
 
       }
 
@@ -340,11 +357,37 @@ export class InfoCourseComponent {
 
   actualizar(){
     
+    if(this.imagen !== this.imagenActual ){
+
+      this.curso = {
+        id_curso:this.numero,
+        nombre: this.titulo,
+        descripcion: this.descripcion,
+        objetivos: this.nuevosObjetivos,
+        video_presentacion: this.video
+      }
+
+      this.guardar(this.curso);
+
+      this.guardaImagen = false;
+
+    }
+    
     if(this.nuevoVideo !== ""){
 
       if(this.video !== this.nuevoVideo) {
 
         this.video = this.nuevoVideo;
+
+        this.curso = {
+          id_curso:this.numero,
+          nombre: this.titulo,
+          descripcion: this.descripcion,
+          objetivos: this.nuevosObjetivos,
+          video_presentacion: this.video
+        }
+
+        this.guardar(this.curso);
 
         this.esPresenta = true;
 
@@ -356,6 +399,16 @@ export class InfoCourseComponent {
       if(this.titulo !== this.nuevoTitulo){
 
         this.titulo = this.nuevoTitulo;
+
+        this.curso = {
+          id_curso:this.numero,
+          nombre: this.titulo,
+          descripcion: this.descripcion,
+          objetivos: this.nuevosObjetivos,
+          video_presentacion: this.video
+        }
+
+        this.guardar(this.curso);
 
         this.EsTitulo = true;
   
@@ -374,6 +427,52 @@ export class InfoCourseComponent {
 
   }
 
+  guardar(curso:Course){
+
+    this._courseService.updateCourse(curso).subscribe({
+      next: () =>{
+        console.log("Has recibido cambios");
+        window.location.reload();
+        this.cerrar();
+      }
+    });
+
+  }
+
+  eliminarCurso(){
+
+    this.baseUrl = this.currentUrl.split('/courses')[0];
+
+    if(this.modulos.length > 0){
+      console.log(this.modulos);
+      this.modulos.forEach(modulo => {
+        this._moduleService.deleteModule(modulo.id_modulo).subscribe({
+          next: () => {
+            console.log("Módulos eliminados");
+          }
+        });
+      });
+
+      this._courseService.deleteCourse(this.numero).subscribe({
+       next: () => {
+          console.log("Curso eliminado");
+          this.newUrl = this.baseUrl+"/vist-home";
+          this.router.navigateByUrl(this.newUrl);
+        }
+      });
+
+    }else{
+      this._courseService.deleteCourse(this.numero).subscribe({
+        next: () => {
+           console.log("Curso eliminado");
+           this.newUrl = this.baseUrl+"/vist-home";
+           this.router.navigateByUrl(this.newUrl);
+         }
+       });
+    }
+
+  }
+
   newModulo(){
 
     const newUrl = this.baseUrl+"/modules/new-module"
@@ -381,27 +480,11 @@ export class InfoCourseComponent {
     this.router.navigateByUrl(newUrl);
   }
 
-  Infomodulo(){
+  Infomodulo(id:number){
 
-    const newUrl = this.baseUrl+"/course/modules/infoDoc-modulo"
-
-    this.router.navigateByUrl(newUrl);
-  }
-
-  newExam(){
-
-    const newUrl = this.baseUrl+"/exam/new-exam";
+    const newUrl = this.baseUrl+"/modules/"+id+"/infoDoc-modulo"
 
     this.router.navigateByUrl(newUrl);
-
-  }
-
-  questionBank(){
-
-    const newUrl = this.baseUrl+"/question-bank";
-
-    this.router.navigateByUrl(newUrl);
-
   }
 
 }

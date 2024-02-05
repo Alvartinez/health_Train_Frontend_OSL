@@ -32,8 +32,7 @@ main{
 }
 
 .portada{
-    width: 130px;
-    height: 130px;
+    width: 150px;
     overflow: hidden;
     border-radius: 50%;
     margin-bottom: 10px;
@@ -89,7 +88,7 @@ main{
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 40.25%; /* Aspect ratio 16:9 */
+    padding-top: 40.25%;
 }
 
 .video-container iframe {
@@ -288,7 +287,7 @@ hr{
 }
 
 .presenta:hover, .titulo:hover, .tituloCurso:hover{
-    color: #15daa8;
+    color: #27cfab;
     font-weight: 700;
 }
 
@@ -298,6 +297,35 @@ hr{
     margin-top: 10px;
     margin-bottom: 5px;
     cursor: pointer;
+}
+
+.tituloCurso{
+    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.info{
+    border: 1px solid #c4c4c4;
+    background-color: #2E95B6;
+    color: #081938;
+    padding: 10px;
+    margin: 0;
+}
+
+.infor{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #333333b6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.inforContent{
+    padding: 15px;
+}
+.inforContent textarea{
+    width: 100%;
 }
 
 .contenido-exam{
@@ -325,7 +353,7 @@ hr{
     margin-right: 8px; 
 }
 
-.info-curso input, .info-curso textarea{
+.container-perfil input, .container-perfil textarea{
     width: 100%;
     height: 2rem;
 }
@@ -452,8 +480,7 @@ hr{
 @media (min-width: 700px) {
 
     .portada{
-        width: 180px;
-        height: 180px;
+        width: 200px;
     }
 
     .indicacion, .container-perfil .indicacion{
@@ -471,17 +498,31 @@ hr{
     }
 
     .tituloCurso{
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
 
     .banco-pregunta label{
         font-size:1rem;
     }
 
+    .contenido-curso{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
 
 @media (min-width: 800px) {
 
+    .vista-course{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+    }
+    
     .contenido-curso form{
         padding: 10px 16px;
     }
@@ -497,7 +538,7 @@ hr{
         padding: 20px;
     }
 
-    .info-curso input, .info-curso textarea{
+    .container-perfil input, .container-perfil textarea{
         width: 80%;
     }
 
@@ -512,5 +553,9 @@ hr{
         padding-top: 30.25%; 
     }
     
+    .container-modulo{
+        width: 80%;
+        padding: 20px;
+    }
 
 }

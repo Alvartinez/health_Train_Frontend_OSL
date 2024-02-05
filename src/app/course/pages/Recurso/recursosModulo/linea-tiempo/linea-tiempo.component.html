@@ -1,0 +1,51 @@
+<section>
+    <div class="contenedor" *ngIf="mostrarContenedor">
+        <div class="cierre">
+            <span class="material-symbols-outlined" (click)="navegarAtras()">
+                close
+            </span>
+        </div>
+
+        <div class="main">
+
+            <h3 class="heading">
+                Título de la línea del tiempo
+            </h3>
+
+            <div class="contenedor-linea">
+
+                <ul>
+                    <li *ngFor="let periodo of periodos" (click)="toggleContenedor()">
+                        <a target="_blank">
+                            <h3 class="title">{{ periodo.titulo }}</h3>
+                            <span class="cicle">
+                            </span>
+                            <span class="date">{{ periodo.fecha }}</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="!mostrarContenedor">
+
+        <div class="cierre">
+            <span class="material-symbols-outlined" (click)="toggleContenedor()">
+                close
+            </span>
+        </div>
+
+        <div class="main">
+
+            <div class="recurso">
+                <img src="assets/image/alimentosContaminados.png" alt="">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,34 @@
+<main>
+    <div class="text-plain">
+        <div class="cierre">
+            <span class="material-symbols-outlined" (click)="navegarAtras()">
+                close
+            </span>
+        </div>
+        <div class="tabs-container">
+            <div class="tab-tabs">
+                <h2>Soy el Tema</h2>
+                <ul class="tabs">
+                    <li *ngFor="let subtema of subtemas; let i = index">
+                        <a (click)="setActiveTab(i)">
+                            {{ subtema.titulo }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content-wrapper">
+                <ng-container *ngFor="let subtema of subtemas; let i = index">
+                    <article class="tab-content" *ngIf="activeTabIndex === i">
+                        <h2>{{ subtema.titulo }}</h2>
+                        <p>{{ subtema.contenido }}</p>
+                        <img [src]="subtema.imagen" alt="">
+                    </article>
+                </ng-container>
+            </div>
+            <div class="botones">
+                <a class="retrocede" (click)="movePrevious()">Anterior</a>
+                <a class="siguiente" (click)="moveNext()">Siguiente</a>
+            </div>
+        </div>
+    </div>
+</main>

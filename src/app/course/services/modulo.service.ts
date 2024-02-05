@@ -25,4 +25,8 @@ export class ModuleService {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}newModule`, modulo);
   }
 
+  deleteModule(id:number): Observable<number> {
+    return this.http.delete<number>(`${this.myAppUrl}${this.myApiUrl}deleteModule/${id}`);
+  }
+
 }

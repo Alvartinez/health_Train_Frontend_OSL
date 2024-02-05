@@ -39,8 +39,13 @@ import { CompetenceService } from './course/services/competencia.service';
 import { NewExamComponent } from './course/pages/Examen/new-exam/new-exam.component';
 import { QuestionBankComponent } from './course/pages/Curso/question-bank/question-bank.component';
 import { QuestionService } from './course/services/question.service';
-import { LineaTiempoComponent } from './course/pages/Recurso/linea-tiempo/linea-tiempo.component';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { SabiaQueComponent } from './course/pages/Recurso/recursosModulo/sabia-que/sabia-que.component';
+import { TextoPlanoComponent } from './course/pages/Recurso/recursosModulo/texto-plano/texto-plano.component';
+import { LineaTiempoComponent } from './course/pages/Recurso/recursosModulo/linea-tiempo/linea-tiempo.component';
+import { VideoComponent } from './course/pages/Recurso/recursosModulo/recursoVideo/video.component';
+import { PodcastComponent } from './course/pages/Recurso/recursosModulo/podcast/podcast.component';
+import { HitoComponent } from './course/components/hito/hito.component';
 
 @NgModule({
   declarations: [
@@ -72,8 +77,13 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
     NuevoModuloComponent,
     NewExamComponent,
     QuestionBankComponent,
+    DomseguroPipe,
+    SabiaQueComponent,
+    TextoPlanoComponent,
     LineaTiempoComponent,
-    DomseguroPipe
+    VideoComponent,
+    PodcastComponent,
+    HitoComponent
   ],
   imports: [
     BrowserModule,
