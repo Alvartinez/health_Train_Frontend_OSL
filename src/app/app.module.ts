@@ -5,7 +5,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/pages/home/home.component';
 import { LoginComponent } from './home/pages/login/login.component';
@@ -46,6 +45,12 @@ import { LineaTiempoComponent } from './course/pages/Recurso/recursosModulo/line
 import { VideoComponent } from './course/pages/Recurso/recursosModulo/recursoVideo/video.component';
 import { PodcastComponent } from './course/pages/Recurso/recursosModulo/podcast/podcast.component';
 import { HitoComponent } from './course/components/hito/hito.component';
+import { RecursosComponent } from './course/pages/Recurso/recursos/recursos.component';
+import { ResourcePlainTextComponent } from './course/components/resource-plain-text/resource-plain-text.component';
+import { ResourcePodcastComponent } from './course/components/resource-podcast/resource-podcast.component';
+import { ResourceTimeLineComponent } from './course/components/resource-time-line/resource-time-line.component';
+import { ResourceVideoComponent } from './course/components/resource-video/resource-video.component';
+import { RecursoComponent } from './course/components/recurso/recurso.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +88,13 @@ import { HitoComponent } from './course/components/hito/hito.component';
     LineaTiempoComponent,
     VideoComponent,
     PodcastComponent,
-    HitoComponent
+    HitoComponent,
+    RecursosComponent,
+    ResourcePlainTextComponent,
+    ResourcePodcastComponent,
+    ResourceTimeLineComponent,
+    ResourceVideoComponent,
+    RecursoComponent
   ],
   imports: [
     BrowserModule,

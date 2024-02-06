@@ -425,8 +425,6 @@ p{
     font-weight: 700;
 }
 
-
-
 @media (min-width: 700px) {
 
     .portada{
@@ -456,9 +454,41 @@ p{
         font-size: 1.8rem;
     }
 
+    .contenido-curso{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container-modulo{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        padding: 20px;
+    }
+
+    .container-resource{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-modulo{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
 }
 
 @media (min-width: 800px) {
+
+    .vista-course{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+    }
 
     .contenido-curso form{
         padding: 10px 16px;
@@ -473,17 +503,13 @@ p{
         align-items: center;
     }
 
-    .info-curso input, .info-curso textarea{
-        width: 80%;
-    }
-
     .container{
         width: 95%;
     }
 
-    
-.container-modulo{
-    padding: 30px;
-}
+    .container-modulo{
+        width: 80%;
+        padding: 20px;
+    }
 
 }

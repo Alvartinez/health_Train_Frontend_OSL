@@ -1,0 +1,52 @@
+<form autocomplete="off" (ngSubmit)="guardar(forma)" #forma="ngForm">
+
+    <div>
+
+        <div class="mb-3 row">
+          <label class="col-2 col-form-label">Nombre del recurso</label>
+          <div class="col-8">
+    
+            <input class="form-control"
+                   type="text"
+                   name="nombre"
+                   [class.is-invalid]="nombre.invalid && nombre.touched"
+                   [(ngModel)]="recursoVideo.nombre"
+                   required
+                   placeholder="Nombre"
+                   #nombre="ngModel">
+
+            <small class="form-text text-danger" 
+                   *ngIf="nombre.invalid && nombre.touched">
+            El campo es requerido </small>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-2 col-form-label">Url del recurso</label>
+            <div class="col-8">
+      
+              <input class="form-control"
+                     type="text"
+                     name="url"
+                     [class.is-invalid]="url.invalid && url.touched"
+                     [(ngModel)]="recursoVideo.url"
+                     required
+                     placeholder="Url del video"
+                     #url="ngModel">
+                     
+              <small class="form-text text-danger" 
+                     *ngIf="url.invalid && url.touched">
+              El campo es requerido </small>
+            </div>
+          </div>
+        
+        <div class="input-group mb-3">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="d-grid col-8 mx-0">
+            <button type="submit" class="btn btn-outline-primary">
+                Generar
+            </button>
+            </div>
+        </div>
+</div>
+</form>

@@ -171,22 +171,28 @@ export class InfoCourseComponent {
 
   onFileChange(event: any) {
     const reader = new FileReader();
-
     if (event.target.files && event.target.files.length) {
-      const file = event.target.files[0];
-
+      const [file] = event.target.files;
+  
       reader.onload = () => {
-        this.imagen = reader.result;
+        // Convertir la imagen a un formato comparable, por ejemplo, a Base64 o Blob
+        const imgBase64 = reader.result;
+  
+        // Verificar si la imagen es la misma que la imagenActual
+        // Esto podría requerir una comparación más compleja dependiendo de cómo estés manejando las imágenes
+        if (imgBase64 === this.imagenActual) {
+          // Si la imagen es la misma que la actual, no se necesita cambiar portada ni guardar la imagen
+          this.portada = false; // o true, dependiendo de tu lógica para mostrar los botones
+          this.guardaImagen = false;
+        } else {
+          // Si la imagen es diferente, permitir guardar la nueva imagen
+          this.imagen = imgBase64; // Actualizar la vista previa de la imagen con la nueva imagen
+          this.portada = true; // o false, para mostrar los botones de editar y eliminar
+          this.guardaImagen = true; // Permitir guardar la nueva imagen
+        }
       };
-
-      reader.readAsDataURL(file);
-
-      if(this.imagen != this.imagenActual){
-        this.guardaImagen = false;
-      }else{
-        this.guardaImagen = true;
-      }
-
+  
+      reader.readAsDataURL(file); // Leer el archivo como Data URL (Base64)
     }
   }
 

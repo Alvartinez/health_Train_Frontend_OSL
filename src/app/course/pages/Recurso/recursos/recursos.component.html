@@ -1,0 +1,85 @@
+<main>
+    <div class="container">
+        <h1>Recursos</h1>
+        <hr>
+        
+        <div class="row mt-5">
+          <div class="col">
+              <button class="btn btn-sm btn-outline-info"
+                      (click)="onRegresar()">Regresar</button>
+          </div>
+        </div>
+        
+        <!--Aquí estan los radio button-->
+        <div class="mt-3 row">
+          
+          <div class="col-10">
+            <label class="col-2 col-form-label">Tipo de recurso</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" 
+                     type="radio" 
+                     value="M"
+                     required
+                     name="genero"
+                     [value]="valueVideo"
+                     (click)="validarSeleccionado(valueVideo)"
+                     
+                     > <!--[ngModel]="usuario.genero" #genero="ngModel" [class.is-invalid]="genero.invalid && genero.touched"-->
+              <label class="form-check-label">{{valueVideo}}</label>
+            </div>
+        
+            <div class="form-check form-check-inline mx-auto">
+              <input class="form-check-input mx-1" 
+                     type="radio"
+                     required 
+                     [value]="valuePodcast"
+                     (click)="validarSeleccionado(valuePodcast)"
+                     name="genero"
+                     >
+              <label class="form-check-label">{{valuePodcast}}</label>
+        
+              
+            </div>
+        
+            <div class="form-check form-check-inline mx-auto">
+              <input class="form-check-input mx-1" 
+                     type="radio"
+                     required 
+                     [value]="valueTextoPlano"
+                     (click)="validarSeleccionado(valueTextoPlano)"
+                     name="genero"
+                     >
+              <label class="form-check-label">{{valueTextoPlano}}</label>
+        
+              
+            </div>
+        
+            <div class="form-check form-check-inline mx-auto">
+              <input class="form-check-input mx-1" 
+                     type="radio"
+                     required 
+                     [value]="timeLine"
+                     (click)="validarSeleccionado(timeLine)"
+                     name="genero"
+                     >
+              <label class="form-check-label">{{timeLine}}</label>
+        
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-3">
+        <app-resource-plain-text *ngIf="opciones.isTextoPlano; else noOpcion"></app-resource-plain-text>
+        <app-resource-time-line *ngIf="opciones.isTimeLine"></app-resource-time-line>
+        <app-resource-podcast *ngIf="opciones.isPodcast"></app-resource-podcast>
+        <app-resource-video *ngIf="opciones.isVideo"></app-resource-video>
+        
+        <ng-template #noOpcion>
+          <div *ngIf="!opciones.isTextoPlano && !opciones.isTimeLine && !opciones.isPodcast && !opciones.isVideo"
+              class="alert alert-info">No ha seleccionado ninguna opción</div>
+        </ng-template>
+        </div>
+        
+        </div>
+</main>

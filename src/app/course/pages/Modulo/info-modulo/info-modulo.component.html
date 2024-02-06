@@ -11,8 +11,9 @@
 
             <div class="container-perfil">
 
+
                 <h2 class="tituloCurso" (click)="titular(EsTitulo)">
-                    {{modulos.nombre}}
+                    {{modulos?.nombre}}
                     <span class="material-symbols-outlined">
                         edit
                     </span>
@@ -152,7 +153,7 @@
                     </div>
 
                     <div class="infor">
-                        <label class="titulo info" (click)="editar(fin)">
+                        <label class="titulo info" (click)="end(fin)">
                             <h4>Conclusión</h4>
                             <span class="material-symbols-outlined">
                                 edit
@@ -188,7 +189,7 @@
 
                 <div class="lista-cursos" >
         
-                    <div class="flip-newCard" (click)="newModulo()">
+                    <div class="flip-newCard" (click)="newResource()">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <p class="nuevoCurso">
@@ -204,12 +205,12 @@
                     <div class="flip-card" *ngFor="let resource of resources" class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <p class="title">{{resource.nombre}}</p>
+                                <p class="title">{{resource?.nombre}}</p>
                             </div>
                             <div class="flip-card-back">
                                 <span class="description">Descripción</span>
                                 <p class="description-text">
-                                    {{resource.descripcion}}
+                                    {{resource?.descripcion}}
                                 </p>
                                 <button class="course-button">
                                     Ver más
@@ -265,6 +266,38 @@
                             </div>
                         </div>
                     </ng-container>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contenido-com-obj" *ngIf="!compObject">
+    
+        <div class="modal">
+            
+            <div class="container-modal">
+
+                <span class="material-symbols-outlined" (click)="cerrar()">
+                    close
+                </span>
+
+                <div class="model-competencia">
+                
+                    <h2>COMPETENCIAS</h2>
+                    <span class="indicacion" >*Actualiza las competencias</span>
+                    <div class="container-competencia">
+                        <textarea id="textarea1" (input)="autoExpand($event)" [(ngModel)]="textareaContent1"></textarea>
+                        <textarea id="textarea2" (input)="autoExpand($event)" [(ngModel)]="textareaContent2"></textarea>
+                        <textarea id="textarea3" (input)="autoExpand($event)" [(ngModel)]="textareaContent3"></textarea>
+                        <textarea id="textarea4" (input)="autoExpand($event)" [(ngModel)]="textareaContent4"></textarea>
+                        <textarea id="textarea5" (input)="autoExpand($event)" [(ngModel)]="textareaContent5"></textarea>
+                    </div>
+
+
+
                 </div>
 
             </div>

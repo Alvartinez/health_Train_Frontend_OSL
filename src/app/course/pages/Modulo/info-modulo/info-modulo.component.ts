@@ -316,8 +316,6 @@ export class InfoModuloDocComponent {
   esDescripcion:boolean = true;
 
   compObject:boolean = true;
-  comp:boolean = false;
-  obj:boolean = false;
 
   textareaContent1:any;
   textareaContent2:any;
@@ -332,12 +330,6 @@ export class InfoModuloDocComponent {
   objetivoContent3:any;
   objetivoContent4:any;
   objetivoContent5:any;
-
-  objetivos1:any;
-  objetivos2:any;
-  objetivos3:any;
-  objetivos4:any;
-  objetivos5:any;
 
   auxiliar1: string = "";
   auxiliar2: string = "";
@@ -421,7 +413,6 @@ export class InfoModuloDocComponent {
 
   actualiza(){
 
-    if(this.comp){
 
       if((this.textareaContent1 !== this.auxiliar1) || (this.textareaContent2 !== this.auxiliar2) && (this.textareaContent3  !== this.auxiliar3) && (this.textareaContent4 !== this.auxiliar4) && (this.textareaContent5 !== this.auxiliar5)){
         
@@ -430,51 +421,22 @@ export class InfoModuloDocComponent {
         this.cerrar();
       }
 
-    }
-
-    if(this.obj){
-
-      if((this.objetivoContent1 !== this.auxiliar1) || (this.objetivoContent2 !== this.auxiliar2) && (this.objetivoContent3  !== this.auxiliar3) && (this.objetivoContent4 !== this.auxiliar4) && (this.objetivoContent5 !== this.auxiliar5)){
-        
-        this.objetivos1 = this.objetivoContent1;
-        this.objetivos2 = this.objetivoContent2;
-        this.objetivos3 = this.objetivoContent3;
-        this.objetivos4 = this.objetivoContent4;
-        this.objetivos5 = this.objetivoContent5;
-
-        this.cerrar();
-      }
-
-      console.log("Modifica algún campo")
-
-    }
-
   }
 
   modalC(){
-
-    this.auxiliar1 = this.objetivoContent1;
-    this.auxiliar2 = this.objetivoContent2;
-    this.auxiliar3 = this.objetivoContent3;
-    this.auxiliar4 = this.objetivoContent4;
-    this.auxiliar5 = this.objetivoContent5;
-
+    console.log(this.compObject);
     this.compObject = false;
-    this.comp = true;
-
   }
 
   cerrar(){
     this.compObject = true;
-    this.obj = false;
-    this.comp = false;
   }
 
-  newModulo(){
+  newResource(){
 
     const baseUrl = this.currentUrl.split('/infoDoc-modulo')[0];
 
-    const newUrl = baseUrl+"/resources/podcast";
+    const newUrl = baseUrl+"/resources/new-resource";
 
     this.router.navigateByUrl(newUrl);
   }

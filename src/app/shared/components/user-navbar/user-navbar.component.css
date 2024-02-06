@@ -6,14 +6,14 @@ header {
     background: #2E95B6;
 }
 
-header .container{
+header .container-navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 6px 30px;
 }
 
-header .containerLogo .cont-logo{
+header .containerLogo .content-logo{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,14 +36,14 @@ header .cont-perfil {
     text-align: center;
 }
 
-header .cont-perfil .container{
+header .cont-perfil .container-navbar{
     display: flex;
     align-items: center;
     gap: 5px;
     padding: 0px;
 }
 
-header .cont-perfil .container h3{
+header .cont-perfil .container-navbar h3{
     display: none;
 }
 
@@ -180,7 +180,7 @@ header .cont-perfil .container h3{
         color: #ffffff;
     }
 
-    header .cont-perfil .container h3{
+    header .cont-perfil .container-navbar h3{
         display: block;
         width: 80%;
         font-size: 16px;
