@@ -43,7 +43,7 @@
 
             <div class="flip-card" *ngFor="let cursoInscrito of cursosInscritos">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
+                    <div class="flip-card-front" [style.background-image]="'url(' + cursoInscrito.portada+ ')'">
                         <p class="title">{{cursoInscrito.nombre}}</p>
                     </div>
                     <div class="flip-card-back">
@@ -72,7 +72,7 @@
 
             <div class="flip-card" *ngFor="let cursosNuevos of cursosDisponibles">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
+                    <div class="flip-card-front" [style.background-image]="'url(' + cursosNuevos.portada+ ')'">
                         <p class="title">{{cursosNuevos.nombre}}</p>
                     </div>
                     <div class="flip-card-back">

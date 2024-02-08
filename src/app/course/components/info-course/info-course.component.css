@@ -1,4 +1,7 @@
 main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: linear-gradient(0deg, rgba(203,177,236,1) 11%, rgba(204,255,254,1) 63%);
     min-height: 90.4vh;
     padding: 30px 20px 10px 20px;
@@ -9,6 +12,11 @@ main{
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 100%;
+}
+
+.Retorno:hover {
+    color: #00BFA6;
 }
 
 .contenido-curso form{
@@ -33,10 +41,14 @@ main{
 
 .portada{
     width: 150px;
+    height: 150px;
     overflow: hidden;
     border-radius: 50%;
     margin-bottom: 10px;
     border: 2px solid #dbfced;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 }
 
 .portada img{
@@ -107,6 +119,8 @@ hr{
 
 .editButton{
     display: flex;
+    align-items: center;
+    justify-content: center;
     padding-top: 5px;
 }
 
@@ -326,6 +340,7 @@ hr{
 }
 .inforContent textarea{
     width: 100%;
+    height: auto;
 }
 
 .contenido-exam{
@@ -480,7 +495,8 @@ hr{
 @media (min-width: 700px) {
 
     .portada{
-        width: 200px;
+        width: 220px;
+        height: 220px;
     }
 
     .indicacion, .container-perfil .indicacion{
@@ -516,6 +532,10 @@ hr{
 
 @media (min-width: 800px) {
 
+    .Retorno{
+        width: 90%;
+    }
+
     .vista-course{
         display: flex;
         flex-direction: column;
@@ -525,10 +545,6 @@ hr{
     
     .contenido-curso form{
         padding: 10px 16px;
-    }
-
-    hr{
-        display: none;
     }
 
     .info-curso{

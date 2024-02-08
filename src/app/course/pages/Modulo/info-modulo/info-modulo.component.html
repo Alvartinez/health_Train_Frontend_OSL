@@ -3,7 +3,7 @@
 
     <section class="Retorno">
         <div class="flecha">&#9668;</div>
-        <h3>Regresar</h3>
+        <h3 (click)="regresar()">Regresar - Curso</h3>
     </section>
 
     <section class="contenido-curso" *ngIf="compObject">
@@ -13,13 +13,21 @@
 
 
                 <h2 class="tituloCurso" (click)="titular(EsTitulo)">
-                    {{modulos?.nombre}}
+                    {{titulo}}
                     <span class="material-symbols-outlined">
                         edit
                     </span>
                 </h2>
                 <span class="indicacion" *ngIf="!EsTitulo">*Actualiza el nombre del módulo del curso</span> 
-                <input type="text" *ngIf="!EsTitulo">
+                <input type="text" [(ngModel)]="nuevoTitulo" *ngIf="!EsTitulo">
+
+                <div class="editButton" *ngIf="!EsTitulo">
+                    <label id="upgrate" (click)="actualizarTitulo()">
+                        Actualizar
+                    </label>
+                </div>
+
+                <br>
 
                 <label id="delete">
                     <span class="material-symbols-outlined">
@@ -70,9 +78,16 @@
                         </label>
 
                         <div class="inforContent">
-                            <p class="descripcion">{{modulos.descripcion}}</p>
+                            <p class="descripcion">{{descripcion}}</p>
                             <span class="indicacion" *ngIf="!esDescripcion">*Actualiza la descripción del modulo</span> 
-                            <textarea name="" id=""  *ngIf="!esDescripcion"></textarea>
+                            <textarea name="" [(ngModel)]="nuevaDescripcion"  *ngIf="!esDescripcion"></textarea>
+
+                            <div class="editButton" *ngIf="!esDescripcion">
+                                <label id="upgrate" (click)="actualizarDescripcion()">
+                                    Actualizar
+                                </label>
+                            </div>
+
                         </div>
 
                     </div>
@@ -86,10 +101,17 @@
                         </label>
 
                         <div class="inforContent">
-                            <p>{{modulos.duracion}} horas</p>
+                            <p>{{duracionModulo}} horas</p>
         
-                            <span class="indicacion" *ngIf="tiempo">*Actualiza la duración del módulo </span> 
-                            <input type="number" *ngIf="tiempo">
+                            <span class="indicacion" *ngIf="!tiempo">*Actualiza la duración del módulo </span> 
+                            <input type="number" [(ngModel)]="nuevaDuracion" *ngIf="!tiempo" min="0">
+
+                            <div class="editButton" *ngIf="!tiempo">
+                                <label id="upgrate" (click)="actualizarDuracion()"> 
+                                    Actualizar
+                                </label>
+                            </div>
+
                         </div>
     
         
@@ -104,9 +126,15 @@
                         </label>
 
                         <div class="inforContent">
-                            <p class="descripcion">{{modulos.objetivo}}</p>
-                            <span class="indicacion" *ngIf="objetivo_aprendizaje">*Actualiza el objetivo de aprendizaje</span> 
-                            <textarea type="text" *ngIf="objetivo_aprendizaje"></textarea>
+                            <p class="descripcion">{{objetivo}}</p>
+                            <span class="indicacion" *ngIf="!objetivo_aprendizaje">*Actualiza el objetivo de aprendizaje</span> 
+                            <textarea type="text" [(ngModel)]="nuevoObjetivo" *ngIf="!objetivo_aprendizaje"></textarea>
+
+                            <div class="editButton" *ngIf="!objetivo_aprendizaje">
+                                <label id="upgrate" (click)="actualizarObjetivo()"> 
+                                    Actualizar
+                                </label>
+                            </div>
                         </div>    
                     </div>
 
@@ -161,17 +189,25 @@
                         </label>
 
                         <div class="inforContent">
-                            <p class="descripcion">{{modulos.conclusion}}</p>
+                            <p class="descripcion">{{conclusion}}</p>
         
-                            <span class="indicacion" *ngIf="fin">*Actualiza la conclusión del módulo </span> 
-                            <input type="text" *ngIf="fin">
+                            <span class="indicacion" *ngIf="!fin">*Actualiza la conclusión del módulo </span> 
+                            <input type="text" *ngIf="!fin" [(ngModel)]="nuevaConclusion">
+
+                            <div class="editButton" *ngIf="!fin">
+                                <label id="upgrate" (click)="actualizarConclusion()">
+                                    Actualizar
+                                </label>
+                            </div>
+
                         </div>
                     </div>
 
 
                 </div>
             </div>
-            
+
+            <hr>
 
         </div>
         <div class="container-modulo">
@@ -289,14 +325,16 @@
                     <h2>COMPETENCIAS</h2>
                     <span class="indicacion" >*Actualiza las competencias</span>
                     <div class="container-competencia">
-                        <textarea id="textarea1" (input)="autoExpand($event)" [(ngModel)]="textareaContent1"></textarea>
-                        <textarea id="textarea2" (input)="autoExpand($event)" [(ngModel)]="textareaContent2"></textarea>
-                        <textarea id="textarea3" (input)="autoExpand($event)" [(ngModel)]="textareaContent3"></textarea>
-                        <textarea id="textarea4" (input)="autoExpand($event)" [(ngModel)]="textareaContent4"></textarea>
-                        <textarea id="textarea5" (input)="autoExpand($event)" [(ngModel)]="textareaContent5"></textarea>
+                        <textarea id="textarea1" (input)="autoExpand($event, 'textareaContent1')" [(ngModel)]="textareaContent1"></textarea>
+                        <textarea id="textarea2" (input)="autoExpand($event, 'textareaContent2')" [(ngModel)]="textareaContent2"></textarea>
+                        <textarea id="textarea3" (input)="autoExpand($event, 'textareaContent3')" [(ngModel)]="textareaContent3"></textarea>
+                        <textarea id="textarea4" (input)="autoExpand($event, 'textareaContent4')" [(ngModel)]="textareaContent4"></textarea>
+                        <textarea id="textarea5" (input)="autoExpand($event, 'textareaContent5')" [(ngModel)]="textareaContent5"></textarea>
                     </div>
 
-
+                    <div class="buttton-competencia">
+                        <button (click)="actualiza()">Actualizar</button>
+                    </div>
 
                 </div>
 

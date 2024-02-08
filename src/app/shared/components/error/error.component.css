@@ -1,0 +1,67 @@
+.error{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    background-color: #f5db8e;
+}
+
+.error img{
+    width: 20em;
+}
+
+button {
+    width: 20em;
+    position: relative;
+    height: 3.5em;
+    border: 3px ridge #14ea74;
+    outline: none;
+    background-color: transparent;
+    color: #1B2E35;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: #f5db8e;
+    transition: 0.5s;
+    transform-origin: center;
+  }
+  
+  button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: #f5db8e;
+    transition: 0.5s;
+  }
+  
+  button:hover::before, button:hover::after {
+    transform: scale(0)
+  }
+  
+  button:hover {
+    box-shadow: inset 0px 0px 25px #14eac6;
+    color: #14ea74;
+  }
+
+  @media (min-width: 800px) {
+    .error img{
+        width: 30em;
+    }
+  }

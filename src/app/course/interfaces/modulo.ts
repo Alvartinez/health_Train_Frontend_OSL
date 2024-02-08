@@ -1,10 +1,11 @@
 export interface Module{
-    id_curso?: number,
+    id_curso?: Number,
+    id_modulo?: Number,
     nombre: String,
     descripcion:String,
     objetivo:String,
     conclusion:String,
-    portada:String,
+    portada?:String,
     creadores?:JSON, 
     competencias: Competencia[],
     duracion: Number,

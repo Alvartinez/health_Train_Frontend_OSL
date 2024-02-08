@@ -1,10 +1,11 @@
 import { Module } from './../../../interfaces/modulo';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CourseService } from '@rutas/course/services/curso.service';
+import { Competencia } from '@rutas/course/interfaces/curso';
 import { ModuleService } from '@rutas/course/services/modulo.service';
+import { Location } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-info-modulo',
@@ -13,338 +14,68 @@ import { ModuleService } from '@rutas/course/services/modulo.service';
 })
 export class InfoModuloDocComponent {
 
-
   imagen: string | ArrayBuffer | null = '../../../../assets/image/logo-perfil.png';
 
   portada:boolean = true;
 
   recurso:boolean = true;
   quiz:boolean = true;
-  tiempo:boolean = false;
-  fin:boolean = false;
-  objetivo_aprendizaje:boolean = false;
-
-  resources:any;
-  quizzes:any;
-
-  tituloTema2:boolean = false;
-  tituloTema3:boolean = false;
-  tituloTema4:boolean = false;
-  tituloTema5:boolean = false;
-
-  tema1:boolean = false;
-  tema2:boolean = false;
-  tema3:boolean = false;
-  tema4:boolean = false;
-  tema5:boolean = false;
-
-  subTema1:boolean = false;
-  subTema2:boolean = false;
-  subTema3:boolean = false;
-  subTema4:boolean = false;
-  subTema5:boolean = false;
-
-  subTema11:boolean = false;
-  subTema12:boolean = false;
-  subTema13:boolean = false;
-  subTema14:boolean = false;
-  subTema15:boolean = false;
-
-  subTema21:boolean = false;
-  subTema22:boolean = false;
-  subTema23:boolean = false;
-  subTema24:boolean = false;
-  subTema25:boolean = false;
-
-  subTema31:boolean = false;
-  subTema32:boolean = false;
-  subTema33:boolean = false;
-  subTema34:boolean = false;
-  subTema35:boolean = false;
-
-  subTema41:boolean = false;
-  subTema42:boolean = false;
-  subTema43:boolean = false;
-  subTema44:boolean = false;
-  subTema45:boolean = false;
-
-  subTema51:boolean = false;
-  subTema52:boolean = false;
-  subTema53:boolean = false;
-  subTema54:boolean = false;
-  subTema55:boolean = false;
-
-  iconSubTema1:string = "add";
-  iconSubTema2:string = "add";
-  iconSubTema3:string = "add";
-  iconSubTema4:string = "add";
-  iconSubTema5:string = "add";
-
-  iconTema1:string = "add";
-  iconTema2:string = "add";
-  iconTema3:string = "add";
-  iconTema4:string = "add";
-  iconTema5:string = "add";
-
-  nuevo1:boolean = true;
-  nuevo2:boolean = true;
-  nuevo3:boolean = true;
-
-  nucomp1:boolean = false;
-  nucomp2:boolean = false;
-  nucomp3:boolean = false;
-  nucomp4:boolean = false;
-
-  comp1:string= "";
-  comp2:string= "";
-  comp3:string= "";
-  comp4:string= "";
-  comp5:string= "";
-
-  add1:boolean = true;
-  add2:boolean = true;
-  add3:boolean = true;
-  add4:boolean = true;
-
-  nuobje1:boolean = false;
-  nuobje2:boolean = false;
-  nuobje3:boolean = false;
-  nuobje4:boolean = false;
-
-  add5:boolean = true;
-  add6:boolean = true;
-  add7:boolean = true;
-  add8:boolean = true;
-
-  onFileChange(event: any) {
-    const reader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      const file = event.target.files[0];
-
-      reader.onload = () => {
-        this.imagen = reader.result;
-      };
-
-      reader.readAsDataURL(file);
-      this.portada =false;
-    }
-  }
-
-  quitarFoto() {
-    this.imagen = '../../../../assets/image/logo-perfil.png';
-    this.portada = true;
-  }
-
-  temas1(){
-    if(this.iconTema1 === "add"){
-      this.iconTema1 = "remove";
-      this.tema1 = true;
-
-    } else if(this.iconTema1 === "remove"){
-      this.iconTema1 = "add";
-      this.tema1 = false;
-      this.subTema11 = false;
-    }
-  }
-
-  temas2(){
-    if(this.iconTema2 === "add"){
-      this.iconTema2 = "remove";
-      this.tema2 = true;
-
-    } else if(this.iconTema2 === "remove"){
-      this.iconTema2 = "add";
-      this.tema2 = false;
-    }
-  }
-
-  temas3(){
-    if(this.iconTema3 === "add"){
-      this.iconTema3 = "remove";
-      this.tema3 = true;
-
-    } else if(this.iconTema3 === "remove"){
-      this.iconTema3 = "add";
-      this.tema3 = false;
-    }
-  }
-
-  temas4(){
-    if(this.iconTema4 === "add"){
-      this.iconTema4 = "remove";
-      this.tema4 = true;
-
-    } else if(this.iconTema4 === "remove"){
-      this.iconTema4 = "add";
-      this.tema4 = false;
-    }
-  }
-
-  temas5(){
-    if(this.iconTema5 === "add"){
-      this.iconTema5 = "remove";
-      this.tema5 = true;
-
-    } else if(this.iconTema5 === "remove"){
-      this.iconTema5 = "add";
-      this.tema5 = false;
-    }
-  }
-
-  nuevoTema1(){
-    this.add1 = false;
-    this.tituloTema2 = true;
-
-  }
-
-  nuevoTema2(){
-    this.add2 = false;
-    this.tituloTema3 = true;
-  }
-
-  eliminaTema2(){
-    this.add1 = true;
-    this.tituloTema2 = false;
-  }
-
-  nuevoTema3(){
-    this.add3 = false;
-    this.tituloTema4 = true;
-  }
-
-  eliminaTema3(){
-    this.add2 = true;
-    this.tituloTema3 = false;
-  }
-
-  nuevoTema4(){
-    this.add4 = false;
-    this.tituloTema5 = true;
-  }
-
-  eliminaTema4(){
-    this.add3 = true;
-    this.tituloTema4 = false;
-  }
-
-  eliminaTema5(){
-    this.add4 = true;
-    this.tituloTema5 = false;
-  }
-
-  subtemas11(){
-    this.subTema1 = true;
-    this.subTema11 = true;
-  }
-
-  nuevaCompetencia2(){
-    this.add2 = false;
-    this.nucomp2 = true;
-  }
-
-  nuevaCompetencia3(){
-    this.add3 = false;
-    this.nucomp3 = true;
-  }
-
-  nuevaCompetencia4(){
-    this.add4 = false;
-    this.nucomp4 = true;
-  }
-
-  eliminaCompetencia2(){
-    this.add2 = true;
-    this.nucomp2 = false;
-  }
-
-  eliminaCompetencia3(){
-    this.add3 = true;
-    this.nucomp3 = false;
-  }
-
-  eliminaCompetencia4(){
-    this.add4 = true;
-    this.nucomp4 = false;
-  }
-
-  nuevObjetivo1(){
-    this.add5 = false;
-    this.nuobje1 = true;
-
-  }
-
-  nuevObjetivo2(){
-    this.add6 = false;
-    this.nuobje2 = true;
-  }
-
-  nuevObjetivo3(){
-    this.add7 = false;
-    this.nuobje3 = true;
-  }
-
-  nuevObjetivo4(){
-    this.add8 = false;
-    this.nuobje4 = true;
-  }
-
-  eliminaObjetivo1(){
-    this.add5 = true;
-    this.nuobje1 = false;
-  }
-
-  eliminaObjetivo2(){
-    this.add6 = true;
-    this.nuobje2 = false;
-  }
-
-  eliminaObjetivo3(){
-    this.add7 = true;
-    this.nuobje3 = false;
-  }
-
-  eliminaObjetivo4(){
-    this.add8 = true;
-    this.nuobje4 = false;
-  }
-
-  datos:any;
-  modulos: Module;
+  tiempo:boolean = true;
+  fin:boolean = true;
+  objetivo_aprendizaje:boolean = true;
   esPresenta:boolean = true;
   EsTitulo:boolean = true;
   esDescripcion:boolean = true;
 
+  resources:any;
+  quizzes:any;
+
+  datos:any;
+  modulos: Module;
+
   compObject:boolean = true;
 
-  textareaContent1:any;
-  textareaContent2:any;
-  textareaContent3:any;
-  textareaContent4:any;
-  textareaContent5:any;
-
-  competencias:any;
-  
-  objetivoContent1:any;
-  objetivoContent2:any;
-  objetivoContent3:any;
-  objetivoContent4:any;
-  objetivoContent5:any;
-
-  auxiliar1: string = "";
-  auxiliar2: string = "";
-  auxiliar3: string = "";
-  auxiliar4: string = "";
-  auxiliar5: string = "";
+  textareaContent1 = '';
+  textareaContent2 = '';
+  textareaContent3 = '';
+  textareaContent4 = '';
+  textareaContent5 = '';
 
   currentUrl:string = "";
 
-  constructor(private router: Router, 
-              private _courseService: CourseService, 
-              private cdr: ChangeDetectorRef, 
-              private sanitizer: DomSanitizer, 
+  titulo: string = "";
+  nuevoTitulo: string = "";
+
+  descripcion: string = "";
+  nuevaDescripcion: string = "";
+
+  duracionModulo: number = 0;
+  nuevaDuracion: number = 0;
+
+  objetivo: string = "";
+  nuevoObjetivo: string = "";
+
+  conclusion: string = "";
+  nuevaConclusion: string = "";
+
+  competencias: Competencia[] = [];
+  nuevasCompetencias: Competencia[] = [];
+
+  modulo: Module ={
+    id_modulo: 0,
+    nombre: "",
+    descripcion: "",
+    objetivo: "",
+    conclusion: "",
+    competencias: [],
+    duracion: 0,
+    temas: []
+}
+
+  constructor(private router: Router,
               private _moduleService: ModuleService,
-              private activatedRoute:ActivatedRoute
+              private activatedRoute:ActivatedRoute, 
+              private location: Location
     ) {}
   
   ngOnInit(){
@@ -358,8 +89,34 @@ export class InfoModuloDocComponent {
 
         this.modulos = dataModule.cursoModuloInfo?.modulo;
 
-        console.log(this.modulos);
+        this.modulo.id_modulo = id;
 
+        this.titulo = this.modulos.nombre as string;
+        this.descripcion = this.modulos.descripcion as string;
+        this.duracionModulo = this.modulos.duracion as number;
+        this.objetivo = this.modulos.objetivo as string;
+        this.conclusion = this.modulos.objetivo as string;
+        this.competencias = this.modulos?.competencias;
+        
+        this.modulo.nombre = this.titulo;
+        this.modulo.descripcion = this.descripcion;
+        this.modulo.duracion = this.duracionModulo;
+        this.modulo.objetivo = this.objetivo;
+        this.modulo.competencias = this.competencias;
+
+        console.log(this.modulo);
+
+
+        if (this.competencias.length > 0) {
+          this.competencias.forEach((competencia, index) => {
+              if(index === 0) this.textareaContent1 = competencia.nombre;
+              if(index === 1) this.textareaContent2 = competencia.nombre;
+              if(index === 2) this.textareaContent3 = competencia.nombre;
+              if(index === 3) this.textareaContent4 = competencia.nombre;
+              if(index === 4) this.textareaContent5 = competencia.nombre;
+          });
+
+      }
 
         this.quizzes = Array.isArray(dataModule.quizFormativo) ? dataModule.quizFormativo : [dataModule.quizFormativo];
 
@@ -370,6 +127,33 @@ export class InfoModuloDocComponent {
     });
 
   }
+
+  regresar(){
+    this.location.back();
+  }
+
+  onFileChange(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+
+      reader.onload = () => {
+        this.imagen = reader.result;
+        this.modulo.portada = this.imagen as string;
+      };
+
+      reader.readAsDataURL(file);
+      this.portada =false;
+
+    }
+  }
+
+  quitarFoto() {
+    this.imagen = '../../../../assets/image/logo-perfil.png';
+    this.portada = true;
+  }
+
 
   editar(estado:boolean): boolean {
     return !estado;
@@ -397,39 +181,210 @@ export class InfoModuloDocComponent {
     this.fin = this.editar(estado);
   }
 
-  autoExpand(event: any): void {
+  autoExpand(event: any, variableId: string): void {
     const textarea = event.target;
     textarea.style.height = 'auto';
     const newHeight = textarea.scrollHeight;
     
-    // Limitar la altura a 72px
     if (newHeight <= 72) {
       textarea.style.height = newHeight + 'px';
     }
 
-    this.textareaContent1 = textarea.value;
-
+    switch (variableId) {
+        case 'textareaContent1':
+            this.textareaContent1 = textarea.value;
+            break;
+        case 'textareaContent2':
+            this.textareaContent2 = textarea.value;
+            break;
+        case 'textareaContent3':
+            this.textareaContent3 = textarea.value;
+            break;
+        case 'textareaContent4':
+            this.textareaContent4 = textarea.value;
+            break;
+        case 'textareaContent5':
+            this.textareaContent5 = textarea.value;
+            break;
+        default:
+            // Manejar un caso por defecto si es necesario
+            break;
+    }
   }
 
-  actualiza(){
-
-
-      if((this.textareaContent1 !== this.auxiliar1) || (this.textareaContent2 !== this.auxiliar2) && (this.textareaContent3  !== this.auxiliar3) && (this.textareaContent4 !== this.auxiliar4) && (this.textareaContent5 !== this.auxiliar5)){
-        
-        this.competencias = this.textareaContent1;
-
-        this.cerrar();
-      }
-
+  sonIgualesCompetencias(competencias1: Competencia[], competencias2: Competencia[]): boolean {
+    if (competencias1.length !== competencias2.length) {
+      return false;
+    }
+  
+    let sonIguales = competencias1.every(comp1 => 
+      competencias2.some(comp2 => comp2.nombre === comp1.nombre));
+  
+    if (sonIguales) {
+      sonIguales = competencias2.every(comp2 => 
+        competencias1.some(comp1 => comp1.nombre === comp2.nombre));
+    }
+  
+    return sonIguales;
   }
 
   modalC(){
-    console.log(this.compObject);
     this.compObject = false;
   }
 
   cerrar(){
     this.compObject = true;
+  }
+
+  actualiza(){
+
+    let competenciasTemporales = [
+      { nombre: this.textareaContent1 },
+      { nombre: this.textareaContent2 },
+      { nombre: this.textareaContent3 },
+      { nombre: this.textareaContent4 },
+      { nombre: this.textareaContent5 }
+    ].filter(competencia => competencia.nombre && competencia.nombre.trim() !== '');
+
+    if (this.sonIgualesCompetencias(this.competencias, competenciasTemporales)) {
+      this.nuevasCompetencias = [];
+
+      console.log("NO hay cambios");
+
+    } else {
+      this.nuevasCompetencias = competenciasTemporales;
+
+      console.log(this.nuevasCompetencias);
+
+      this.modulo.competencias = this.nuevasCompetencias;
+
+      this.showConfirmation();
+      
+    }
+  }
+
+  actualizarTitulo(){
+
+    let cambiosRealizados = false;
+
+    if(this.titulo !== "" && this.nuevoTitulo !==  ""){
+      if(this.titulo !== this.nuevoTitulo){
+        this.modulo.nombre = this.nuevoTitulo;
+        this.titulo = this.nuevoTitulo;
+        cambiosRealizados = true;
+        this.EsTitulo = true;
+      }else{
+        this.modulo.nombre = this.titulo;
+        this.EsTitulo = true;
+      }
+    }
+
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
+  }
+
+  actualizarDescripcion() {
+
+    let cambiosRealizados = false;
+
+    if(this.descripcion !== "" && this.nuevaDescripcion !== ""){
+      if(this.descripcion !== this.nuevaDescripcion){
+        this.modulo.descripcion = this.nuevaDescripcion;
+        this.descripcion = this.nuevaDescripcion;
+        cambiosRealizados = true;
+        this.esDescripcion = true;
+      }else{
+        this.modulo.descripcion = this.descripcion;
+        this.esDescripcion = true;
+      }
+    }
+
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
+  }
+
+  actualizarDuracion(){
+    
+    let cambiosRealizados = false;
+
+    if(this.nuevaDuracion > 0){
+      if(this.duracionModulo !== this.nuevaDuracion){
+        this.modulo.duracion = this.nuevaDuracion;
+        this.duracionModulo = this.nuevaDuracion;
+        cambiosRealizados = true;
+        this.tiempo = true;
+      }else{
+        this.modulo.duracion = this.duracionModulo;
+        this.tiempo = true;
+      }
+    }
+
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
+  }
+
+  actualizarObjetivo() {
+    
+    let cambiosRealizados = false;
+
+    if(this.objetivo !== "" || this.nuevoObjetivo !==  ""){
+      if(this.objetivo !== this.nuevoObjetivo){
+        this.modulo.objetivo = this.nuevoObjetivo;
+        this.objetivo = this.nuevoObjetivo;
+        cambiosRealizados = true;
+        this.objetivo_aprendizaje = true;
+      }else{
+        this.modulo.objetivo = this.objetivo;
+        this.objetivo_aprendizaje = true;
+      }
+    }
+
+  }
+
+  actualizarConclusion(){
+
+    let cambiosRealizados = false;
+
+    if(this.conclusion !== "" || this.nuevaConclusion !== ""){
+      if(this.conclusion !== this.nuevaConclusion){
+        this.modulo.conclusion = this.nuevaConclusion;
+        this.conclusion = this.nuevaConclusion;
+        cambiosRealizados = true;
+        this.fin = true;
+      }else{
+        this.modulo.conclusion = this.conclusion;
+        this.fin = true;
+      }
+    }
+
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
+  }
+
+  guardar(modulo:Module){
+
+    this._moduleService.updateModule(modulo).subscribe({
+      next: () =>{
+        console.log("Has recibido cambios");
+      }
+    });
+
   }
 
   newResource(){
@@ -440,5 +395,29 @@ export class InfoModuloDocComponent {
 
     this.router.navigateByUrl(newUrl);
   }
+
+  showConfirmation(): void {
+    Swal.fire({
+      title: '¿Estás seguro hacer cambios?',
+      text: "No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          '¡Cambios exitosos!',
+          'Módulo actualizado.',
+          'success'
+        );
+        this.guardar(this.modulo);
+        this.cerrar();
+      }
+    });
+  }
+
 
 }

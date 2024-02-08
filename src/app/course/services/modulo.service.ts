@@ -29,4 +29,8 @@ export class ModuleService {
     return this.http.delete<number>(`${this.myAppUrl}${this.myApiUrl}deleteModule/${id}`);
   }
 
+  updateModule(modulo:Module) : Observable<any>{
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}updateModule`, modulo);
+  }
+
 }

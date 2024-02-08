@@ -9,7 +9,7 @@ import { UserCourseComponent } from '@rutas/shared/components/user-course/user-c
 // import { ExamComponent } from '../pages/exam/exam.component';
 // import { FeedbackExamComponent } from '../pages/feedback-exam/feedback-exam.component';
 // import { ErrorComponent } from '@rutas/home/pages/error/error.component';
-import { UserDashboardComponent } from '@rutas/user/shared/user_dashboard/user-dashboard.component';
+import { UserDashboardComponent } from '@rutas/user/shared/components/user_dashboard/user-dashboard.component';
 import { NewCourseComponent } from '../pages/Curso/new-course/new-course.component';
 import { InfoCourseComponent } from '../components/info-course/info-course.component';
 import { QuestionBankComponent } from '../pages/Curso/question-bank/question-bank.component';

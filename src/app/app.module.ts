@@ -17,7 +17,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { VisitHomeComponent } from './user/1-Visitor/pages/visit-home/visit-home.component';
 import { UserNavbarComponent } from './shared/components/user-navbar/user-navbar.component';
-import { UserDashboardComponent } from './user/shared/user_dashboard/user-dashboard.component';
+import { UserDashboardComponent } from './user/shared/components/user_dashboard/user-dashboard.component';
 import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
 import { ForoComponent } from './shared/components/foro/foro.component';
 import { UserCourseComponent } from './shared/components/user-course/user-course.component';
@@ -51,6 +51,9 @@ import { ResourcePodcastComponent } from './course/components/resource-podcast/r
 import { ResourceTimeLineComponent } from './course/components/resource-time-line/resource-time-line.component';
 import { ResourceVideoComponent } from './course/components/resource-video/resource-video.component';
 import { RecursoComponent } from './course/components/recurso/recurso.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { AppHomeComponent } from './user/2-Apprentice/pages/app-home/app-home.component';
+import { DocHomeComponent } from './user/3-Teacher/pages/doc-home/doc-home.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +97,10 @@ import { RecursoComponent } from './course/components/recurso/recurso.component'
     ResourcePodcastComponent,
     ResourceTimeLineComponent,
     ResourceVideoComponent,
-    RecursoComponent
+    RecursoComponent,
+    ErrorComponent,
+    AppHomeComponent,
+    DocHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -104,6 +110,7 @@ import { RecursoComponent } from './course/components/recurso/recurso.component'
     FormsModule, 
     ReactiveFormsModule,
     AngularEditorModule, 
+    BrowserAnimationsModule, 
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

@@ -7,6 +7,9 @@
       "@rutas/*": ["./src/app/*"],
       "@users/*": ["./src/app/user/*"],
       "@visitor/*": ["./src/app/user/1-Visitor/*"],
+      "@apprentice/*": ["./src/app/user/2-Apprentice/*"],
+      "@teacher/*": ["./src/app/user/3-Teacher/*"],
+      "@admin/*": ["./src/app/user/3-Teacher/*"],
       "@course/*": ["./src/app/course/routers/*"]
     },
     "baseUrl": "./",

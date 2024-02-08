@@ -7,6 +7,7 @@ import { CourseService } from '@rutas/course/services/curso.service';
 import { ModuleService } from '@rutas/course/services/modulo.service';
 import { Location } from '@angular/common';
 import { CompetenceService } from '@rutas/course/services/competencia.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -59,8 +60,9 @@ export class InfoCourseComponent {
   objetivoContent5:any;
 
   imagen: string | ArrayBuffer | null = '../../../../assets/image/logo-perfil.png';
+  imagenGlosario = "../../../../assets/image/concepto.png";
+  imagenPregunta = "../../../../assets/image/question.png";
   imagenActual:string | ArrayBuffer | null;
-  guardaImagen:boolean = false;
 
   video:string = "";
   nuevoVideo:string = "";
@@ -111,6 +113,13 @@ export class InfoCourseComponent {
           this.imagenActual = this.imagen;
           this.portada = false;
         }
+
+        this.curso.id_curso = this.numero;
+        this.curso.nombre = this.titulo;
+        this.curso.descripcion = this.descripcion;
+        this.curso.objetivos = this.objetivos; 
+        this.curso.video_presentacion = this.video;
+        
 
         if (this.objetivos.length > 0) {
           this.objetivos.forEach((objetivo, index) => {
@@ -171,41 +180,28 @@ export class InfoCourseComponent {
 
   onFileChange(event: any) {
     const reader = new FileReader();
+
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-  
+      const file = event.target.files[0];
+
       reader.onload = () => {
-        // Convertir la imagen a un formato comparable, por ejemplo, a Base64 o Blob
-        const imgBase64 = reader.result;
-  
-        // Verificar si la imagen es la misma que la imagenActual
-        // Esto podría requerir una comparación más compleja dependiendo de cómo estés manejando las imágenes
-        if (imgBase64 === this.imagenActual) {
-          // Si la imagen es la misma que la actual, no se necesita cambiar portada ni guardar la imagen
-          this.portada = false; // o true, dependiendo de tu lógica para mostrar los botones
-          this.guardaImagen = false;
-        } else {
-          // Si la imagen es diferente, permitir guardar la nueva imagen
-          this.imagen = imgBase64; // Actualizar la vista previa de la imagen con la nueva imagen
-          this.portada = true; // o false, para mostrar los botones de editar y eliminar
-          this.guardaImagen = true; // Permitir guardar la nueva imagen
-        }
+        this.imagen = reader.result;
+        this.curso.portada = this.imagen  as string;
       };
-  
-      reader.readAsDataURL(file); // Leer el archivo como Data URL (Base64)
+
+      reader.readAsDataURL(file);
+      this.portada =false;
+
+      console.log(this.curso);
+      
+      this.showConfirmation();
+
     }
   }
 
   quitarFoto() {
-    if(this.imagen === this.imagenActual){
-      this.imagen = '../../../../assets/image/logo-perfil.png';
-      this.portada = true;
-      this.guardaImagen = true;
-    }else{
       this.imagen = this.imagenActual;
       this.portada = true;
-      this.guardaImagen = true;
-    }
   }
 
   editar(estado:boolean): boolean {
@@ -228,16 +224,50 @@ export class InfoCourseComponent {
     this.esDescripcion = this.editar(estado);
   }
 
-  autoExpand(event: any): void {
+  autoExpand(event: any, variableId: string): void {
     const textarea = event.target;
     textarea.style.height = 'auto';
     const newHeight = textarea.scrollHeight;
     
-    // Limitar la altura a 72px
     if (newHeight <= 72) {
       textarea.style.height = newHeight + 'px';
     }
 
+    switch (variableId) {
+        case 'textareaContent1':
+            this.textareaContent1 = textarea.value;
+            break;
+        case 'textareaContent2':
+            this.textareaContent2 = textarea.value;
+            break;
+        case 'textareaContent3':
+            this.textareaContent3 = textarea.value;
+            break;
+        case 'textareaContent4':
+            this.textareaContent4 = textarea.value;
+            break;
+        case 'textareaContent5':
+            this.textareaContent5 = textarea.value;
+            break;
+        case 'objetivoContent1':
+            this.objetivoContent1 = textarea.value;
+            break;
+        case 'objetivoContent2':
+            this.objetivoContent2 = textarea.value;
+            break;
+        case 'objetivoContent3':
+            this.objetivoContent3 = textarea.value;
+            break;
+        case 'objetivoContent4':
+            this.objetivoContent4 = textarea.value;
+            break;
+        case 'objetivoContent5':
+            this.objetivoContent5 = textarea.value;
+            break;
+        default:
+            // Manejar un caso por defecto si es necesario
+            break;
+    }
   }
 
   actualiza(){
@@ -295,15 +325,10 @@ export class InfoCourseComponent {
         this.nuevosObjetivos = objetivosTemporales;
         console.log(this.nuevosObjetivos);
 
-        this.curso = {
-          id_curso:this.numero,
-          nombre: this.titulo,
-          descripcion: this.descripcion,
-          objetivos: this.nuevosObjetivos,
-          video_presentacion: this.video
-        }
+        this.curso.objetivos = this.nuevosObjetivos;
+        this.objetivos = this.nuevosObjetivos;
 
-        this.guardar(this.curso);
+        this.showConfirmation();
 
       }
 
@@ -361,85 +386,84 @@ export class InfoCourseComponent {
     this.comp = false;
   }
 
-  actualizar(){
-    
-    if(this.imagen !== this.imagenActual ){
+  actualizarTitulo() {
 
-      this.curso = {
-        id_curso:this.numero,
-        nombre: this.titulo,
-        descripcion: this.descripcion,
-        objetivos: this.nuevosObjetivos,
-        video_presentacion: this.video
-      }
+    let cambiosRealizados = false;
 
-      this.guardar(this.curso);
-
-      this.guardaImagen = false;
-
-    }
-    
-    if(this.nuevoVideo !== ""){
-
-      if(this.video !== this.nuevoVideo) {
-
-        this.video = this.nuevoVideo;
-
-        this.curso = {
-          id_curso:this.numero,
-          nombre: this.titulo,
-          descripcion: this.descripcion,
-          objetivos: this.nuevosObjetivos,
-          video_presentacion: this.video
-        }
-
-        this.guardar(this.curso);
-
-        this.esPresenta = true;
-
-      }
-
-    }
-    
-    if(this.nuevoTitulo !== ""){
+    if(this.titulo !== "" && this.nuevoTitulo !== ""){
       if(this.titulo !== this.nuevoTitulo){
-
+        this.curso.nombre = this.nuevoTitulo;
         this.titulo = this.nuevoTitulo;
-
-        this.curso = {
-          id_curso:this.numero,
-          nombre: this.titulo,
-          descripcion: this.descripcion,
-          objetivos: this.nuevosObjetivos,
-          video_presentacion: this.video
-        }
-
-        this.guardar(this.curso);
-
         this.EsTitulo = true;
-  
+        cambiosRealizados = true;
+      } else {
+        this.curso.nombre = this.titulo;
+        this.EsTitulo = true;
       }
     }
 
-    if(this.nuevaDescripcion !== ""){
-      if(this.descripcion !== this.nuevaDescripcion){
-
-        this.descripcion = this.nuevaDescripcion;
-
-        this.esDescripcion = true;
-  
-      }
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
     }
 
   }
+
+  actualizarVideo() {
+    
+    let cambiosRealizados = false;
+
+    if(this.video !== "" && this.nuevoVideo !== ""){
+      if(this.video !== this.nuevoVideo){
+        this.curso.video_presentacion = this.nuevoVideo;
+        this.video = this.nuevoVideo;
+        this.esPresenta = true;
+        cambiosRealizados = true;
+      } else {
+        this.curso.video_presentacion = this.video;
+        this.esPresenta = true;
+      }
+    }
+    
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
+  }
+
+  actualizarDescripcion() {    
+
+    let cambiosRealizados = false;
+
+    if(this.descripcion !== "" || this.nuevaDescripcion !== ""){
+      if(this.descripcion !== this.nuevaDescripcion){
+        this.curso.descripcion = this.nuevaDescripcion;
+        this.descripcion = this.nuevaDescripcion;
+        this.esDescripcion = true;    
+        cambiosRealizados = true;
+      } else {
+        this.curso.descripcion = this.descripcion;
+        this.esDescripcion = true;
+      }
+    }
+    
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
+  }
+
 
   guardar(curso:Course){
 
     this._courseService.updateCourse(curso).subscribe({
       next: () =>{
         console.log("Has recibido cambios");
-        window.location.reload();
-        this.cerrar();
       }
     });
 
@@ -491,6 +515,35 @@ export class InfoCourseComponent {
     const newUrl = this.baseUrl+"/modules/"+id+"/infoDoc-modulo"
 
     this.router.navigateByUrl(newUrl);
+  }
+
+  regresar(){
+    this.location.back();
+  }
+
+  showConfirmation(): void {
+    Swal.fire({
+      title: '¿Estás seguro hacer cambios?',
+      text: "No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          '¡Cambios exitosos!',
+          'Curso actualizado.',
+          'success'
+        );
+        console.log(this.curso);
+        this.guardar(this.curso);
+
+        this.cerrar();
+      }
+    });
   }
 
 }

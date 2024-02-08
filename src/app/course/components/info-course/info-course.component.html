@@ -3,7 +3,7 @@
 
     <div class="Retorno" *ngIf="compObject">
         <div class="flecha">&#9668;</div>
-        <h3>Regresar</h3>
+        <h3 (click)="regresar();">Regresar</h3>
     </div>
 
     <section class="contenido-curso" *ngIf="compObject">
@@ -21,11 +21,13 @@
                 <span class="indicacion" *ngIf="!EsTitulo">*Actualiza el nombre del curso</span> 
                 <input type="text" *ngIf="!EsTitulo" [(ngModel)]="nuevoTitulo">
 
-                <div class="editButton" *ngIf="!EsTitulo">
-                    <label id="upgrate" (click)="actualizar()">
-                        Guardar
+                <div class="editButton" (click)="actualizarTitulo()" *ngIf="!EsTitulo">
+                    <label id="upgrate">
+                        Actualizar
                     </label>
                 </div>
+
+                <br>
 
                 <label id="delete" (click)="eliminarCurso()">
                     <span class="material-symbols-outlined">
@@ -59,12 +61,6 @@
                     </span>
                     Eliminar portada
                 </label>
-
-                <div class="editButton" *ngIf="guardaImagen" (click)="actualizar()">
-                    <label id="upgrate">
-                        Guardar
-                    </label>
-                </div>
     
                 <label class="presenta" for="video" (click)="presentar(esPresenta)">
                     <b>
@@ -90,9 +86,9 @@
                 <span class="indicacion" *ngIf="!esPresenta">*Inserta el enlace del video de presentación del curso</span>
                 <input [(ngModel)]="nuevoVideo" *ngIf="!esPresenta" type="text" name="video" id="">
 
-                <div class="editButton" *ngIf="!esPresenta">
+                <div class="editButton" (click)="actualizarVideo()" *ngIf="!esPresenta">
                     <label id="upgrate">
-                        Guardar
+                        Actualizar
                     </label>
                 </div>
 
@@ -113,13 +109,14 @@
                     <div class="inforContent">
                         <p class="descripcion">{{descripcion}}</p>
                         <span class="indicacion" *ngIf="!esDescripcion">*Actualiza la descripción del curso existente</span> 
-                        <textarea name="nuevaDescripcion" [(ngModel)]="nuevaDescripcion"  *ngIf="!esDescripcion"></textarea>
-        
-                        <div class="editButton" *ngIf="!esDescripcion">
+                        <textarea name="nuevaDescripcion" [(ngModel)]="nuevaDescripcion"  *ngIf="!esDescripcion"></textarea>       
+                    
+                        <div class="editButton" (click)="actualizarDescripcion()" *ngIf="!esDescripcion">
                             <label id="upgrate">
-                                Guardar
+                                Actualizar
                             </label>
                         </div>
+
                     </div>
                 </div>
 
@@ -159,6 +156,8 @@
                     </div>
                 </div>
 
+                <hr>
+
                 <div class="recursos-informativos">
                     <div class="banco-pregunta">
                         <label class="titulo">
@@ -170,7 +169,7 @@
 
                         <div class="flip-card" class="flip-card">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front">
+                                <div class="flip-card-front" [style.background-image]="'url(' + imagenPregunta + ')'">
                                     <p class="title">Banco de preguntas</p>
                                 </div>
                                 <div class="flip-card-back">
@@ -197,7 +196,7 @@
 
                         <div class="flip-card" class="flip-card">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front">
+                                <div class="flip-card-front" [style.background-image]="'url(' + imagenGlosario + ')'">
                                     <p class="title">Glosario de términos</p>
                                 </div>
                                 <div class="flip-card-back">
@@ -220,8 +219,6 @@
 
 
         </div>
-
-        <hr>
 
         <div class="container-modulo">
             <h3 class="modulo">
@@ -246,7 +243,7 @@
                 <ng-container *ngIf="modulos.length > 0">
                     <div class="flip-card" *ngFor="let modulo of modulos">
                         <div class="flip-card-inner">
-                            <div class="flip-card-front">
+                            <div class="flip-card-front" [style.background-image]="'url(' + modulo?.portada + ')'">
                                 <p class="title">{{modulo?.nombre}}</p>
                             </div>
                             <div class="flip-card-back">
@@ -279,11 +276,11 @@
                     <h2>COMPETENCIAS</h2>
                     <span class="indicacion" >*Actualiza las competencias</span>
                     <div class="container-competencia">
-                        <textarea id="textarea1" (input)="autoExpand($event)" [(ngModel)]="textareaContent1"></textarea>
-                        <textarea id="textarea2" (input)="autoExpand($event)" [(ngModel)]="textareaContent2"></textarea>
-                        <textarea id="textarea3" (input)="autoExpand($event)" [(ngModel)]="textareaContent3"></textarea>
-                        <textarea id="textarea4" (input)="autoExpand($event)" [(ngModel)]="textareaContent4"></textarea>
-                        <textarea id="textarea5" (input)="autoExpand($event)" [(ngModel)]="textareaContent5"></textarea>
+                        <textarea id="textarea1" (input)="autoExpand($event, 'textareaContent1')" [(ngModel)]="textareaContent1"></textarea>
+                        <textarea id="textarea2" (input)="autoExpand($event, 'textareaContent2')" [(ngModel)]="textareaContent2"></textarea>
+                        <textarea id="textarea3" (input)="autoExpand($event, 'textareaContent3')" [(ngModel)]="textareaContent3"></textarea>
+                        <textarea id="textarea4" (input)="autoExpand($event, 'textareaContent4')" [(ngModel)]="textareaContent4"></textarea>
+                        <textarea id="textarea5" (input)="autoExpand($event, 'textareaContent5')" [(ngModel)]="textareaContent5"></textarea>
                     </div>
                     <div class="buttton-competencia">
                         <button (click)="actualiza()">Actualizar</button>
@@ -294,11 +291,12 @@
                     <h2>OBJETIVOS</h2>
                     <span class="indicacion" >*Actualiza los objetivos</span>
                     <div class="container-competencia">
-                        <textarea id="textarea1" (input)="autoExpand($event)" [(ngModel)]="objetivoContent1"></textarea>
-                        <textarea id="textarea2" (input)="autoExpand($event)" [(ngModel)]="objetivoContent2"></textarea>
-                        <textarea id="textarea3" (input)="autoExpand($event)" [(ngModel)]="objetivoContent3"></textarea>
-                        <textarea id="textarea4" (input)="autoExpand($event)" [(ngModel)]="objetivoContent4"></textarea>
-                        <textarea id="textarea5" (input)="autoExpand($event)" [(ngModel)]="objetivoContent5"></textarea>
+                        <textarea id="textarea1" (input)="autoExpand($event, 'objetivoContent1')" [(ngModel)]="objetivoContent1"></textarea>
+                        <textarea id="textarea2" (input)="autoExpand($event, 'objetivoContent2')" [(ngModel)]="objetivoContent2"></textarea>
+                        <textarea id="textarea3" (input)="autoExpand($event, 'objetivoContent3')" [(ngModel)]="objetivoContent3"></textarea>
+                        <textarea id="textarea4" (input)="autoExpand($event, 'objetivoContent4')" [(ngModel)]="objetivoContent4"></textarea>
+                        <textarea id="textarea5" (input)="autoExpand($event, 'objetivoContent5')" [(ngModel)]="objetivoContent5"></textarea>
+
                     </div>
                     <div class="buttton-competencia">
                         <button (click)="actualiza()">Actualizar</button>

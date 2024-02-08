@@ -1,4 +1,7 @@
 main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: linear-gradient(0deg, rgba(203,177,236,1) 11%, rgba(204,255,254,1) 63%);
     min-height: 90.4vh;
     padding: 30px 20px 10px 20px;
@@ -8,6 +11,11 @@ main{
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 100%;
+}
+
+.Retorno:hover {
+    color: #00BFA6;
 }
 
 .contenido-curso form{
@@ -211,7 +219,7 @@ p{
     text-align: justify;
 }
 
- .indicacion{
+.indicacion{
     margin-top: 15px;
     color: #333333d0;
     font-size: .8rem;
@@ -381,6 +389,23 @@ p{
     cursor: pointer;
 }
 
+.editButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.editButton #upgrate{
+    box-shadow: 2px 1px #333;
+}
+
+.editButton #upgrate:hover{
+    background-color: #00BFA6;
+    padding: 6px 11px;
+    box-shadow: 1px 1px #333;
+}
+
 .container-competencia{
     display: flex;
     flex-direction: column;
@@ -483,6 +508,10 @@ p{
 
 @media (min-width: 800px) {
 
+    .Retorno{
+        width: 90%;
+    }
+
     .vista-course{
         display: flex;
         flex-direction: column;
@@ -492,10 +521,6 @@ p{
 
     .contenido-curso form{
         padding: 10px 16px;
-    }
-
-    hr{
-        display: none;
     }
 
     .info-curso{
