@@ -12,9 +12,23 @@ export class RecursoComponent {
   recursoVideo:RecursoVidPod = new RecursoVidPod();
   @Input() video: boolean;
 
+  titulo = "";
+
+  tituloPodcast = "podcast";
+  tituloVideo = "video";
+
   constructor() {
     
   }
+
+  ngOnInit(){
+    if(this.video){
+      this.titulo = this.tituloVideo;
+    } else {
+      this.titulo = this.tituloPodcast;
+    }
+  }
+
   
 
   guardar(forma: NgForm) {

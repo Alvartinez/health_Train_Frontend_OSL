@@ -1,28 +1,28 @@
 <form autocomplete="off" (ngSubmit)="guardar(forma)" #forma="ngForm">
 
-    <div>
+    <div class="container-resource">
 
-        <div class="mb-3 row">
-          <label class="col-2 col-form-label">Nombre del recurso</label>
-          <div class="col-8">
+        <div>
+          <label>Nombre del {{titulo}}</label>
+          <div>
     
             <input class="form-control"
-                   type="text"
-                   name="nombre"
-                   [class.is-invalid]="nombre.invalid && nombre.touched"
-                   [(ngModel)]="recursoVideo.nombre"
-                   required
-                   placeholder="Nombre"
-                   #nombre="ngModel">
+            type="text"
+            name="nombre"
+            [class.is-invalid]="nombre.invalid && nombre.touched"
+            [(ngModel)]="recursoVideo.nombre"
+            required
+            placeholder="Nombre"
+            #nombre="ngModel">
 
-            <small class="form-text text-danger" 
-                   *ngIf="nombre.invalid && nombre.touched">
-            El campo es requerido </small>
+            <div *ngIf="nombre.invalid && nombre.touched" class="invalid-feedback">
+                El nombre es requerido.
+            </div>
           </div>
         </div>
 
-        <div class="mb-3 row">
-            <label class="col-2 col-form-label">Url del recurso</label>
+        <div>
+            <label>Url del {{titulo}}</label>
             <div class="col-8">
       
               <input class="form-control"
@@ -31,22 +31,19 @@
                      [class.is-invalid]="url.invalid && url.touched"
                      [(ngModel)]="recursoVideo.url"
                      required
-                     placeholder="Url del video"
+                     placeholder="Enlace"
                      #url="ngModel">
                      
-              <small class="form-text text-danger" 
+              <div class="invalid-feedback" 
                      *ngIf="url.invalid && url.touched">
-              El campo es requerido </small>
+              El campo es requerido </div>
             </div>
           </div>
         
-        <div class="input-group mb-3">
-            <label class="col-2 col-form-label">&nbsp;</label>
-            <div class="d-grid col-8 mx-0">
+        <div class="button-resource">
             <button type="submit" class="btn btn-outline-primary">
-                Generar
+              <span class="button-content">Generar </span>
             </button>
-            </div>
         </div>
 </div>
 </form>

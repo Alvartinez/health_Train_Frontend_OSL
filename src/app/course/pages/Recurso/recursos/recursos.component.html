@@ -1,82 +1,75 @@
 <user-navbar></user-navbar>
 <main>
-  <div class="container">
-    <section class="Retorno">
+  <section class="container">
+    <div class="Retorno">
       <div class="flecha">&#9668;</div>
       <h3 (click)="onRegresar()">Regresar - Modulo</h3>
-    </section>
+    </div>
 
-    <section class="contenido-curso">
+    <div class="contenido-curso">
 
       <div class="vista-resource">
-        <h1>Recursos</h1>
-        <div class="mt-3 row">
-          
-          <div class="col-10">
-            <label class="col-2 col-form-label">Tipo de recurso</label>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" 
-                     type="radio"
-                     name="genero" 
-                     required
-                     [value]="valueVideo"
-                     (click)="validarSeleccionado(valueVideo)"
-                     
-                    > 
-              <label class="form-check-label">{{valueVideo}}</label>
-            </div>
-        
-            <div class="form-check form-check-inline mx-auto">
-              <input class="form-check-input mx-1" 
-                     type="radio"
-                     required 
-                     [value]="valuePodcast"
-                     (click)="validarSeleccionado(valuePodcast)"
-                     name="genero"
-                     >
-              <label class="form-check-label">{{valuePodcast}}</label>
-        
-              
-            </div>
-        
-            <div class="form-check form-check-inline mx-auto">
-              <input class="form-check-input mx-1" 
-                     type="radio"
-                     required 
-                     [value]="valueTextoPlano"
-                     (click)="validarSeleccionado(valueTextoPlano)"
-                     name="genero"
-                     >
-              <label class="form-check-label">{{valueTextoPlano}}</label>
-        
-              
-            </div>
-        
-            <div class="form-check form-check-inline mx-auto">
-              <input class="form-check-input mx-1" 
-                     type="radio"
-                     required 
-                     [value]="timeLine"
-                     (click)="validarSeleccionado(timeLine)"
-                     name="genero"
-                     >
-              <label class="form-check-label">{{timeLine}}</label>
-        
-              
-            </div>
+
+        <div class="recursos">
+
+          <div class="titulo-contenedor">
+            <h1>Recursos</h1>
           </div>
+          
+          <div class="mydict">
+
+            <label>
+              <input 
+                type="radio" 
+                name="radio"
+                required
+                [value]="valueVideo"
+                (click)="validarSeleccionado(valueVideo)">
+              <span>{{valueVideo}}</span>
+            </label>
+
+            <label>
+              <input
+               type="radio" 
+               name="radio"
+               required 
+               [value]="valuePodcast"
+               (click)="validarSeleccionado(valuePodcast)">
+              <span>{{valuePodcast}}</span>
+            </label>
+            
+            <label>
+              <input
+               type="radio" 
+               name="radio"
+               required 
+               [value]="valueTextoPlano"
+               (click)="validarSeleccionado(valueTextoPlano)">
+              <span>{{valueTextoPlano}}</span>
+            </label>
+
+            <label>
+              <input
+               type="radio" 
+               name="radio"
+               required 
+               [value]="timeLine"
+               (click)="validarSeleccionado(timeLine)">
+              <span>{{timeLine}}</span>
+            </label>
+
+
+          </div>
+          
+          
         </div>
-        <hr>
+        
         
       </div>
+      <hr>
 
+      <div class="resource-container">
 
-    </section>
-
-        
-        <!--Aquí estan los radio button-->
-        
-        <div class="mt-3">
         <app-resource-plain-text *ngIf="opciones.isTextoPlano; else noOpcion"></app-resource-plain-text>
         <app-resource-time-line *ngIf="opciones.isTimeLine"></app-resource-time-line>
         <app-resource-podcast *ngIf="opciones.isPodcast"></app-resource-podcast>
@@ -86,7 +79,13 @@
           <div *ngIf="!opciones.isTextoPlano && !opciones.isTimeLine && !opciones.isPodcast && !opciones.isVideo"
               class="alert alert-info">No ha seleccionado ninguna opción</div>
         </ng-template>
-        </div>
+
+
+      </div>
+      
+    </div>
         
-  </div>
+        
+        
+  </section>
 </main>
