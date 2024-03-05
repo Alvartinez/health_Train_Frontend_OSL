@@ -1,5 +1,6 @@
-<user-navbar></user-navbar>
-<main>
+<loading *ngIf="loading"></loading>
+<user-navbar *ngIf="!loading"></user-navbar>
+<main *ngIf="curso && !loading">
     <nav class="titulo">
         <div class="titulo-curso">
             <div class="flecha">&#9668;</div>
@@ -48,7 +49,7 @@
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <div class="container-img">
-                                <img [src]="imagen" alt="">
+                                <img [src]="modulo.portada" alt="">
                             </div>
                             <div class="container-title">
                                 <h2>Modulo {{i +1}}</h2>

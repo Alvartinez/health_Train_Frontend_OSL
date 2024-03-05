@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModuleService } from '@rutas/course/services/modulo.service';
+import { Module } from '@rutas/course/interfaces/modulo';
 
 @Component({
   selector: 'info-modulo',
@@ -9,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class InfoModuloComponent {
 
-  constructor(private location: Location, private router: Router) {}
+  constructor(private location: Location, private router: Router, private _moduleService:ModuleService,
+              private activatedRoute: ActivatedRoute) {}
 
   description: boolean = false;
   objetivo: boolean = false;
@@ -21,6 +24,35 @@ export class InfoModuloComponent {
   tabCompetencia = "add";
   tabDuracion = "add";
   tabTema = "add";
+
+  idModulo:number = 0;
+
+  modulo:Module = {
+    nombre: "",
+    descripcion: "",
+    objetivo: "",
+    conclusion: "",
+    competencias: [],
+    duracion: 0,
+    temas: []
+  }
+
+  ngOnInit(){
+
+    const {id} = this.activatedRoute.snapshot.params;
+
+    this.idModulo = id;
+
+    this._moduleService.getModule(id).subscribe({
+      next: (data) => {
+
+         this.modulo = data.cursoModuloInfo.modulo;
+         
+         console.log(this.modulo);
+      }
+    });
+
+  }
 
   tab(tabName: string) {
     // Cambiar el valor del booleano específico según el nombre proporcionado
@@ -76,7 +108,7 @@ export class InfoModuloComponent {
     this.location.back();
   }
 
-  modulo(){
+  verModulo(){
     const currentUrl = this.router.url;
 
     const baseUrl = currentUrl.split('/info-modulo')[0];

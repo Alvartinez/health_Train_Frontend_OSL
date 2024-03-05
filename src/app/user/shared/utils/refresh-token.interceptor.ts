@@ -40,8 +40,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
               return next.handle(clonedRequest);
             }),
             catchError(err => {
-              // Manejar errores de renovación de token
-              // Por ejemplo, redirigir a la página de inicio de sesión
+              
               this.router.navigate(['login']);
               return throwError(err);
             })

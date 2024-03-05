@@ -1,0 +1,195 @@
+<user-navbar></user-navbar>
+<main>
+
+    <section class="Retorno">
+        <div class="flecha">&#9668;</div>
+        <h3 (click)="regresar()">Regresar - Curso</h3>
+    </section>
+
+    <section>
+
+        <div class="recurso">
+            <h2>Recurso: {{titleResource}}</h2>
+            <label id="delete" (click)="elimina(tituloTime?.id_linea_tiempo ?? idVideo ?? idPodcast)">
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
+                Eliminar Recurso
+            </label>
+        </div>
+
+        <div class="titulo">
+            <h1></h1>
+        </div>
+        <hr>
+
+        <div class="video" *ngIf="isVideo">
+
+            <div class="container-video">
+                <div class="video-nombre">
+                    <span>Nombre:</span>
+                </div>
+                <p>
+                    {{nombreVideo}}
+                </p>
+                <span>Actualiza el nombre del video</span>
+                <input type="text" name="" id="">
+                <div class="editButton">
+                    <label id="upgrate">
+                        Actualizar
+                    </label>
+                </div>
+            </div>
+
+            <div class="container-video">
+                <div class="video-nombre">
+                    <span>Url:</span>
+                </div>
+                <p>
+                    {{urlVideo}}
+                </p>
+                <span>Actualiza el enlace del video</span>
+                <input type="text" name="" id="">
+                <div class="editButton">
+                    <label id="upgrate">
+                        Actualizar
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="podcast" *ngIf="isPodcast">
+
+            <div class="container-video">
+                <div class="video-nombre">
+                    <span>Nombre:</span>
+                </div>
+                <p>
+                    {{nombrePodcast}}
+                </p>
+                <span>Actualiza el nombre del podcast</span>
+                <input type="text" name="" id="">
+                <div class="editButton">
+                    <label id="upgrate">
+                        Actualizar
+                    </label>
+                </div>
+            </div>
+
+            <div class="container-video">
+                <div class="video-nombre">
+                    <span>Url:</span>
+                </div>
+                <p>
+                    {{urlPodcast}}
+                </p>
+                <span>Actualiza el enlace del podcast</span>
+                <input type="text" name="" id="">
+                <div class="editButton">
+                    <label id="upgrate">
+                        Actualizar
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="linea" *ngIf="isTimeline">
+
+            <div class="container-video" *ngIf="tituloTime">
+                <div class="video-nombre">
+                    <span>Título:</span>
+                </div>
+                <p>
+                    {{tituloTime?.titulo}}
+                </p>
+                <span>Actualiza el título del Línea del tiempo</span>
+                <br>
+                <input type="text" name="" id="">
+                <div class="editButton">
+                    <label id="upgrate">
+                        Actualizar
+                    </label>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>Hito(s)</h3>
+
+            <hr>
+
+            <div class="hitos" *ngFor="let hito of hitos; let i = index">
+                <span>Hito {{ i + 1 }}</span>
+                <label id="delete" (click)="eliminarHito(hito.id_hito)">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    Eliminar Hito {{ i + 1 }}
+                </label>
+
+                <div class="container-video">
+                    <div class="video-nombre">
+                        <span>Nombre:</span>
+                    </div>
+                    <p>
+                        {{hito.titulo}}
+                    </p>
+                    <span>Actualiza el nombre del Hito</span>
+                    <br>
+                    <input type="text" name="" id="">
+                    <div class="editButton">
+                        <label id="upgrate">
+                            Actualizar
+                        </label>
+                    </div>
+                    
+                </div>
+
+                <div class="container-video">
+                    <div class="video-nombre">
+                        <span>Fecha:</span>
+                    </div>
+                    <p>
+                        {{hito.fecha}}
+                    </p>
+                    <span>Actualiza la fecha del Hito</span>
+                    <br>
+                    <input type="text" name="" id="">
+                    <div class="editButton">
+                        <label id="upgrate">
+                            Actualizar
+                        </label>
+                    </div>
+                    
+                </div>
+
+                <div class="container-video">
+                    <div class="video-nombre">
+                        <span>Descripción:</span>
+                    </div>
+                    <p>
+                        {{hito.descripcion}}
+                    </p>
+                    <span>Actualiza la descripcion del Hito</span>
+                    <br>
+                    <input type="text" name="" id="">
+                    <div class="editButton">
+                        <label id="upgrate">
+                            Actualizar
+                        </label>
+                    </div>
+                    
+                </div>
+
+                <hr *ngIf="hito">
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>

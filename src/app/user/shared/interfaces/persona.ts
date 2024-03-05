@@ -3,10 +3,11 @@ export type Roles = 'Visitante' | 'Aprendiz' | 'Docente' | 'ADMIN';
 export interface Person{
     nombre?: string,
     email?: string,
-    password: string,
+    password?: string,
     estado?: boolean,
     fecha_registro?: Date,
-    username?:string
+    username?:string,
+    rol?:string
 }
 
 export interface personResponse{

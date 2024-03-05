@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,6 +54,24 @@ import { RecursoComponent } from './course/components/recurso/recurso.component'
 import { ErrorComponent } from './shared/components/error/error.component';
 import { AppHomeComponent } from './user/2-Apprentice/pages/app-home/app-home.component';
 import { DocHomeComponent } from './user/3-Teacher/pages/doc-home/doc-home.component';
+import { WelcomeModuleComponent } from './course/shared/welcome-module/welcome-module.component';
+import { TerminosComponent } from './course/shared/terminos/terminos.component';
+import { ParticlesComponent } from './shared/components/particles/particles.component';
+import { AddTokenInterceptor } from './user/shared/utils/add-token.interceptor';
+import { RefreshTokenInterceptor } from './user/shared/utils/refresh-token.interceptor';
+import { LocalStorageService } from './shared/services/local-storage.service';
+import { CourseBodyComponent } from './course/shared/course-body/course-body.component';
+import { CourseContentComponent } from './course/pages/Modulo/course-content/course-content.component'; 
+import { AdminHomeComponent } from './user/4-Admin/pages/admin-home/admin-home.component';
+import { AdminContentComponent } from './user/4-Admin/components/admin-content/admin-content.component';
+import { FooterTeacherComponent } from './course/components/footer-teacher/footer-teacher.component';
+import { ResourceService } from './course/services/recurso.service';
+import { RecursosEditoresComponent } from './course/pages/Recurso/recursos-editores/recursos-editores.component';
+import { InfoRecursoComponent } from './course/components/info-recurso/info-recurso.component';
+import { ContentDropdownsComponent } from './course/components/content-dropdowns/content-dropdowns.component';
+import { ContentModuleComponent } from './course/pages/Modulo/content-module/content-module.component';
+import { RouterModule } from '@angular/router';
+import { Location } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -100,9 +118,22 @@ import { DocHomeComponent } from './user/3-Teacher/pages/doc-home/doc-home.compo
     RecursoComponent,
     ErrorComponent,
     AppHomeComponent,
-    DocHomeComponent
+    DocHomeComponent,
+    WelcomeModuleComponent,
+    TerminosComponent,
+    ParticlesComponent,
+    CourseBodyComponent,
+    CourseContentComponent,
+    AdminHomeComponent,
+    AdminContentComponent,
+    FooterTeacherComponent,
+    RecursosEditoresComponent,
+    InfoRecursoComponent,
+    ContentDropdownsComponent,
+    ContentModuleComponent
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -117,7 +148,9 @@ import { DocHomeComponent } from './user/3-Teacher/pages/doc-home/doc-home.compo
       preventDuplicates: true
     })
   ],
-  providers: [ CourseService, ModuleService, CompetenceService, QuestionService],
+  providers: [     {provide: HTTP_INTERCEPTORS, useClass:AddTokenInterceptor, multi: true},
+    LocalStorageService, CourseService, CompetenceService, ResourceService, Location,
+    { provide: HTTP_INTERCEPTORS, useClass:RefreshTokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

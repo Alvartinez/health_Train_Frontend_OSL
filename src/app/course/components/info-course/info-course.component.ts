@@ -17,6 +17,8 @@ import Swal from 'sweetalert2';
 })
 export class InfoCourseComponent {
 
+  loading:boolean = true;
+
   datos:any;
   modulos:any[] = [];
   esPresenta:boolean = true;
@@ -135,11 +137,11 @@ export class InfoCourseComponent {
         this._competenceService.getCompetence(this.numero).subscribe({
           next: (competencia) =>{
 
-            this.competencias = competencia.competencia;
+            this.competencias = competencia?.competencia;
 
             this.idCompetencia = competencia?.id_competencia;
 
-            if (this.competencias.length > 0) {
+
               this.competencias.forEach((competencia, index) => {
                   if(index === 0) this.textareaContent1 = competencia.nombre;
                   if(index === 1) this.textareaContent2 = competencia.nombre;
@@ -148,13 +150,15 @@ export class InfoCourseComponent {
                   if(index === 4) this.textareaContent5 = competencia.nombre;
               });
 
-          }
+          
 
           },
           error: (e: HttpErrorResponse) => {
             console.error(e);
           }
-        });        
+        });   
+        
+        this.loading = false;
 
         this._moduleService.getAllModules(this.numero).subscribe({
           next: (dataModule) =>{
@@ -175,6 +179,7 @@ export class InfoCourseComponent {
         console.error(e);
       } 
     });
+
 
   }
 
@@ -518,7 +523,11 @@ export class InfoCourseComponent {
   }
 
   regresar(){
-    this.location.back();
+    console.log(this.baseUrl);
+    const actualUrl = this.baseUrl.split('/courses')[0];
+    const newUrl = actualUrl+"/doc-home";
+
+    this.router.navigateByUrl(newUrl);
   }
 
   showConfirmation(): void {

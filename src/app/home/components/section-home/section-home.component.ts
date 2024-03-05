@@ -11,11 +11,11 @@ export class SectionHomeComponent {
   constructor(private router:Router){}
 
   login(){
-    this.router.navigate(["Services/healthtrain","login"]);
+    this.router.navigate(["healthtrain","login"]);
   }
 
   register(){
-    this.router.navigate(["Services/healthtrain","register"]);
+    this.router.navigate(["healthtrain","register"]);
   }
 
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Competencia, Course, Objetivo } from '@rutas/course/interfaces/curso';
 import { CompetenceService } from '@rutas/course/services/competencia.service';
 import { CourseService } from '@rutas/course/services/curso.service';
+import jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -71,12 +72,13 @@ export class CreateCourseComponent {
   curso: Course = {
     nombre: '',
     descripcion: '',
-    id_persona: 1, // Ejemplo, ajusta según necesidad
+    id_persona: 0,
     objetivos: [],
     video_presentacion: '',
     portada: '',
     publicado: false
   };
+  id: number;
 
   constructor(private sanitizer: DomSanitizer, private cdr: ChangeDetectorRef, private router: Router, private _courseService: CourseService, private _competenceService:CompetenceService) {}
 
@@ -104,6 +106,13 @@ export class CreateCourseComponent {
 
       this.baseUrl = this.currentUrl.split('/new-course')[0];
       console.log(this.baseUrl);
+
+      const token:any = localStorage.getItem("x-token");
+      const decoded:any = jwt_decode(token);
+      this.id = decoded.id;
+
+      console.log(this.id)
+
     }
 
   quitarFoto() {
@@ -223,7 +232,7 @@ export class CreateCourseComponent {
 
     this.curso.nombre = this.nombre;
     this.curso.descripcion = this.descripcion;
-    this.curso.id_persona = 1;
+    this.curso.id_persona = this.id;
     this.curso.objetivos = this.objetivosCurso;
     this.curso.video_presentacion = this.video;
     
@@ -249,5 +258,5 @@ export class CreateCourseComponent {
     });
 
   }
-
 }
+

@@ -1,0 +1,74 @@
+<module-navbar></module-navbar>
+<main>
+
+    <content-dropdowns [titular]="titulo"></content-dropdowns>
+    <div class="contenedor-base">
+        <div class="contenedor-titulo">
+            <h5>
+                modulo {{module_selected[0]}}
+            </h5>
+            <h3 (click)="retroceder()">
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+                {{titulo}}
+            </h3>
+        </div>
+        <div class="cartas">
+            <div class="carta">
+                <div class="card-body">
+                    <div class="card-img">
+                        <img src="assets/image/timeline.png" alt="">
+                    </div>
+                    <div class="card-title">
+                        <p>
+                            LÍNEA(S) DEL TIEMPO(S)
+                        </p>
+                    </div>
+                </div>
+            </div>
+             
+            <div class="carta">
+                <div class="card-body">
+                    <div class="card-img">
+                        <img src="assets/image/textPlain.png" alt="">
+                    </div>
+                    <div class="card-title">
+                        <p>
+                            TEXTO(S) PLANO(S)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carta">
+                <div class="card-body">
+                    <div class="card-img">
+                        <img src="assets/image/video.png" alt="">
+                    </div>
+                    <div class="card-title">
+                        <p>
+                            VIDEO(S)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carta">
+                <div class="card-body">
+                    <div class="card-img">
+                        <img src="assets/image/podcast.png" alt="">
+                    </div>
+                    <div class="card-title">
+                        <p>
+                           PODCAST(S)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

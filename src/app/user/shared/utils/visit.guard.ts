@@ -23,17 +23,17 @@ export class VisitanteGuard implements CanActivate {
     }
 
     if(userRole === "Aprendiz"){
-        this.router.navigate(["healthtrain/users/apprentice","user-home"]);
+        this.router.navigate(["Services/healthtrain/users/apprentice","user-home"]);
         return false;
     }
 
     if(userRole === "Docente"){
-        this.router.navigate(["healthtrain/users/apprentice","doc-home"]);
+        this.router.navigate(["Services/healthtrain/users/apprentice","doc-home"]);
         return false;
     }
 
     if(userRole === "Admin"){
-        this.router.navigate(["healthtrain/users/apprentice","admin-home"]);
+        this.router.navigate(["Services/healthtrain/users/apprentice","admin-home"]);
         return false;
     }
 

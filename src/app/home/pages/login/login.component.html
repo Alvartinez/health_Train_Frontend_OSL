@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+    <particles></particles>
     <main>
         <div class="login-box" *ngIf="!loading && !reset">
             <p class="titulo">INICIO DE SESIÓN</p>
             <form>
               <div class="user-box">
-                <input required="" name="" type="text">
+                <input required="" name="username" [(ngModel)]="username" type="text">
                 <label>Username</label>
               </div>
               <div class="user-box">
-                <input required="" name="" type="password">
+                <input required="" name="password" [(ngModel)]="password" type="password">
                 <label>Contraseña</label>
               </div>
               <button (click)="login()">
@@ -29,10 +23,9 @@
             <p>¿No tienes cuenta? <a class="a2" (click)="register()">¡Registrate aquí!</a></p>
           </div>
 
-          <app-loading *ngIf="loading"></app-loading>
+          <loading *ngIf="loading"></loading>
 
           <app-reset-password *ngIf="reset" (eventoBooleano)="handleEventoBooleano($event)"></app-reset-password>
 
     </main>
-</body>
-</html>
+

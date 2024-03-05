@@ -21,7 +21,7 @@ export class LoginGuard implements CanActivate {
 
     if (token) {
       this.toastr.error("Acceso Denegado", "Error");
-        this.router.navigate(["healthtrain","login"]);
+        this.router.navigate(["Services/healthtrain","login"]);
         return false;
 
     }

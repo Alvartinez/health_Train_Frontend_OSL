@@ -22,6 +22,7 @@ main{
   border-radius: 10px;
   border: 1px solid #f1f1f1ad;
   padding: 40px 50px;
+  z-index: 1;
 }
 
 .login-box .titulo{

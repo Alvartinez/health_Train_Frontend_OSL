@@ -23,6 +23,8 @@ export class UserCourseComponent {
   modulos:any;
   tokenId:any;
 
+  loading:boolean = true;
+
   porcentaje:number = 0;
   examen = false;
   resultado: any;
@@ -51,7 +53,7 @@ export class UserCourseComponent {
 
         this._moduleService.getAllModules(this.numero).subscribe({
           next:(datos) => {
-            this.modulos = datos;
+            this.modulos = datos.sort((a, b) => a.id_modulo - b.id_modulo);
           }
         });
 
@@ -109,8 +111,9 @@ export class UserCourseComponent {
       }
     });
 
-    this.imagen = "../../../../assets/image/modulo2.png";
     this.porcentaje_Modulo = 0
+
+    this.loading = false;
   }
 
   ResultadosEvaluation(id:any){

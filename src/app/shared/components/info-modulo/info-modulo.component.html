@@ -1,5 +1,5 @@
 <main>
-    <section class="modal-body">
+    <section class="modal-body" *ngIf="modulo">
         <div class="close" (click)="close()">
             <span class="material-symbols-outlined">
                 close
@@ -8,7 +8,7 @@
 
         <div class="content-body">
             <div class="titulo-modal">
-                <h2>Historia y evolución</h2>
+                <h2>{{modulo.nombre}}</h2>
             </div>
 
             <div class="container">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="contenido" *ngIf="description">
                         <p>
-                            Esto es un parrafo para guiar el diseño, dgdfhfgjghkghkfgjgnvlvhml, fdhjsgdsgdfjghfsvfhrgjkk,fdfgsdgfdhjkhgk hvfgjxjfgkfhkxbk
+                            {{modulo.descripcion}}
                         </p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="contenido" *ngIf="objetivo">
                         <p>
-                            Esto es un parrafo para guiar el diseño
+                            {{modulo.objetivo}}
                         </p>
                     </div>
                 </div>
@@ -49,22 +49,11 @@
                         </span>
                     </div>
                     <div class="contenido" *ngIf="competencia">
-                        <ol>
-                            <li>
-                              Gorda
-                              <ol>
-                                <li>
-                                  Hola
-                                </li>
-                                <li>
-                                  Adiós
-                                </li>
-                              </ol>
+                        <ul>
+                            <li *ngFor="let competencia of modulo.competencias">
+                                {{ competencia.nombre }}
                             </li>
-                            <li>
-                              Babosa
-                            </li>
-                          </ol>
+                        </ul>
                     </div>
                 </div>
 
@@ -77,7 +66,7 @@
                     </div>
                     <div class="contenido" *ngIf="duracion">
                         <p>
-                            24 Hora(s)
+                            {{modulo.duracion}} Hora(s)
                         </p>
                     </div>
                 </div>
@@ -90,25 +79,31 @@
                         </span>
                     </div>
                     <div class="contenido" *ngIf="tema">
-                        <ol>
-                            <li>
-                                Gorda   
-                                <ol>
-                                    <li>
-                                        Hola
-                                    </li>
-                                </ol>
-                            </li>
-                            <li>
-                                Babosa
-                            </li>
-                        </ol>
+                        <div class="info-tema" *ngFor="let tema of modulo.temas">
+                            <label>
+        
+                                <h4>{{ tema.nombre }}</h4>
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </label>
+
+                            <div class="inforContent">
+                                <div class="competencias">
+                                    <ul>
+                                        <li *ngFor="let subtema of tema.subtemas">
+                                            {{ subtema.nombre }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>  
 
             </div> 
 
-            <button (click)="modulo()">Iniciar módulo</button>
+            <button (click)="verModulo()">Iniciar módulo</button>
 
         </div>
     </section>

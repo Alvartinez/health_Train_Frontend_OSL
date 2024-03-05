@@ -6,6 +6,7 @@ import { Competencia } from '@rutas/course/interfaces/curso';
 import { ModuleService } from '@rutas/course/services/modulo.service';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
+import { ResourceService } from '@rutas/course/services/recurso.service';
 
 @Component({
   selector: 'app-info-modulo',
@@ -13,6 +14,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./info-modulo.component.css']
 })
 export class InfoModuloDocComponent {
+
+  loading:boolean = true;
+
+  idModulo:number;
 
   imagen: string | ArrayBuffer | null = '../../../../assets/image/logo-perfil.png';
 
@@ -58,6 +63,8 @@ export class InfoModuloDocComponent {
   conclusion: string = "";
   nuevaConclusion: string = "";
 
+  imagenActual:string | ArrayBuffer | null;
+
   competencias: Competencia[] = [];
   nuevasCompetencias: Competencia[] = [];
 
@@ -75,7 +82,8 @@ export class InfoModuloDocComponent {
   constructor(private router: Router,
               private _moduleService: ModuleService,
               private activatedRoute:ActivatedRoute, 
-              private location: Location
+              private location: Location, 
+              private _resourceService: ResourceService
     ) {}
   
   ngOnInit(){
@@ -87,6 +95,14 @@ export class InfoModuloDocComponent {
     this._moduleService.getModule(id).subscribe({
       next: (dataModule) =>{
 
+        console.log(dataModule)
+
+        this.resources = dataModule?.Recursos;
+
+        console.log(this.resources)
+
+        this.idModulo = id;
+        
         this.modulos = dataModule.cursoModuloInfo?.modulo;
 
         this.modulo.id_modulo = id;
@@ -97,12 +113,22 @@ export class InfoModuloDocComponent {
         this.objetivo = this.modulos.objetivo as string;
         this.conclusion = this.modulos.objetivo as string;
         this.competencias = this.modulos?.competencias;
+
+        if (this.modulos.portada) {
+          
+          this.imagen = this.modulos.portada as string;
+          this.imagenActual = this.imagen;
+          this.portada = false;
+        }
+
         
         this.modulo.nombre = this.titulo;
         this.modulo.descripcion = this.descripcion;
         this.modulo.duracion = this.duracionModulo;
         this.modulo.objetivo = this.objetivo;
         this.modulo.competencias = this.competencias;
+        this.modulo.conclusion = this.conclusion;
+        this.modulo.temas = this.modulos.temas;
 
         console.log(this.modulo);
 
@@ -117,6 +143,8 @@ export class InfoModuloDocComponent {
           });
 
       }
+
+        this.loading = false;
 
         this.quizzes = Array.isArray(dataModule.quizFormativo) ? dataModule.quizFormativo : [dataModule.quizFormativo];
 
@@ -139,18 +167,21 @@ export class InfoModuloDocComponent {
       const file = event.target.files[0];
 
       reader.onload = () => {
-        this.imagen = reader.result;
-        this.modulo.portada = this.imagen as string;
+        this.imagen = reader.result as string;
+        this.modulo.portada = this.imagen;
       };
 
       reader.readAsDataURL(file);
       this.portada =false;
+
+      this.showConfirmation();
 
     }
   }
 
   quitarFoto() {
     this.imagen = '../../../../assets/image/logo-perfil.png';
+    this.modulo.portada = this.imagen;
     this.portada = true;
   }
 
@@ -351,6 +382,12 @@ export class InfoModuloDocComponent {
       }
     }
 
+    if(cambiosRealizados){
+      this.showConfirmation();
+    }else{
+      console.log("No hay cambios")
+    }
+
   }
 
   actualizarConclusion(){
@@ -387,6 +424,23 @@ export class InfoModuloDocComponent {
 
   }
 
+  deleteModule(){
+    
+    const baseUrl = this.currentUrl.split('/modules')[0];
+
+    const newUrl = baseUrl+"/info-course";
+
+    this._moduleService.deleteModule(this.idModulo).subscribe({
+      next: () => {
+        console.log("Curso eliminado");
+
+        this.router.navigateByUrl(newUrl);
+
+      }
+    });
+
+  }
+
   newResource(){
 
     const baseUrl = this.currentUrl.split('/infoDoc-modulo')[0];
@@ -417,6 +471,48 @@ export class InfoModuloDocComponent {
         this.cerrar();
       }
     });
+  }
+
+  deleteConfirmation(): void {
+    Swal.fire({
+      title: '¿Estás seguro eliminar?',
+      text: "No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.deleteModule();
+        
+      }
+    });
+  }
+
+  verRecurso(resource: any, id:number){
+    const baseUrl = this.currentUrl.split('/infoDoc-modulo')[0];
+    const newUrl = baseUrl+"/resources/"+id+"/"+resource+"/info-resource";
+
+    this.router.navigateByUrl(newUrl);
+
+  }
+
+  getColor(recurso: string): string {
+    switch (recurso) {
+      case 'Video':
+        return '#30EE84';
+      case 'Podcast':
+        return '#FB795C'; 
+      case 'Texto plano':
+        return '#5CF1FB';
+      case 'Linea del tiempo':
+        return '#C15EFE'; 
+      default:
+        return '#transparent'; 
+    }
   }
 
 

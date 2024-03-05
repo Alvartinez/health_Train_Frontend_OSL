@@ -1,16 +1,16 @@
-import { HomeRoutingModule } from './home/routers/home-routing.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+//Estos son los componentes que debo editar y después borrar
 
 const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full', // Asegura que coincida con la URL completa
+    redirectTo: 'healthtrain',
+    pathMatch: 'full'
   },
     {
-    path: 'Services/healthtrain',
+    path: 'healthtrain',
     loadChildren: () => import('./home/routers/home-routing.module').then(m => m.HomeRoutingModule)
   },
   {

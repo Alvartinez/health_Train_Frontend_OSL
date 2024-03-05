@@ -1,5 +1,6 @@
-<user-navbar></user-navbar>
-<main>
+<loading *ngIf="loading"></loading>
+<user-navbar *ngIf="!loading"></user-navbar>
+<main *ngIf="!loading">
 
     <div class="Retorno" *ngIf="compObject">
         <div class="flecha">&#9668;</div>

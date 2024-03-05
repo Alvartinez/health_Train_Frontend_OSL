@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormArray, FormBuilder, FormControlOptions, FormGroup, Validators } from '@angular/forms';
-import { RecursoTimeLine } from '@rutas/course/model/recursos.model';
+import { Hito, Line } from '@rutas/course/interfaces/recurso';
+import { ActivatedRoute } from '@angular/router';
+import { ResourceService } from '@rutas/course/services/recurso.service';
 
 @Component({
   selector: 'app-resource-time-line',
@@ -10,14 +12,32 @@ import { RecursoTimeLine } from '@rutas/course/model/recursos.model';
 })
 export class ResourceTimeLineComponent {
 
+  titulo:string = ""
+
   forma: FormGroup;
   disableGuardar:boolean=false;
+  disableHito:boolean=false;
   disableAgregarHito:boolean=false;
   fotoSeleccionada: File;
-  timeLine: RecursoTimeLine = new RecursoTimeLine();
+  idLine:number;
 
-  constructor(private fb: FormBuilder){
+  linea: Line = {
+    id_modulo:0,
+    recurso:"", 
+    nombre:""
+  }
+
+  milestones: Hito[] = [];
+
+  constructor(private fb: FormBuilder,
+    private activatedRoute:ActivatedRoute,
+    private _lineService:ResourceService){
     this.crearFormulario();
+  }
+
+  ngOnInit() {
+    const {id}= this.activatedRoute.snapshot.params;
+    this.linea.id_modulo = id;
   }
 
   crearFormulario(){
@@ -42,6 +62,7 @@ export class ResourceTimeLineComponent {
   }
 
   agregarHito(){
+    this.disableHito = true;
     this.hitos.push(this.fb.group({
       tituloHito: ['',[Validators.required]],
       dateHito: ['',[Validators.required]],
@@ -63,6 +84,9 @@ export class ResourceTimeLineComponent {
   borrarHito(index: number) {
     this.hitos.removeAt(index);
     this.desactivarBotones();
+    if(index === 0){
+      this.disableHito = false;
+    }
   }
 
   seleccionarFoto(event){
@@ -76,22 +100,59 @@ export class ResourceTimeLineComponent {
   }
 
   guardar() {
-    
-    if(this.forma.invalid){
-      return Object.values(this.forma.controls).forEach(control=> {
-        
-        if(control instanceof FormGroup){
-          Object.values(control.controls).forEach(controlForm=> controlForm.markAllAsTouched());
-        }
-        control.markAllAsTouched();
-      });
-    }
-    
-    this.timeLine.nombre= this.forma.get('nombre').value;
-    this.timeLine.hitos= this.forma.get('hitos').value;
 
-    //llamar al service y retornar respuesta
-    
+    if (this.forma.invalid) {
+      // Marca todos los controles como tocados para mostrar validaciones
+      Object.values(this.forma.controls).forEach(control => {
+        if (control instanceof FormGroup) {
+          Object.values(control.controls).forEach(control => control.markAsTouched());
+        } else {
+          control.markAsTouched();
+        }
+      });
+      return;
+    }
+
+    this.linea.nombre = this.forma.get('nombre').value;
+    this.linea.recurso = "Linea del tiempo";
+
+    console.log(this.linea);
+
+    this._lineService.postLine(this.linea).subscribe({
+      next: (timeline) => {
+        console.log(timeline.linea.id_linea_tiempo);
+        this.idLine = timeline.linea.id_linea_tiempo;
+
+        if (Array.isArray(this.forma.value.hitos) && this.forma.value.hitos.length) {
+          // Iterar sobre cada hito del formulario
+          this.forma.value.hitos.forEach((hitoForm:any) => {
+            // Crear la estructura de Hito esperada
+            const hito: Hito = {
+              id_linea_tiempo: this.idLine, 
+              titulo: hitoForm.tituloHito,
+              descripcion: hitoForm.desc,
+              imagen: hitoForm.img,
+              archivo: "",
+              enlace: hitoForm.link,
+              fecha: hitoForm.dateHito
+            };
+        
+            // Llamar al servicio para crear el hito
+            this._lineService.postHito(hito).subscribe({
+              next: (response) => {
+                console.log(response);
+                // Aquí puedes manejar la respuesta, por ejemplo, mostrando un mensaje de éxito
+              },
+              error: (error) => {
+                console.error(error);
+                // Aquí puedes manejar errores, por ejemplo, mostrando un mensaje de error
+              }
+            });
+          });
+        } 
+
+      }
+    });
     
   }
 

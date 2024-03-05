@@ -7,15 +7,3 @@ export class Recursos {
 export class RecursoVidPod extends Recursos{
     url: string;
 }
-
-export class RecursoTimeLine extends Recursos{
-
-    hitos: hito[];
-}
-
-export class hito{
-    dateHito:Date;
-    desc: string;
-    img:File;
-    link:string;
-}

@@ -1,0 +1,45 @@
+<div class="bloque-principal" *ngIf="infoCurso">
+    <div class="titulo">
+        <div class="div1" (click)="retroceder()">
+            <div class="images">
+                <img src="assets/image/arrow-left-circle-svgrepo-com.svg">
+            </div>
+            <div class="div2">
+                <img src="assets/image/arrow-left-circle-hover-svgrepo-com.svg">
+            </div>
+        </div>
+        <h1>{{infoCurso.nombre}}</h1>
+        <button class="button-course" (click)="ingresar()">{{ingreso}}</button>
+    </div>
+    <div class="contenido-informativo">
+        <div class="video-info">
+            <iframe [src]="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="informativo">
+            <h1>Acerca del curso</h1>
+            <div class="content-description">
+                <h2>Descripción</h2>
+                <p>
+                    {{infoCurso.descripcion}}
+                </p>
+            </div>
+            <h2>Objetivos</h2>
+            <ol>
+                <li *ngFor="let objetivo of infoCurso.objetivos">
+                    {{ objetivo.descripcion }}
+                </li>
+            </ol>
+        </div>
+        <div class="modulo">
+            <div class="lista-modulos" *ngIf="modulos">
+                <h2>MÓDULOS</h2>
+                <hr>
+                <ul>
+                    <li *ngFor="let modulo of modulos; let i = index">
+                        <strong>Módulo {{ toRoman(i + 1) }}: </strong> {{ modulo.nombre }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

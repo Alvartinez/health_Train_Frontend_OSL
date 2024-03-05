@@ -6,6 +6,7 @@ import { PodcastComponent } from '../pages/Recurso/recursosModulo/podcast/podcas
 import { SabiaQueComponent } from '../pages/Recurso/recursosModulo/sabia-que/sabia-que.component';
 import { TextoPlanoComponent } from '../pages/Recurso/recursosModulo/texto-plano/texto-plano.component';
 import { RecursosComponent } from '../pages/Recurso/recursos/recursos.component';
+import { RecursosEditoresComponent } from '../pages/Recurso/recursos-editores/recursos-editores.component';
 
 const routes: Routes = [
    
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path:"texto-plano",
     component:TextoPlanoComponent
+  },
+  {
+    path:":id/:resource/info-resource",
+    component:RecursosEditoresComponent
   }
 ];
 

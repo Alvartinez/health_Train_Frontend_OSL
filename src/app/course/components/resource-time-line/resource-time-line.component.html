@@ -1,106 +1,120 @@
 <h4>Línea del tiempo</h4>
 <hr>
-<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()"> <!---->
-
-    <div class="mb-3 row">
-      <label class="col-2 col-form-label">Nombre del recurso</label>
-      <div class="col">
+<form [formGroup]="forma" (ngSubmit)="guardar()">
+    <div>
+      <label class="col-2 col-form-label">Nombre de la línea del tiempo</label>
+      <div>
 
         <input class="form-control"
                type="text"
-               placeholder="Nombre"
                formControlName="nombre"
-               [class.is-invalid]="isValido('nombre')">
-
-        <small *ngIf="isValido('nombre')" class="text-danger">campo obligatorio</small>
+               placeholder="Nombre"
+               required
+               [class.is-invalid]="forma.get('nombre').invalid && forma.get('nombre').touched">
+        <div *ngIf="forma.get('nombre').invalid && forma.get('nombre').touched" class="invalid-feedback">
+          El nombre es requerido.
+        </div>
       </div>
     </div>
 
     <h4>HITOS</h4>
 
-    <div class="row">
-        <div class="col">
+    <hr>
+
+    <div class="row-table">
+      <div class="col">
     
-          <table class="table">
-            <thead class="table-dark">
-              <tr>
-                <th>#</th>
-                <th>Titulo del hito</th>
-                <th>Fecha del evento</th>
-                <th>Descripción</th>
-                <th>Imagen</th>
-                <th>Enlace</th>
-                <th>Borrar</th>
-              </tr>
-            </thead>
+        <table class="table" *ngIf="disableHito">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Titulo del hito</th>
+              <th>Fecha del evento</th>
+              <th>Descripción</th>
+              <th>Imagen</th>
+              <th>Enlace</th>
+              <th>Borrar</th>
+            </tr>
+          </thead>
               
-            <tbody formArrayName="hitos">
-                <tr *ngFor="let hito of hitos.controls; let i = index" [formGroupName]="i">
+          <tbody formArrayName="hitos">
+            <tr *ngFor="let hito of hitos.controls; let i = index" [formGroupName]="i">
 
-                    <td>{{i+1}}</td>
-                    <td>
-                        <input formControlName= "tituloHito" 
-                               type="text" 
-                               class="form-control"
-                               [class.is-invalid]="isValidoHitos(i,'tituloHito')"/>
-                        <small *ngIf="isValidoHitos(i,'tituloHito')" class="text-danger">
-                          campo obligatorio</small>
-                    </td>
+              <td>{{i+1}}</td>
+              <td>
+                <input formControlName= "tituloHito" 
+                       type="text" 
+                       class="form-control"
+                       [class.is-invalid]="isValidoHitos(i,'tituloHito')"/>
 
-                    <td>
-                        <input formControlName= "dateHito" 
-                               type="date" 
-                               class="form-control"
-                               [class.is-invalid]="isValidoHitos(i,'dateHito')"/>
-                        <small *ngIf="isValidoHitos(i,'dateHito')" class="text-danger">
-                          campo obligatorio</small>
-                    </td>
+                <div *ngIf="isValidoHitos(i,'tituloHito')" class="invalid-feedback">
+                  campo obligatorio
+                </div>
+              </td>
 
-                    <td>
-                        <input formControlName="desc" 
-                               type="text" 
-                               class="form-control"
-                               [class.is-invalid]="isValidoHitos(i,'desc')"/>
-                        <small *ngIf="isValidoHitos(i,'desc')" class="text-danger">
-                          campo obligatorio</small>
-                    </td>
+              <td>
+                <input formControlName= "dateHito" 
+                       type="text" 
+                       class="form-control"
+                       [class.is-invalid]="isValidoHitos(i,'dateHito')"/>
+                <div *ngIf="isValidoHitos(i,'dateHito')" class="invalid-feedback">
+                  campo obligatorio
+                </div>
+              </td>
 
-                    <td>
-                        <input formControlName="img" (change)="seleccionarFoto($event)" type="file" class="form-control"/>
-                    </td>
+              <td>
+                <input formControlName="desc" 
+                       type="text" 
+                       class="form-control"
+                       [class.is-invalid]="isValidoHitos(i,'desc')"/>
+                <div *ngIf="isValidoHitos(i,'desc')" class="invalid-feedback">
+                  campo obligatorio
+                </div>
+              </td>
 
-                    <td>
-                        <input formControlName="link"  type="text" class="form-control"/>
-                    </td>
+              <td>
+                <input formControlName="img" (change)="seleccionarFoto($event)" type="file" class="form-control"/>
+              </td>
+
+              <td>
+                <input formControlName="link"  type="text" class="form-control"/>
+              </td>
                 
-                    <td>
-                        <button type="button" 
-                                class="btn btn-danger"
-                                (click)="borrarHito(i)">Borrar</button>
-                    </td>
+              <td>
+                <div class="button-resource">
+                  <button type="submit" (click)="borrarHito(i)">
+                    <span class="button-content">Borrar</span>
+                  </button>
+                </div>
+              </td>
                   
 
-                </tr>  
-            </tbody>
-          </table>
+            </tr>  
+          </tbody>
+        </table>
 
-          <div class="text-end">
-            <button type="button" 
-                    class="btn btn-primary mt-3 mb-5"
-                    [disabled]="disableAgregarHito"
-                    (click)="agregarHito()"> + Agregar hito</button>
+        <div class="text-end">
+          <div class="button-resource">
+            <button type="submit" *ngIf="!disableAgregarHito" (click)="agregarHito()">
+              <span class="button-content">+ Agregar hito</span>
+            </button>
           </div>
-
         </div>
-    </div>
 
-    <div class="input-group mb-3">
-        
-        <div class="d-grid col mx-0">
-          <button type="submit" class="btn btn-success" [disabled]="!disableGuardar || forma.invalid">
-            Guardar
-          </button>
-        </div>
       </div>
+  </div>
+
+  <div class="input-group mb-3">
+    
+    <hr *ngIf="disableGuardar">
+
+    <div>
+      <div class="button-resource">
+        <button type="submit" *ngIf="disableGuardar">
+          <span class="button-content">Guardar</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
 </form>

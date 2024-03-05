@@ -1,5 +1,6 @@
-<user-navbar></user-navbar>
-<main>
+<loading *ngIf="loading"></loading>
+<user-navbar *ngIf="!loading"></user-navbar>
+<main *ngIf="!loading">
 
     <section class="Retorno">
         <div class="flecha">&#9668;</div>
@@ -29,7 +30,7 @@
 
                 <br>
 
-                <label id="delete">
+                <label id="delete" (click)="deleteConfirmation()">
                     <span class="material-symbols-outlined">
                         delete
                     </span>
@@ -240,15 +241,12 @@
         
                     <div class="flip-card" *ngFor="let resource of resources" class="flip-card">
                         <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">{{resource?.nombre}}</p>
+                            <div class="flip-card-front" [ngStyle]="{'background-color': getColor(resource.recurso)}">
+                                <p class="title">{{resource?.nombre ?? resource?.titulo}}</p>
                             </div>
                             <div class="flip-card-back">
-                                <span class="description">Descripción</span>
-                                <p class="description-text">
-                                    {{resource?.descripcion}}
-                                </p>
-                                <button class="course-button">
+                                <span class="description" style="text-transform: uppercase;">{{resource?.recurso}}</span>
+                                <button class="course-button" (click)="verRecurso(resource.recurso, resource.id_video || resource.id_podcast || resource.id_linea_tiempo)">
                                     Ver más
                                 </button>
                             </div>

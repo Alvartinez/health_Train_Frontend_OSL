@@ -7,10 +7,15 @@ export interface Course {
     video_presentacion: string;
     portada?: string;
     publicado?: boolean;
+    creador?: Teacher;
 }
 
 export interface Objetivo {
     descripcion: string;
+}
+
+export interface Teacher {
+    nombre: string
 }
 
 export interface Competencia {

@@ -13,6 +13,8 @@ import { UserDashboardComponent } from '@rutas/user/shared/components/user_dashb
 import { NewCourseComponent } from '../pages/Curso/new-course/new-course.component';
 import { InfoCourseComponent } from '../components/info-course/info-course.component';
 import { QuestionBankComponent } from '../pages/Curso/question-bank/question-bank.component';
+import { AuthGuard } from '@rutas/user/shared/utils/auth.guard';
+import { CourseContentComponent } from '../pages/Modulo/course-content/course-content.component';
 
 const routes: Routes = [
     // {
@@ -32,12 +34,12 @@ const routes: Routes = [
     //   canActivate: [AuthGuard],
     //   data: { rol: 'Aprendiz' }
     // },
-    // {
-    //   path: "course/:id/course-content",
-    //   component: CourseContentComponent,
-    //   canActivate: [AuthGuard],
-    //   data: { rol: ['Aprendiz', 'Visitante'] }
-    // },
+    {
+      path: ":id/course-content",
+      component: CourseContentComponent,
+      canActivate: [AuthGuard],
+      data: { rol: ['Aprendiz', 'Visitante'] }
+    },
     // {
     //   path: "course/:id/exam",
     //   component: ExamComponent,
@@ -56,7 +58,9 @@ const routes: Routes = [
     },
     {
       path:"new-course",
-      component: NewCourseComponent
+      component: NewCourseComponent,
+        canActivate: [AuthGuard],
+        data: { rol: ['Docente'] }
     },
     {
       path: ":id/info-course",

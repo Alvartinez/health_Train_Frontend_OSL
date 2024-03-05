@@ -181,6 +181,18 @@ export class NuevoModuloComponent {
   add54:boolean = true;
   add55:boolean = true;
 
+  moduloNuevo: Module = {
+    id_curso: 0,
+    nombre: "",
+    descripcion: "",
+    objetivo: "",
+    conclusion: "",
+    portada: "", 
+    competencias: [],
+    duracion: 0,
+    temas: []
+  }
+
   constructor(private router: Router, private _competenceService: CompetenceService, private _moduleService: ModuleService, private location: Location, private route: ActivatedRoute) {}
 
   ngOnInit(){
@@ -215,7 +227,7 @@ export class NuevoModuloComponent {
       const file = event.target.files[0];
 
       reader.onload = () => {
-        this.imagen = reader.result;
+        this.imagen = reader.result;      
       };
 
       reader.readAsDataURL(file);
@@ -893,25 +905,25 @@ export class NuevoModuloComponent {
       return;
     }
 
-    const moduloNuevo: Module = {
+    this.moduloNuevo = {
       id_curso: this.numero,
       nombre: this.titulo,
       descripcion: this.descripcion,
       objetivo: this.objetivo,
-      conclusion: this.conlusion,
-      portada: "", 
+      conclusion: this.conlusion, 
+      portada: this.imagen as string, 
       competencias: this.competenciasSeleccionadas,
       duracion: this.tiempo,
       temas: Temario
     }
 
-    console.log(moduloNuevo);
+    console.log(this.moduloNuevo);
 
     this.newBaseUrl = this.baseUrl.split('/new-module')[0];
     console.log(this.newBaseUrl);
 
 
-    this._moduleService.newModule(moduloNuevo).subscribe({
+    this._moduleService.newModule(this.moduloNuevo).subscribe({
       next: (datoModulo) => {
        console.log("Módulo creado");
        console.log(datoModulo);

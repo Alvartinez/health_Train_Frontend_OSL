@@ -19,7 +19,7 @@
         </form>
     </section>
 
-    <section class="cursos-inicio">
+    <section class="cursos-inicio" *ngIf="!visitante">
         <h2 (click)="curso_Inscritos()"> 
             <span class="material-symbols-outlined">
                 {{menuI}}
@@ -28,7 +28,7 @@
         </h2>
         <div class="lista-cursos" *ngIf="actuales">
             
-            <div class="flip-newCard" (click)="nuevo_Curso()">
+            <div class="flip-newCard" (click)="nuevo_Curso()" *ngIf="creaCurso">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <p class="nuevoCurso">
@@ -51,7 +51,7 @@
                         <p class="description-text">
                             {{cursoInscrito.descripcion}}
                         </p>
-                        <button class="course-button" (click)="prueba(cursoInscrito.id_curso)">
+                        <button class="course-button" (click)="tuCurso(cursoInscrito.id_curso)">
                             Ver más
                         </button>
                     </div>
@@ -61,7 +61,7 @@
         </div>
     </section>
 
-    <section class="cursos-actuales">
+    <section class="cursos-actuales" *ngIf="cursosDisponibles || nuevoCurso">
         <h2 (click)="curso_Nuevo()"> 
             <span class="material-symbols-outlined">
                 {{menuN}}
@@ -80,7 +80,7 @@
                         <p class="description-text">
                             {{cursosNuevos.descripcion}}
                         </p>
-                        <button class="course-button" (click)="prueba(cursosNuevos.id_curso)">
+                        <button class="course-button" (click)="visualizarCurso(cursosNuevos.id_curso)"> 
                             Ver más
                         </button>
                     </div>
